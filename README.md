@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# 2023 version of my portfolio
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+My portfolio made with [Nuxt 3](https://nuxt.com/docs) and [Stapi 4](https://strapi.io/).
 
 ## Setup
 
@@ -22,6 +22,10 @@ pnpm install --shamefully-hoist
 Start the development server on http://localhost:3000
 
 ```bash
+# yarn
+yarn dev
+
+# npm
 npm run dev
 ```
 
@@ -30,12 +34,20 @@ npm run dev
 Build the application for production:
 
 ```bash
+# yarn
+yarn build
+
+# npm
 npm run build
 ```
 
 Locally preview production build:
 
 ```bash
+# yarn
+yarn run preview
+
+# npm
 npm run preview
 ```
 
