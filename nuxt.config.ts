@@ -7,5 +7,18 @@ export default defineNuxtConfig({
         files: './**/*.{ts,js,vue}'
       }
     }
+  },
+  css: [
+    '@/assets/styles/base/test.scss'
+  ],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/assets/styles/abstracts/_index.scss" as *;'
+        }
+      }
+    }
   }
 })
+

@@ -1,0 +1,41 @@
+@use "sass:math";
+
+//
+// Spacers
+//
+
+$spacer: 1rem;
+$spacers: (
+  1: math.div($spacer, 8),
+  2: math.div($spacer, 4),
+  3: math.div($spacer, 2),
+  4: $spacer,
+  5: $spacer * 1.25,
+  6: $spacer * 1.5,
+  7: $spacer * 2,
+  8: $spacer * 3,
+  9: $spacer * 4,
+  10: $spacer * 5,
+);
+
+
+//
+// Breakpoints
+//
+
+$breakpoint-xs: 30rem;
+$breakpoint-s: 40rem;
+$breakpoint-m: 60rem;
+$breakpoint-l: 80rem;
+
+
+//
+// Z-index
+//
+
+$z-index: (
+  base: 0,
+  base-increase: 1,
+  base-decrease: -1,
+  nav: 10,
+);
