@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { About } from '@/types/about'
 
-const route = useRoute()
-
 const { findOne } = useStrapi()
 const aboutResponse = await findOne<About>('about', {populate: ['experience', 'skills', 'interests', 'social_links']})
 const aboutData = ref(aboutResponse.data)

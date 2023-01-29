@@ -10,8 +10,11 @@ const homepageData = ref(homepageResponse.data)
   <div>
     <h1>{{ homepageData.attributes.title }}</h1>
     <p>{{ homepageData.attributes.subtitle }}</p>
-    <NuxtLink to="/a-propos" class="n-link-base">
+    <NuxtLink to="/a-propos">
       À propos
+    </NuxtLink>
+    <NuxtLink to="/projets">
+      Projets
     </NuxtLink>
   </div>
 </template>
