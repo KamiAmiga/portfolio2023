@@ -2,7 +2,7 @@
 import { Project } from '@/types/projects'
 
 const { find } = useStrapi()
-const projectsResponse = await find<Project>('projects', {fields: ['name', 'year'], populate: ['cover_image']})
+const projectsResponse = await find<Project>('projects', {fields: ['name', 'slug', 'year'], populate: ['cover_image']})
 const projectsData = reactive(projectsResponse.data)
 const projectsDataSorted = computed(() => {
   return projectsData.sort((a, b) => b.attributes.year - a.attributes.year)
@@ -15,8 +15,10 @@ const projectsDataSorted = computed(() => {
 
     <ul>
       <li v-for="project in projectsDataSorted" :key="project.id">
-        <h2>{{ project.attributes.name }}</h2>
-        <img :src="useStrapiMedia(project.attributes.cover_image.data?.attributes?.url)"/>
+        <NuxtLink to="">
+          <h2>{{ project.attributes?.name }}</h2>
+        </NuxtLink>
+        <custom-picture :picture-data="project.attributes?.cover_image.data?.attributes" format="full_width" />
       </li>
     </ul>
   </div>
