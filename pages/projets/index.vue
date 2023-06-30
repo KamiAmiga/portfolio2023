@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { Project } from '@/types/projects'
+import { Project } from '@/types/project'
 
 const { find } = useStrapi()
+
 const projectsResponse = await find<Project>('projects', {fields: ['name', 'slug', 'year'], populate: ['cover_image']})
 const projectsData = reactive(projectsResponse.data)
 const projectsDataSorted = computed(() => {
@@ -15,10 +16,11 @@ const projectsDataSorted = computed(() => {
 
     <ul>
       <li v-for="project in projectsDataSorted" :key="project.id">
-        <NuxtLink to="">
-          <h2>{{ project.attributes?.name }}</h2>
+        <h2>{{ project.attributes?.name }}</h2>
+        <NuxtLink :to="`/projets/${project.attributes?.slug}`">
+          {{ project.attributes?.slug }}
         </NuxtLink>
-        <custom-picture :picture-data="project.attributes?.cover_image.data?.attributes" format="full_width" />
+        <custom-picture :picture-data="project.attributes?.cover_image.data?.attributes" format="half_width" />
       </li>
     </ul>
   </div>

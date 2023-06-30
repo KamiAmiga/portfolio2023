@@ -15,7 +15,7 @@ interface PictureAttributes {
 
 defineProps<{
   pictureData: PictureAttributes
-  format: 'full_width' | 'half_width' | 'zoom_in'
+  format: 'full_width' | 'half_width' | 'zoom_img'
 }>()
 </script>
 
