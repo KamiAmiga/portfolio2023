@@ -1,15 +1,15 @@
 interface StrapiImage {
-  url: string,
-  width: number,
-  height: number,
+  url: string;
+  width: number;
+  height: number;
 }
 
 export interface StrapiResponsiveImage extends StrapiImage {
-  alternativeText?: string,
+  alternativeText?: string;
   formats: {
-    desktop: StrapiImage,
-    mobile: StrapiImage,
-    tablet: StrapiImage,
-    thumbnail: StrapiImage,
-  }
+    desktop: StrapiImage;
+    mobile: StrapiImage;
+    tablet: StrapiImage;
+    thumbnail: StrapiImage;
+  };
 }

@@ -1,4 +1,4 @@
 export interface Homepage {
-  title: string,
-  subtitle: string
+  title: string;
+  subtitle: string;
 }
