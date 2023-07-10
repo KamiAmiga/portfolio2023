@@ -4,6 +4,18 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: "build",
   },
-  components: [{ path: "~/components/atoms" }, "~/components"],
+  components: {
+    dirs: [
+      {
+        path: "~/components/atoms",
+        global: true,
+      },
+      {
+        path: "~/components/molecules",
+        global: true,
+      },
+      "~/components",
+    ],
+  },
   css: ["@/assets/styles/main.scss"],
 });

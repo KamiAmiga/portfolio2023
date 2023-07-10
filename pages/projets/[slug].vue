@@ -34,25 +34,17 @@ const projectData = ref(projectResponse.data[0]);
         {{ skill.attributes?.name }}
       </li>
     </ul>
-    <div>
-      {{ projectData.attributes?.description }}
-    </div>
     <div v-html="$mdRenderer.render(projectData.attributes?.description)"></div>
     <div>
       <template
         v-for="mainImage in projectData.attributes?.main_images"
         :key="mainImage.id"
       >
-        <CustomPicture
-          :picture-data="mainImage.images?.data[0]?.attributes"
-          format="full_width"
+        <ProjectMainImage
+          :type="mainImage.type"
+          :images="mainImage.images?.data"
+          :zoom-images="mainImage.zoom_images?.data"
         />
-        <template v-if="mainImage.zoom_images?.data">
-          <CustomPicture
-            :picture-data="mainImage.zoom_images?.data[0]?.attributes"
-            format="zoom_img"
-          />
-        </template>
       </template>
     </div>
     <section>

@@ -1,15 +1,24 @@
-interface StrapiImage {
+interface StrapiImageData {
   url: string;
   width: number;
   height: number;
 }
 
-export interface StrapiResponsiveImage extends StrapiImage {
+export enum StrapiResponsiveFormats {
+  FullWidth = "full_width",
+  HalfWidth = "half_width",
+  FourthWidth = "fourth_width",
+}
+
+export interface StrapiImageResponsiveData extends StrapiImageData {
+  url: string;
   alternativeText?: string;
-  formats: {
-    desktop: StrapiImage;
-    mobile: StrapiImage;
-    tablet: StrapiImage;
-    thumbnail: StrapiImage;
-  };
+  width: number;
+  height: number;
+  formats: Record<string, StrapiImageData>;
+}
+
+export interface StrapiImage {
+  id: number;
+  attributes: StrapiImageResponsiveData;
 }

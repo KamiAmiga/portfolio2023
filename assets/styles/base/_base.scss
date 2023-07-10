@@ -2,12 +2,17 @@
 @use '../abstracts/layout' as *;
 @use './typography' as *;
 
-html:focus-within {
-  scroll-behavior: smooth;
+html {
+  font-size: clamp(16px, 1.25vw, 20px);
 
-  @media (prefers-reduced-motion: reduce) {
-    scroll-behavior: auto;
+  &:focus-within {
+    scroll-behavior: smooth;
+  
+    @media (prefers-reduced-motion: reduce) {
+      scroll-behavior: auto;
+    }
   }
+  
 }
 
 body {

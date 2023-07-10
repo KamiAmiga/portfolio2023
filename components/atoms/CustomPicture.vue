@@ -1,29 +1,38 @@
 <script setup lang="ts">
-interface ResponsiveFormats {
-  url: string,
-  width: number,
-  height: number,
-}
-
-interface PictureAttributes {
-  url: string,
-  alternativeText?: string,
-  width: number,
-  height: number,
-  formats: Record<string, ResponsiveFormats>,
-}
+import {
+  StrapiImageResponsiveData,
+  StrapiResponsiveFormats,
+} from "../../types/strapiResponsiveImage";
 
 defineProps<{
-  pictureData: PictureAttributes
-  format: 'full_width' | 'half_width' | 'zoom_img'
-}>()
+  pictureData: StrapiImageResponsiveData;
+  format: `${StrapiResponsiveFormats}`;
+}>();
 </script>
 
 <template>
   <picture>
-    <source :srcset="useStrapiMedia(pictureData?.formats[`${format}_desktop`]?.url)" media="(min-width: 80em)" type="image/webp"/>
-    <source :srcset="useStrapiMedia(pictureData?.formats[`${format}_tablet`]?.url)" media="(min-width: 40em)" type="image/webp"/>
-    <source :srcset="useStrapiMedia(pictureData?.formats[`${format}_mobile`]?.url)" type="image/webp"/>
-    <img :src="useStrapiMedia(pictureData?.url)" :alt="pictureData.alternativeText" />
+    <source
+      :srcset="useStrapiMedia(pictureData?.formats[`${format}_desktop`]?.url)"
+      media="(min-width: 80em)"
+      type="image/webp"
+    />
+    <source
+      :srcset="useStrapiMedia(pictureData?.formats[`${format}_tablet`]?.url)"
+      media="(min-width: 40em)"
+      type="image/webp"
+    />
+    <source
+      v-if="
+        format !== StrapiResponsiveFormats.FourthWidth &&
+        format !== StrapiResponsiveFormats.HalfWidth
+      "
+      :srcset="useStrapiMedia(pictureData?.formats[`${format}_mobile`]?.url)"
+      type="image/webp"
+    />
+    <img
+      :src="useStrapiMedia(pictureData?.url)"
+      :alt="pictureData.alternativeText ?? ''"
+    />
   </picture>
 </template>
