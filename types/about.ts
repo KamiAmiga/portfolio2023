@@ -1,19 +1,11 @@
+import { Skill } from "./skills";
+
 interface Experience {
   id: number;
   name: string;
   date: string;
   place?: string;
   category: string;
-}
-
-interface Skill {
-  id: number;
-  attributes: {
-    name: string;
-    level?: number;
-    category?: string;
-    icon_name: string;
-  };
 }
 
 interface Interest {

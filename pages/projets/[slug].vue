@@ -22,24 +22,17 @@ const projectData = ref(projectResponse.data[0]);
 </script>
 
 <template>
-  <div>
+  <div class="project">
     <ProjectHeader
       :title="projectData.attributes?.name"
       :cover-image="projectData.attributes?.cover_image?.data"
     />
-    <div class="container">
+    <div class="container project__content">
       <div class="section section--third">
-        <div>
-          {{ projectData.attributes?.year }}
-        </div>
-        <ul>
-          <li
-            v-for="skill in projectData.attributes?.skills.data"
-            :key="skill.id"
-          >
-            {{ skill.attributes?.name }}
-          </li>
-        </ul>
+        <ProjectStats
+          :year="projectData.attributes?.year"
+          :skills="projectData.attributes?.skills.data"
+        ></ProjectStats>
       </div>
 
       <div
@@ -99,6 +92,18 @@ const projectData = ref(projectResponse.data[0]);
 @use "../../assets/styles/abstracts" as *;
 
 .project {
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-top: map-get($spacers, 8);
+    row-gap: map-get($spacers, 8);
+
+    @media screen and (min-width: $breakpoint-m) {
+      padding-top: map-get($spacers, 10);
+      row-gap: map-get($spacers, 9);
+    }
+  }
+
   &__main-images {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;

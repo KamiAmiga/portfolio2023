@@ -43,6 +43,7 @@ defineProps<{
   height: 50dvh;
   max-height: 60rem;
   position: relative;
+  z-index: map-get($z-index, base-decrease);
   background: linear-gradient(
     to bottom,
     fade-out(map-get($theme-color-accent, base), map-get($fading-out, 0)),
@@ -78,7 +79,7 @@ defineProps<{
     z-index: map-get($z-index, base-increase);
 
     @media screen and (min-width: $breakpoint-m) {
-      padding-left: map-get($spacers, 4) + 20rem;
+      padding-left: 20rem;
     }
   }
 }
