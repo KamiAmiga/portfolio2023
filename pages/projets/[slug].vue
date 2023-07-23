@@ -22,73 +22,76 @@ const projectData = ref(projectResponse.data[0]);
 </script>
 
 <template>
-  <div class="container">
-    <div class="section section--full">
-      <h1>
-        {{ projectData.attributes?.name }}
-      </h1>
-    </div>
-
-    <div class="section section--third">
-      <div>
-        {{ projectData.attributes?.year }}
+  <div>
+    <ProjectHeader
+      :title="projectData.attributes?.name"
+      :cover-image="projectData.attributes?.cover_image?.data"
+    />
+    <div class="container">
+      <div class="section section--third">
+        <div>
+          {{ projectData.attributes?.year }}
+        </div>
+        <ul>
+          <li
+            v-for="skill in projectData.attributes?.skills.data"
+            :key="skill.id"
+          >
+            {{ skill.attributes?.name }}
+          </li>
+        </ul>
       </div>
-      <ul>
-        <li
-          v-for="skill in projectData.attributes?.skills.data"
-          :key="skill.id"
-        >
-          {{ skill.attributes?.name }}
-        </li>
-      </ul>
-    </div>
 
-    <div
-      class="section section--half"
-      v-html="$mdRenderer.render(projectData.attributes?.description)"
-    ></div>
+      <div
+        class="section section--half"
+        v-html="$mdRenderer.render(projectData.attributes?.description)"
+      ></div>
 
-    <div class="section section--full">
-      <div class="project__main-images">
-        <template
-          v-for="mainImage in projectData.attributes?.main_images"
-          :key="mainImage.id"
-        >
-          <div class="project__main-images__item">
-            <ProjectMainImage
-              :type="mainImage.type"
-              :images="mainImage.images?.data"
-            />
-          </div>
-        </template>
+      <div class="section section--full">
+        <div class="project__main-images">
+          <template
+            v-for="mainImage in projectData.attributes?.main_images"
+            :key="mainImage.id"
+          >
+            <div class="project__main-images__item">
+              <ProjectMainImage
+                :type="mainImage.type"
+                :images="mainImage.images?.data"
+              />
+            </div>
+          </template>
+        </div>
       </div>
-    </div>
 
-    <section
-      v-if="projectData.attributes?.typography?.length > 0"
-      class="section section--half"
-    >
-      <h2>Typographie</h2>
-      <template
-        v-for="typography in projectData.attributes?.typography"
-        :key="typography.id"
+      <section
+        v-if="projectData.attributes?.typography?.length > 0"
+        class="section section--half"
       >
-        <img
-          :src="useStrapiMedia(typography.typo_visual?.data?.attributes.url)"
-          :alt="typography.typo_name"
-        />
-      </template>
-    </section>
+        <h2>Typographie</h2>
+        <template
+          v-for="typography in projectData.attributes?.typography"
+          :key="typography.id"
+        >
+          <img
+            :src="useStrapiMedia(typography.typo_visual?.data?.attributes.url)"
+            :alt="typography.typo_name"
+          />
+        </template>
+      </section>
 
-    <section
-      v-if="projectData.attributes?.colors?.length > 0"
-      class="section section--half"
-    >
-      <template v-for="color in projectData.attributes?.colors" :key="color.id">
-        <div>{{ color.color_name }}</div>
-        <div>{{ color.color_code }}</div>
-      </template>
-    </section>
+      <section
+        v-if="projectData.attributes?.colors?.length > 0"
+        class="section section--half"
+      >
+        <template
+          v-for="color in projectData.attributes?.colors"
+          :key="color.id"
+        >
+          <div>{{ color.color_name }}</div>
+          <div>{{ color.color_code }}</div>
+        </template>
+      </section>
+    </div>
   </div>
 </template>
 
