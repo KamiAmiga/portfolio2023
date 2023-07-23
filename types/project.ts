@@ -1,9 +1,14 @@
-import { StrapiResponsiveImage } from "./strapiResponsiveImage";
+import { StrapiImage } from "./strapiResponsiveImage";
 
-interface CoverImage {
-  id: number;
-  attributes: StrapiResponsiveImage;
+export enum ProjectMainImageTypes {
+  UIMobileDesktop = "ui-mobile_desktop",
+  UIDesktop = "ui-desktop",
+  UIMobile = "ui-mobile",
+  DesignPrint = "design-print",
+  DesignVisualID = "design-visual_id",
+  Drawing = "drawing",
 }
+
 export interface Project {
   slug: string;
   name: string;
@@ -12,7 +17,7 @@ export interface Project {
   image: any;
   skills: any;
   cover_image: {
-    data: CoverImage;
+    data: StrapiImage;
   };
 }
 

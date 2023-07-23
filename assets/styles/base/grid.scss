@@ -28,7 +28,11 @@
 
   &--third {
     @media screen and (min-width: $breakpoint-m) {
-      grid-column: span 3;
+      grid-column: span 2;
+    }
+
+    @media screen and (min-width: $breakpoint-l) {
+      grid-column: span 2;
     }
   }
 }

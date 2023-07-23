@@ -22,32 +22,52 @@ const projectData = ref(projectResponse.data[0]);
 </script>
 
 <template>
-  <div>
-    <h1>
-      {{ projectData.attributes?.name }}
-    </h1>
-    <div>
-      {{ projectData.attributes?.year }}
+  <div class="container">
+    <div class="section section--full">
+      <h1>
+        {{ projectData.attributes?.name }}
+      </h1>
     </div>
-    <ul>
-      <li v-for="skill in projectData.attributes?.skills.data" :key="skill.id">
-        {{ skill.attributes?.name }}
-      </li>
-    </ul>
-    <div v-html="$mdRenderer.render(projectData.attributes?.description)"></div>
-    <div>
-      <template
-        v-for="mainImage in projectData.attributes?.main_images"
-        :key="mainImage.id"
-      >
-        <ProjectMainImage
-          :type="mainImage.type"
-          :images="mainImage.images?.data"
-          :zoom-images="mainImage.zoom_images?.data"
-        />
-      </template>
+
+    <div class="section section--third">
+      <div>
+        {{ projectData.attributes?.year }}
+      </div>
+      <ul>
+        <li
+          v-for="skill in projectData.attributes?.skills.data"
+          :key="skill.id"
+        >
+          {{ skill.attributes?.name }}
+        </li>
+      </ul>
     </div>
-    <section>
+
+    <div
+      class="section section--half"
+      v-html="$mdRenderer.render(projectData.attributes?.description)"
+    ></div>
+
+    <div class="section section--full">
+      <div class="project__main-images">
+        <template
+          v-for="mainImage in projectData.attributes?.main_images"
+          :key="mainImage.id"
+        >
+          <div class="project__main-images__item">
+            <ProjectMainImage
+              :type="mainImage.type"
+              :images="mainImage.images?.data"
+            />
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <section
+      v-if="projectData.attributes?.typography?.length > 0"
+      class="section section--half"
+    >
       <h2>Typographie</h2>
       <template
         v-for="typography in projectData.attributes?.typography"
@@ -59,7 +79,11 @@ const projectData = ref(projectResponse.data[0]);
         />
       </template>
     </section>
-    <section>
+
+    <section
+      v-if="projectData.attributes?.colors?.length > 0"
+      class="section section--half"
+    >
       <template v-for="color in projectData.attributes?.colors" :key="color.id">
         <div>{{ color.color_name }}</div>
         <div>{{ color.color_code }}</div>
@@ -67,3 +91,33 @@ const projectData = ref(projectResponse.data[0]);
     </section>
   </div>
 </template>
+
+<style lang="scss">
+@use "../../assets/styles/abstracts" as *;
+
+.project {
+  &__main-images {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    row-gap: map-get($spacers, 6);
+
+    &__item {
+      display: flex;
+
+      &:nth-of-type(odd) {
+        grid-column: 1 / 3;
+      }
+
+      &:nth-of-type(even) {
+        grid-column: 2 / 4;
+        align-items: end;
+        justify-content: end;
+      }
+    }
+
+    @media screen and (min-width: $breakpoint-m) {
+      row-gap: map-get($spacers, 8);
+    }
+  }
+}
+</style>
