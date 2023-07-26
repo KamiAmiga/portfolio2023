@@ -28,19 +28,19 @@ const projectData = ref(projectResponse.data[0]);
       :cover-image="projectData.attributes?.cover_image?.data"
     />
     <div class="container project__content">
-      <div class="section section--third">
+      <section class="section section--third">
         <ProjectStats
           :year="projectData.attributes?.year"
           :skills="projectData.attributes?.skills.data"
         ></ProjectStats>
-      </div>
+      </section>
 
-      <div
+      <section
         class="section section--half"
         v-html="$mdRenderer.render(projectData.attributes?.description)"
-      ></div>
+      ></section>
 
-      <div class="section section--full">
+      <section class="section section--full">
         <div class="project__main-images">
           <template
             v-for="mainImage in projectData.attributes?.main_images"
@@ -54,7 +54,7 @@ const projectData = ref(projectResponse.data[0]);
             </div>
           </template>
         </div>
-      </div>
+      </section>
 
       <section
         v-if="projectData.attributes?.typography?.length > 0"
@@ -69,12 +69,21 @@ const projectData = ref(projectResponse.data[0]);
         v-if="projectData.attributes?.colors?.length > 0"
         class="section section--half"
       >
+        <h2 class="heading--second">Couleurs</h2>
+
+        <ProjectColors :colors="projectData.attributes?.colors" />
+      </section>
+
+      <section class="section section--full">
         <template
-          v-for="color in projectData.attributes?.colors"
-          :key="color.id"
+          v-for="secondaryImage in projectData.attributes?.secondary_images
+            ?.data"
+          :key="secondaryImage.id"
         >
-          <div>{{ color.color_name }}</div>
-          <div>{{ color.color_code }}</div>
+          <CustomPicture
+            :picture-data="secondaryImage.attributes"
+            format="half_width"
+          />
         </template>
       </section>
     </div>
@@ -87,11 +96,11 @@ const projectData = ref(projectResponse.data[0]);
 .project {
   &__content {
     padding-top: map-get($spacers, 8);
-    row-gap: map-get($spacers, 8);
+    row-gap: map-get($spacers, 9);
 
     @media screen and (min-width: $breakpoint-m) {
       padding-top: map-get($spacers, 10);
-      row-gap: map-get($spacers, 9);
+      row-gap: map-get($spacers, 10);
     }
   }
 

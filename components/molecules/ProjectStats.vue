@@ -131,6 +131,10 @@ $skills-types: "development" $theme-color-tertiary, "art" $theme-color-secondary
           }
         }
       }
+
+      @media screen and (min-width: $breakpoint-m) {
+        color: map-get($theme-color-primary, base);
+      }
     }
 
     &--list-item {
@@ -166,12 +170,6 @@ $skills-types: "development" $theme-color-tertiary, "art" $theme-color-secondary
 
     &__value {
       color: map-get($theme-color-primary, lighter-2);
-    }
-
-    &__skill {
-      &__icon {
-        fill: map-get($theme-color-primary, base);
-      }
     }
   }
 }
