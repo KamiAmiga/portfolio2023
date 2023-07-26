@@ -32,7 +32,7 @@ defineProps<{
     />
     <img
       :src="useStrapiMedia(pictureData?.url)"
-      :alt="pictureData.alternativeText ?? ''"
+      :alt="pictureData?.alternativeText ?? ''"
     />
   </picture>
 </template>

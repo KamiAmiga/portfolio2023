@@ -75,16 +75,9 @@ const projectData = ref(projectResponse.data[0]);
       </section>
 
       <section class="section section--full">
-        <template
-          v-for="secondaryImage in projectData.attributes?.secondary_images
-            ?.data"
-          :key="secondaryImage.id"
-        >
-          <CustomPicture
-            :picture-data="secondaryImage.attributes"
-            format="half_width"
-          />
-        </template>
+        <ProjectSecondaryImages
+          :images="projectData.attributes?.secondary_images?.data"
+        />
       </section>
     </div>
   </div>
@@ -96,10 +89,12 @@ const projectData = ref(projectResponse.data[0]);
 .project {
   &__content {
     padding-top: map-get($spacers, 8);
+    padding-bottom: map-get($spacers, 8);
     row-gap: map-get($spacers, 9);
 
     @media screen and (min-width: $breakpoint-m) {
       padding-top: map-get($spacers, 10);
+      padding-bottom: map-get($spacers, 10);
       row-gap: map-get($spacers, 10);
     }
   }
