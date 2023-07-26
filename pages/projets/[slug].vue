@@ -60,16 +60,9 @@ const projectData = ref(projectResponse.data[0]);
         v-if="projectData.attributes?.typography?.length > 0"
         class="section section--half"
       >
-        <h2>Typographie</h2>
-        <template
-          v-for="typography in projectData.attributes?.typography"
-          :key="typography.id"
-        >
-          <img
-            :src="useStrapiMedia(typography.typo_visual?.data?.attributes.url)"
-            :alt="typography.typo_name"
-          />
-        </template>
+        <h2 class="heading--second">Typographie</h2>
+
+        <ProjectTypography :fonts="projectData.attributes?.typography" />
       </section>
 
       <section
@@ -93,8 +86,6 @@ const projectData = ref(projectResponse.data[0]);
 
 .project {
   &__content {
-    display: grid;
-    grid-template-columns: 1fr;
     padding-top: map-get($spacers, 8);
     row-gap: map-get($spacers, 8);
 
