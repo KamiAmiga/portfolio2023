@@ -1,6 +1,6 @@
 import { Skill } from "./skills";
 
-interface Experience {
+export interface Experience {
   id: number;
   name: string;
   date: string;

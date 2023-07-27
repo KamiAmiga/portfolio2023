@@ -24,18 +24,8 @@ const aboutData = ref(aboutResponse.data);
 
       <div class="section section--full">
         <h2 class="heading--second">Parcours</h2>
-        <ul>
-          <li
-            v-for="experience in aboutData.attributes.experience"
-            :key="experience.id"
-          >
-            <h3>{{ experience.name }}</h3>
-            <p>
-              <span v-if="experience.place">{{ experience.place }},</span>
-              <span>{{ experience.date }}</span>
-            </p>
-          </li>
-        </ul>
+
+        <about-history :history="aboutData.attributes.experience" />
       </div>
 
       <div class="section section--full">
@@ -46,8 +36,8 @@ const aboutData = ref(aboutResponse.data);
             <nuxt-icon :name="skill.attributes.icon_name" />
             <span v-if="skill.attributes.level">{{
               skill.attributes.level === 1
-                ? "Connaissance"
-                : "Bonne connaissance"
+              ? "Connaissance"
+              : "Bonne connaissance"
             }}</span>
           </li>
         </ul>
@@ -56,10 +46,7 @@ const aboutData = ref(aboutResponse.data);
       <div class="section section--half">
         <h2 class="heading--second">Intérêts</h2>
         <ul>
-          <li
-            v-for="interest in aboutData.attributes.interests"
-            :key="interest.id"
-          >
+          <li v-for="interest in aboutData.attributes.interests" :key="interest.id">
             <h3>{{ interest.name }}</h3>
             <nuxt-icon :name="interest.icon_name" />
           </li>
@@ -69,10 +56,7 @@ const aboutData = ref(aboutResponse.data);
       <div class="section section--half">
         <h2 class="heading--second">Contacts</h2>
         <ul>
-          <li
-            v-for="social_link in aboutData.attributes.social_links"
-            :key="social_link.id"
-          >
+          <li v-for="social_link in aboutData.attributes.social_links" :key="social_link.id">
             <a :href="social_link.url">
               <nuxt-icon :name="social_link.icon_name" />
               {{ social_link.name }}
