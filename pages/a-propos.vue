@@ -30,17 +30,8 @@ const aboutData = ref(aboutResponse.data);
 
       <div class="section section--full">
         <h2 class="heading--second">Compétences</h2>
-        <ul>
-          <li v-for="skill in aboutData.attributes.skills.data" :key="skill.id">
-            <h3>{{ skill.attributes.name }}</h3>
-            <nuxt-icon :name="skill.attributes.icon_name" />
-            <span v-if="skill.attributes.level">{{
-              skill.attributes.level === 1
-              ? "Connaissance"
-              : "Bonne connaissance"
-            }}</span>
-          </li>
-        </ul>
+
+        <about-skills :skills="aboutData.attributes.skills.data" />
       </div>
 
       <div class="section section--half">
