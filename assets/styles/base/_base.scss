@@ -1,18 +1,18 @@
 @use '../abstracts/colors' as *;
 @use '../abstracts/layout' as *;
-@use './typography' as *;
+@use '../abstracts/fonts' as *;
 
 html {
   font-size: clamp(16px, 1.25vw, 20px);
 
   &:focus-within {
     scroll-behavior: smooth;
-  
+
     @media (prefers-reduced-motion: reduce) {
       scroll-behavior: auto;
     }
   }
-  
+
 }
 
 body {
