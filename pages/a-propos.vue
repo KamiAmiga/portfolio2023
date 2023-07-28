@@ -42,14 +42,8 @@ const aboutData = ref(aboutResponse.data);
 
       <div class="section section--half">
         <h2 class="heading--second">Contacts</h2>
-        <ul>
-          <li v-for="social_link in aboutData.attributes.social_links" :key="social_link.id">
-            <a :href="social_link.url">
-              <nuxt-icon :name="social_link.icon_name" />
-              {{ social_link.name }}
-            </a>
-          </li>
-        </ul>
+
+        <about-social-links :social-links="aboutData.attributes.social_links" />
       </div>
     </div>
   </main>
