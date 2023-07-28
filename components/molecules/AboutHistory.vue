@@ -13,8 +13,8 @@ defineProps<{
       { 'about-history__item--junction': historyItem.category !== history[index + 1]?.category && index < history.length - 1 && index !== 0 }
     ]">
       <span class="about-history__item__icon-wrapper icon-wrapper icon-wrapper--s icon-wrapper--circle">
-        <nuxt-icon v-if="historyItem.category === 'school'" class="icon--m" name="scholar" />
-        <nuxt-icon v-else class="icon--m" name="bag" />
+        <nuxt-icon v-if="historyItem.category === 'school'" class="icon icon--m" name="scholar" />
+        <nuxt-icon v-else class="icon icon--m" name="bag" />
       </span>
       <div class="about-history__item__description">
         <span class="font-sans--bold">{{ historyItem.name }}</span>
@@ -118,7 +118,7 @@ $types: "school"$history-item-school-color,
 
       &--school {
         align-self: flex-start;
-        padding: map-get($spacers, 4) ((math.div(map-get($icon-wrapper-sizes, s), -2)) + map-get($spacers, 4)) map-get($spacers, 4) 0;
+        padding: map-get($spacers, 4) (math.div(map-get($icon-wrapper-sizes, s), 2) + map-get($spacers, 4)) map-get($spacers, 4) 0;
 
         &::before {
           left: 100%;
@@ -136,7 +136,7 @@ $types: "school"$history-item-school-color,
 
       &--work {
         align-self: flex-end;
-        padding: map-get($spacers, 4) 0 map-get($spacers, 4) ((math.div(map-get($icon-wrapper-sizes, s), -2)) + map-get($spacers, 4));
+        padding: map-get($spacers, 4) 0 map-get($spacers, 4) (math.div(map-get($icon-wrapper-sizes, s), 2) + map-get($spacers, 4));
 
         &::before {
           left: 0;

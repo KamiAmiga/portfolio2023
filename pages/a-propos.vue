@@ -36,12 +36,8 @@ const aboutData = ref(aboutResponse.data);
 
       <div class="section section--half">
         <h2 class="heading--second">Intérêts</h2>
-        <ul>
-          <li v-for="interest in aboutData.attributes.interests" :key="interest.id">
-            <h3>{{ interest.name }}</h3>
-            <nuxt-icon :name="interest.icon_name" />
-          </li>
-        </ul>
+
+        <about-interests :interests="aboutData.attributes.interests" />
       </div>
 
       <div class="section section--half">

@@ -8,13 +8,13 @@ export interface Experience {
   category: string;
 }
 
-interface Interest {
+export interface Interest {
   id: number;
   name: string;
   icon_name: string;
 }
 
-interface SocialLink {
+export interface SocialLink {
   id: number;
   name: string;
   url: string;

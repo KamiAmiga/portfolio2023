@@ -16,38 +16,20 @@ defineProps<{
     <dt class="project-stats__property font-sans--md-capitalized">Outils</dt>
     <dd class="project-stats__value font-mono font-mono--small">
       <ul v-if="skills.length > 1" class="project-stats__skills-list">
-        <li
-          v-for="skill in skills"
-          :key="skill.id"
-          class="project-stats__skill project-stats__skill--list-item"
-        >
-          <div
-            class="project-stats__skill__icon-wrapper icon icon-wrapper icon-wrapper--square icon-wrapper--m"
-            :class="
-              'project-stats__skill__icon-wrapper--' +
-              skill.attributes?.category
-            "
-          >
-            <nuxt-icon
-              :name="skill.attributes?.icon_name"
-              class="project-stats__skill__icon icon--m"
-            />
+        <li v-for="skill in skills" :key="skill.id" class="project-stats__skill project-stats__skill--list-item">
+          <div class="project-stats__skill__icon-wrapper icon icon-wrapper icon-wrapper--square icon-wrapper--m" :class="'project-stats__skill__icon-wrapper--' +
+            skill.attributes?.category
+            ">
+            <nuxt-icon :name="skill.attributes?.icon_name" class="project-stats__skill__icon icon icon--m" />
           </div>
           {{ skill.attributes?.name }}
         </li>
       </ul>
       <div v-else class="project-stats__skill">
-        <div
-          class="project-stats__skill__icon-wrapper icon icon-wrapper icon-wrapper--square icon-wrapper--m"
-          :class="
-            'project-stats__skill__icon-wrapper--' +
-            skills[0].attributes?.category
-          "
-        >
-          <nuxt-icon
-            :name="skills[0].attributes?.icon_name"
-            class="project-stats__skill__icon icon--m"
-          />
+        <div class="project-stats__skill__icon-wrapper icon icon-wrapper icon-wrapper--square icon-wrapper--m" :class="'project-stats__skill__icon-wrapper--' +
+          skills[0].attributes?.category
+          ">
+          <nuxt-icon :name="skills[0].attributes?.icon_name" class="project-stats__skill__icon icon icon--m" />
         </div>
         {{ skills[0].attributes?.name }}
       </div>
@@ -62,7 +44,7 @@ defineProps<{
 // Variables
 //
 
-$skills-types: "development" $theme-color-tertiary, "art" $theme-color-secondary;
+$skills-types: "development"$theme-color-tertiary, "art"$theme-color-secondary;
 
 //
 // Styling
@@ -114,19 +96,16 @@ $skills-types: "development" $theme-color-tertiary, "art" $theme-color-secondary
           height: 2rem;
         }
 
-        @each $type, $theme-color in $skills-types {
+        @each $type,
+        $theme-color in $skills-types {
           &--#{$type} {
             &::before {
               border: 1px solid map-get($theme-color, base);
-              background: linear-gradient(
-                to bottom right,
-                fade-out(
-                  map-get($theme-color, darker),
-                  map-get($fading-out, 5)
-                ),
-                33%,
-                fade-out(map-get($theme-color, base), map-get($fading-out, 0))
-              );
+              background: linear-gradient(to bottom right,
+                  fade-out(map-get($theme-color, darker),
+                    map-get($fading-out, 5)),
+                  33%,
+                  fade-out(map-get($theme-color, base), map-get($fading-out, 0)));
             }
           }
         }
@@ -158,8 +137,7 @@ $skills-types: "development" $theme-color-tertiary, "art" $theme-color-secondary
     width: 20rem;
     flex-grow: 0;
     flex-shrink: 0;
-    padding: map-get($spacers, 8) map-get($spacers, 7) map-get($spacers, 6)
-      map-get($spacers, 7);
+    padding: map-get($spacers, 8) map-get($spacers, 7) map-get($spacers, 6) map-get($spacers, 7);
     border: none;
     margin: -12rem 0 0 0;
     background-color: map-get($theme-color-primary, reverse);

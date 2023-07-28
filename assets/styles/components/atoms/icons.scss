@@ -56,13 +56,12 @@ $icon-wrapper-sizes-suffix: s, m, l;
         left: 50%;
         z-index: map-get($z-index, base-decrease);
         transform-origin: center;
-        transform: translate(-50%, -50%)
-          rotate(45deg);
+        transform: translate(-50%, -50%) rotate(45deg);
       }
     }
   }
 
-  .nuxt-icon {
+  &.nuxt-icon {
     line-height: 1;
 
     svg {

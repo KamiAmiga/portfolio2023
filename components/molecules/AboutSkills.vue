@@ -20,7 +20,7 @@ const sortedSkills = computed(() => {
     <li v-for="skill in sortedSkills" :key="skill.id" class="about-skills__item"
       :class="'about-skills__item--' + skill.attributes.category">
       <div class="about-skills__item__icon-wrapper">
-        <nuxt-icon :name="skill.attributes.icon_name" class="icon--xl" />
+        <nuxt-icon :name="skill.attributes.icon_name" class="icon icon--xl" />
       </div>
 
       <span class="about-skills__item__name">{{ skill.attributes.name }}</span>
@@ -28,12 +28,12 @@ const sortedSkills = computed(() => {
       <template v-if="skill.attributes.level && skill.attributes.level > 0">
         <template v-if="skill.attributes.level == 1">
           <span class="sr-only">Niveau correct</span>
-          <nuxt-icon class="about-skills__item__level icon--s" name="star" />
+          <nuxt-icon class="about-skills__item__level icon icon--s" name="star" />
         </template>
 
         <template v-else>
           <span class="sr-only">Bon niveau</span>
-          <nuxt-icon class="about-skills__item__level icon--s" name="stars" />
+          <nuxt-icon class="about-skills__item__level icon icon--s" name="stars" />
         </template>
       </template>
     </li>
