@@ -1,16 +1,15 @@
 <script setup lang="ts">
+import { ProjectColor } from 'types/project';
+
 defineProps<{
-  colors: { id: number; color_name: string; color_code: string }[];
+  colors: ProjectColor[];
 }>();
 </script>
 
 <template>
   <ul class="project-colors">
     <li v-for="color in colors" :key="color.id" class="project-colors__item">
-      <span
-        class="project-colors__item__swatch"
-        :style="{ '--swatch-color': `#${color.color_code}` }"
-      ></span>
+      <span class="project-colors__item__swatch" :style="{ '--swatch-color': `#${color.color_code}` }"></span>
       <span class="project-colors__item__name">{{ color.color_name }}</span>
     </li>
   </ul>

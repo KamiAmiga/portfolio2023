@@ -10,12 +10,41 @@ export enum ProjectMainImageTypes {
   Drawing = "drawing",
 }
 
+export interface ProjectTypography {
+  id: number;
+  typo_name: string;
+  typo_visual: {
+    id: number;
+    data: StrapiImage;
+  }
+}
+
+export interface ProjectColor {
+  id: number;
+  color_code: string;
+  color_name: string;
+}
+
+export interface ProjectMainImage {
+  id: number;
+  images: {
+    id: number;
+    data: StrapiImage[];
+  };
+  type: ProjectMainImageTypes;
+}
+
 export interface Project {
   slug: string;
   name: string;
   year: number;
   description: string;
-  image: any;
+  main_images: ProjectMainImage[];
+  typography: ProjectTypography[];
+  colors: ProjectColor[];
+  secondary_images: {
+    data: StrapiImage[];
+  };
   skills: {
     data: Skill[];
   };

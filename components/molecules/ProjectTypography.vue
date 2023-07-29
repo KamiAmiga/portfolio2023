@@ -1,16 +1,15 @@
 <script setup lang="ts">
+import { ProjectTypography } from 'types/project';
+
 defineProps<{
-  fonts: { id: number; typo_name: string; typo_visual?: any }[];
+  fonts: ProjectTypography[];
 }>();
 </script>
 
 <template>
   <ul class="project-typography">
     <li v-for="font in fonts" :key="font.id" class="project-typography__item">
-      <img
-        :src="useStrapiMedia(font.typo_visual?.data?.attributes.url)"
-        :alt="font.typo_name"
-      />
+      <img :src="useStrapiMedia(font.typo_visual?.data?.attributes.url)" :alt="font.typo_name" />
     </li>
   </ul>
 </template>
@@ -26,8 +25,7 @@ defineProps<{
   &__item {
     max-width: 20rem;
     padding-bottom: map-get($spacers, 3);
-    border-bottom: 2px solid
-      fade-out(map-get($theme-color-fourth, base), map-get($fading-out, 5));
+    border-bottom: 2px solid fade-out(map-get($theme-color-fourth, base), map-get($fading-out, 5));
     position: relative;
     margin-bottom: map-get($spacers, 7);
     line-height: 0;
@@ -36,8 +34,7 @@ defineProps<{
       content: "";
       display: block;
       width: 100%;
-      border-bottom: 2px dashed
-        fade-out(map-get($theme-color-fourth, lighter), map-get($fading-out, 2));
+      border-bottom: 2px dashed fade-out(map-get($theme-color-fourth, lighter), map-get($fading-out, 2));
       position: absolute;
       bottom: map-get($spacers, 2);
     }

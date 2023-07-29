@@ -2,9 +2,9 @@
 import { Project } from "@/types/project";
 
 const route = useRoute();
-const { findOne } = useStrapi();
+const { find } = useStrapi();
 
-const projectResponse = await findOne<Project>("projects", {
+const projectResponse = await find<Project>("projects", {
   filters: { slug: route.params.slug },
   populate: [
     "cover_image",
@@ -22,65 +22,44 @@ const projectData = ref(projectResponse.data[0]);
 </script>
 
 <template>
-  <div class="project">
-    <ProjectHeader
-      :title="projectData.attributes?.name"
-      :cover-image="projectData.attributes?.cover_image?.data"
-    />
+  <main class="project">
+    <ProjectHeader :title="projectData.attributes?.name" :cover-image="projectData.attributes?.cover_image?.data" />
     <div class="container project__content">
       <section class="section section--third">
-        <ProjectStats
-          :year="projectData.attributes?.year"
-          :skills="projectData.attributes?.skills.data"
-        ></ProjectStats>
+        <ProjectStats :year="projectData.attributes?.year" :skills="projectData.attributes?.skills.data"></ProjectStats>
       </section>
 
-      <section
-        class="section section--half"
-        v-html="$mdRenderer.render(projectData.attributes?.description)"
-      ></section>
+      <section class="section section--half">
+        <RichtextWrapper :text="projectData.attributes?.description" />
+      </section>
 
       <section class="section section--full">
         <div class="project__main-images">
-          <template
-            v-for="mainImage in projectData.attributes?.main_images"
-            :key="mainImage.id"
-          >
+          <template v-for="mainImage in projectData.attributes?.main_images" :key="mainImage.id">
             <div class="project__main-images__item">
-              <ProjectMainImage
-                :type="mainImage.type"
-                :images="mainImage.images?.data"
-              />
+              <ProjectMainImage :type="mainImage.type" :images="mainImage.images?.data" />
             </div>
           </template>
         </div>
       </section>
 
-      <section
-        v-if="projectData.attributes?.typography?.length > 0"
-        class="section section--half"
-      >
+      <section v-if="projectData.attributes?.typography?.length > 0" class="section section--half">
         <h2 class="heading--second">Typographie</h2>
 
-        <ProjectTypography :fonts="projectData.attributes?.typography" />
+        <ProjectTypography :fonts="projectData.attributes.typography" />
       </section>
 
-      <section
-        v-if="projectData.attributes?.colors?.length > 0"
-        class="section section--half"
-      >
+      <section v-if="projectData.attributes?.colors?.length > 0" class="section section--half">
         <h2 class="heading--second">Couleurs</h2>
 
         <ProjectColors :colors="projectData.attributes?.colors" />
       </section>
 
       <section class="section section--full">
-        <ProjectSecondaryImages
-          :images="projectData.attributes?.secondary_images?.data"
-        />
+        <ProjectSecondaryImages :images="projectData.attributes?.secondary_images?.data" />
       </section>
     </div>
-  </div>
+  </main>
 </template>
 
 <style lang="scss">
