@@ -6,14 +6,11 @@
   &--main {
     @include font-sans(xl);
     display: inline-block;
-    padding: map-get($spacers, 3)
-      map-get($spacers, 7)
-      map-get($spacers, 3)
-      map-get($spacers, 4);
+    padding: map-get($spacers, 3) map-get($spacers, 7) map-get($spacers, 3) map-get($spacers, 4);
     margin: 0;
     position: relative;
     background-color: map-get($theme-color-secondary, darker);
-    
+
     &::after {
       content: "";
       display: block;
@@ -24,12 +21,9 @@
       left: 0;
       background-color: map-get($theme-color-secondary, lighter);
     }
-    
+
     @media screen and (min-width: $breakpoint-m) {
-      padding: map-get($spacers, 4)
-        map-get($spacers, 10)
-        map-get($spacers, 4)
-        map-get($spacers, 7);
+      padding: map-get($spacers, 4) map-get($spacers, 10) map-get($spacers, 4) map-get($spacers, 7);
       font-size: $font-size-base * $font-size-scale-ratio * $font-size-scale-ratio * $font-size-scale-ratio * $font-size-scale-ratio * $font-size-scale-ratio;
       letter-spacing: $letter-spacing-small-1;
 
@@ -40,7 +34,7 @@
   }
 
   &--second {
-    @include font-sans(xxl);
+    @include font-sans(xl);
     padding: 0;
     margin-top: 0;
     margin-bottom: map-get($spacers, 7);
@@ -52,11 +46,12 @@
       height: map-get($spacers, 2);
       width: map-get($spacers, 8);
       background-color: map-get($theme-color-secondary, darker);
-      box-shadow: (map-get($spacers, 2) * -1)
-        map-get($spacers, 1)
-        map-get($spacers, 2)
-        fade-out(map-get($theme-color-secondary, lighter),
+      box-shadow: (map-get($spacers, 2) * -1) map-get($spacers, 1) map-get($spacers, 2) fade-out(map-get($theme-color-secondary, lighter),
           map-get($fading-out, 5));
+    }
+
+    @media screen and (min-width: $breakpoint-m) {
+      @include font-sans(xxl);
     }
   }
 }
