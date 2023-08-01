@@ -15,6 +15,8 @@ const projectsDataSorted = computed(() => {
 
 <template>
   <main class="projects">
+    <MainMenu />
+
     <header class="container projects__header">
       <div class="section section--full">
         <h1 class="heading--main">Projets</h1>
@@ -42,7 +44,7 @@ const projectsDataSorted = computed(() => {
 
 .projects {
   &__header {
-    padding-top: map-get($spacers, 8);
+    padding-top: map-get($spacers, 11);
   }
 
   &__content {

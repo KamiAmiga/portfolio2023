@@ -10,6 +10,8 @@ const aboutData = ref(aboutResponse.data);
 
 <template>
   <main class="about">
+    <MainMenu />
+
     <header class="container about__header">
       <div class="section section--full">
         <h1 class="heading--main">A propos</h1>
@@ -57,7 +59,7 @@ const aboutData = ref(aboutResponse.data);
 
 .about {
   &__header {
-    padding-top: map-get($spacers, 8);
+    padding-top: map-get($spacers, 11);
   }
 
   &__content {

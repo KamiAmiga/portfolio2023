@@ -10,6 +10,8 @@ const shopsPageData = ref(shopsPageResponse.data);
 
 <template>
   <main class="shops">
+    <MainMenu />
+
     <div class="container shops__header">
       <div class="section section--full">
         <img src="~/assets/images/logoWithBg.svg" alt="Logo" class="shops__header__logo" />
@@ -34,7 +36,7 @@ const shopsPageData = ref(shopsPageResponse.data);
       </div>
 
       <div class="section section--full">
-        <h2 class="shops__content__title-second font-sans--base">Retrouvez
+        <h2 class="shops__content__title-second font-sans--capitalized">Retrouvez
           moi aussi sur : </h2>
 
         <ul class="shops__content__socials-links">
@@ -59,7 +61,7 @@ const shopsPageData = ref(shopsPageResponse.data);
 
 .shops {
   &__header {
-    padding-top: map-get($spacers, 8);
+    padding-top: map-get($spacers, 11);
     text-align: center;
 
     &__logo {
@@ -81,7 +83,6 @@ const shopsPageData = ref(shopsPageResponse.data);
 
     &__title-second {
       text-align: center;
-      color: map-get($theme-color-primary, reverse);
     }
 
     &__shops-list {
@@ -90,7 +91,7 @@ const shopsPageData = ref(shopsPageResponse.data);
       align-items: center;
       gap: map-get($spacers, 3);
       padding: 0;
-      margin: $spacer 0 0 0;
+      margin: map-get($spacers, 6) 0 0 0;
       list-style: none;
 
       &__item {
@@ -123,7 +124,10 @@ const shopsPageData = ref(shopsPageResponse.data);
             flex-shrink: 0;
             flex-grow: 0;
             margin-right: $spacer;
-            vertical-align: baseline;
+
+            svg {
+              vertical-align: baseline;
+            }
           }
 
           &:hover,
@@ -139,7 +143,7 @@ const shopsPageData = ref(shopsPageResponse.data);
       gap: map-get($spacers, 8);
       justify-content: center;
       padding: 0;
-      margin: $spacer 0 0 0;
+      margin: map-get($spacers, 6) 0 0 0;
       list-style: none;
 
       &__item {
@@ -153,6 +157,10 @@ const shopsPageData = ref(shopsPageResponse.data);
         &__icon-wrapper {
           position: relative;
           color: map-get($theme-color-primary, base);
+
+          svg {
+            vertical-align: baseline;
+          }
 
           &::before {
             width: 1.75rem;

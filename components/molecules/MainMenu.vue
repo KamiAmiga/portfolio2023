@@ -26,6 +26,7 @@
   top: 0;
   left: 0;
   z-index: map-get($z-index, nav);
+  background-color: fade-out(map-get($theme-color-primary, base), map-get($opacities, 3));
 
   &__content {
     display: flex;

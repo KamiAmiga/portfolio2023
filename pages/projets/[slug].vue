@@ -23,6 +23,8 @@ const projectData = ref(projectResponse.data[0]);
 
 <template>
   <main class="project">
+    <MainMenu />
+
     <ProjectHeader :title="projectData.attributes?.name" :cover-image="projectData.attributes?.cover_image?.data" />
     <div class="container project__content">
       <section class="section section--third">

@@ -11,6 +11,8 @@ const homepageData = ref(homepageResponse.data);
 
 <template>
   <main class="homepage">
+    <MainMenu />
+
     <div class="homepage__bg-triangle homepage__bg-triangle--1"></div>
     <div class="homepage__bg-triangle homepage__bg-triangle--2"></div>
     <div class="homepage__bg-triangle homepage__bg-triangle--3"></div>
@@ -40,8 +42,6 @@ const homepageData = ref(homepageResponse.data);
         </h1>
       </div>
     </div>
-
-    <MainMenu />
 
     <div class="homepage__illustration">
       <div class="homepage__illustration__cityscape">
