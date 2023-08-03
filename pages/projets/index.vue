@@ -124,7 +124,7 @@ const projectsDataSorted = computed(() => {
               position: absolute;
               width: 100%;
               height: 100%;
-              clip-path: polygon(0 0, 0 100%, 0 100%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%, 100% 100%, 100% 0);
+              clip-path: polygon(0 0, 0 102%, 0 102%, 0 0, 102% 0, 102% 102%, 0 102%, 0 102%, 102% 102%, 102% 0);
               opacity: map-get($opacities, 9);
               background: linear-gradient(to bottom right,
                   mix(map-get($theme-color-secondary, darker),
@@ -140,7 +140,7 @@ const projectsDataSorted = computed(() => {
 
               .projects__content__item__link:hover &,
               .projects__content__item__link:focus & {
-                clip-path: polygon(0 0, 0 100%, 8% 100%, 8% 8%, 92% 8%, 92% 92%, 8% 92%, 8% 100%, 100% 100%, 100% 0);
+                clip-path: polygon(0 0, 0 102%, 8% 102%, 8% 8%, 92% 8%, 92% 92%, 8% 92%, 8% 102%, 102% 102%, 102% 0);
 
               }
             }
