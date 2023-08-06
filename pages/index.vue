@@ -3,10 +3,12 @@ import { Homepage } from "@/types/homepage";
 import { StrapiResponsiveFormats } from "@/types/strapiResponsiveImage";
 
 const { findOne } = useStrapi();
-const homepageResponse = await findOne<Homepage>("homepage", {
-  populate: ["highlight_medias"],
-});
-const homepageData = ref(homepageResponse.data);
+const { data: homepageData } = await useAsyncData(
+  'homepage',
+  () => findOne<Homepage>("homepage", {
+    populate: ["highlight_medias"],
+  })
+)
 </script>
 
 <template>
@@ -25,17 +27,17 @@ const homepageData = ref(homepageResponse.data);
     <div class="container homepage__content-wrapper">
       <div class="section section--half">
         <h1 class="homepage__title-container">
-          <div class="homepage__title-sub">
+          <div v-if="homepageData?.data.attributes.title" class="homepage__title-sub">
             <div class="anim-slide-up">
               <div class="font-sans--md-capitalized anim-slide-up__text">
-                {{ homepageData.attributes.title }}
+                {{ homepageData.data.attributes.title }}
               </div>
             </div>
           </div>
-          <div class="homepage__title-main">
+          <div v-if="homepageData?.data.attributes.subtitle" class="homepage__title-main">
             <div class="anim-slide-up">
               <div class="anim-slide-up__text">
-                {{ homepageData.attributes.subtitle }}
+                {{ homepageData.data.attributes.subtitle }}
               </div>
             </div>
           </div>
@@ -82,12 +84,12 @@ const homepageData = ref(homepageResponse.data);
           class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-right-3">
         </div>
         <div class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--fore-left">
-          <CustomPicture v-if="homepageData.attributes.highlight_medias?.data?.[0]" :picture-data="homepageData.attributes.highlight_medias.data[0].attributes
+          <CustomPicture v-if="homepageData?.data.attributes.highlight_medias?.data?.[0]" :picture-data="homepageData.data.attributes.highlight_medias.data[0].attributes
             " :format="StrapiResponsiveFormats.HalfWidth"
             class="homepage__illustration__cityscape__building__image homepage__illustration__cityscape__building__image--left" />
         </div>
         <div class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--fore-right">
-          <CustomPicture v-if="homepageData.attributes.highlight_medias?.data?.[1]" :picture-data="homepageData.attributes.highlight_medias.data[1].attributes
+          <CustomPicture v-if="homepageData?.data.attributes.highlight_medias?.data?.[1]" :picture-data="homepageData.data.attributes.highlight_medias.data[1].attributes
             " :format="StrapiResponsiveFormats.HalfWidth"
             class="homepage__illustration__cityscape__building__image homepage__illustration__cityscape__building__image--right" />
         </div>

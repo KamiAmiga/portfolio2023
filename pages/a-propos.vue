@@ -2,10 +2,12 @@
 import { About } from "@/types/about";
 
 const { findOne } = useStrapi();
-const aboutResponse = await findOne<About>("about", {
-  populate: ["experience", "skills", "interests", "social_links"],
-});
-const aboutData = ref(aboutResponse.data);
+const { data: aboutData } = await useAsyncData(
+  'about',
+  () => findOne<About>("about", {
+    populate: ["experience", "skills", "interests", "social_links"],
+  })
+)
 </script>
 
 <template>
@@ -19,10 +21,10 @@ const aboutData = ref(aboutResponse.data);
     </header>
 
     <div class="container about__content">
-      <div class="section section--full">
+      <div v-if="aboutData?.data.attributes.intro" class="section section--full">
         <div class="about__content__intro-wrapper">
           <div class="about__content__intro">
-            <richtext-wrapper :text="aboutData.attributes.intro" />
+            <richtext-wrapper :text="aboutData.data.attributes.intro" />
           </div>
         </div>
       </div>
@@ -30,25 +32,26 @@ const aboutData = ref(aboutResponse.data);
       <div class="section section--full">
         <h2 class="heading--second">Parcours</h2>
 
-        <about-history :history="aboutData.attributes.experience" />
+        <about-history v-if="aboutData?.data.attributes.experience" :history="aboutData.data.attributes.experience" />
       </div>
 
       <div class="section section--full">
         <h2 class="heading--second">Compétences</h2>
 
-        <about-skills :skills="aboutData.attributes.skills.data" />
+        <about-skills v-if="aboutData?.data.attributes.skills?.data" :skills="aboutData.data.attributes.skills.data" />
       </div>
 
       <div class="section section--half">
         <h2 class="heading--second">Intérêts</h2>
 
-        <about-interests :interests="aboutData.attributes.interests" />
+        <about-interests v-if="aboutData?.data.attributes.interests" :interests="aboutData.data.attributes.interests" />
       </div>
 
       <div class="section section--half">
         <h2 class="heading--second">Contacts</h2>
 
-        <about-social-links :social-links="aboutData.attributes.social_links" />
+        <about-social-links v-if="aboutData?.data.attributes.social_links"
+          :social-links="aboutData.data.attributes.social_links" />
       </div>
     </div>
   </main>

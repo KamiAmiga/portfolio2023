@@ -3,7 +3,7 @@ import { Skill } from "@/types/skills";
 
 defineProps<{
   year: number;
-  skills: Skill[];
+  skills?: Skill[];
 }>();
 </script>
 
@@ -14,7 +14,7 @@ defineProps<{
       {{ year }}
     </dd>
     <dt class="project-stats__property font-sans--md-capitalized">Outils</dt>
-    <dd class="project-stats__value font-mono font-mono--small">
+    <dd v-if="skills" class="project-stats__value font-mono font-mono--small">
       <ul v-if="skills.length > 1" class="project-stats__skills-list">
         <li v-for="skill in skills" :key="skill.id" class="project-stats__skill project-stats__skill--list-item">
           <div class="project-stats__skill__icon-wrapper icon icon-wrapper icon-wrapper--square icon-wrapper--m" :class="'project-stats__skill__icon-wrapper--' +

@@ -4,40 +4,46 @@ import { Project } from "@/types/project";
 const route = useRoute();
 const { find } = useStrapi();
 
-const projectResponse = await find<Project>("projects", {
-  filters: { slug: route.params.slug },
-  populate: [
-    "cover_image",
-    "skills",
-    "main_images",
-    "main_images.images",
-    "main_images.zoom_images",
-    "typography",
-    "typography.typo_visual",
-    "colors",
-    "secondary_images",
-  ],
-});
-const projectData = ref(projectResponse.data[0]);
+const { data: projectData } = await useAsyncData(
+  'projects',
+  () => find<Project>("projects", {
+    filters: { slug: route.params.slug },
+    populate: [
+      "cover_image",
+      "skills",
+      "main_images",
+      "main_images.images",
+      "main_images.zoom_images",
+      "typography",
+      "typography.typo_visual",
+      "colors",
+      "secondary_images",
+    ],
+  })
+)
 </script>
 
 <template>
   <main class="project">
     <MainMenu />
 
-    <ProjectHeader :title="projectData.attributes?.name" :cover-image="projectData.attributes?.cover_image?.data" />
+    <ProjectHeader v-if="projectData?.data[0].attributes?.name" :title="projectData.data[0].attributes?.name"
+      :cover-image="projectData.data[0].attributes?.cover_image?.data" />
     <div class="container project__content">
       <section class="section section--third">
-        <ProjectStats :year="projectData.attributes?.year" :skills="projectData.attributes?.skills.data"></ProjectStats>
+        <ProjectStats v-if="projectData?.data[0].attributes?.year" :year="projectData.data[0].attributes?.year"
+          :skills="projectData.data[0].attributes?.skills?.data">
+        </ProjectStats>
       </section>
 
       <section class="section section--half">
-        <RichtextWrapper :text="projectData.attributes?.description" />
+        <RichtextWrapper v-if="projectData?.data[0].attributes?.description"
+          :text="projectData.data[0].attributes?.description" />
       </section>
 
       <section class="section section--full">
-        <div class="project__main-images">
-          <template v-for="mainImage in projectData.attributes?.main_images" :key="mainImage.id">
+        <div v-if="projectData?.data[0].attributes?.main_images" class="project__main-images">
+          <template v-for="mainImage in projectData.data[0].attributes?.main_images" :key="mainImage.id">
             <div class="project__main-images__item">
               <ProjectMainImage :type="mainImage.type" :images="mainImage.images?.data" />
             </div>
@@ -45,20 +51,23 @@ const projectData = ref(projectResponse.data[0]);
         </div>
       </section>
 
-      <section v-if="projectData.attributes?.typography?.length > 0" class="section section--half">
+      <section
+        v-if="projectData?.data[0].attributes?.typography && projectData?.data[0].attributes?.typography?.length > 0"
+        class="section section--half">
         <h2 class="heading--second">Typographie</h2>
 
-        <ProjectTypography :fonts="projectData.attributes.typography" />
+        <ProjectTypography :fonts="projectData.data[0].attributes.typography" />
       </section>
 
-      <section v-if="projectData.attributes?.colors?.length > 0" class="section section--half">
+      <section v-if="projectData?.data[0].attributes?.colors && projectData?.data[0].attributes?.colors?.length > 0"
+        class="section section--half">
         <h2 class="heading--second">Couleurs</h2>
 
-        <ProjectColors :colors="projectData.attributes?.colors" />
+        <ProjectColors :colors="projectData.data[0].attributes?.colors" />
       </section>
 
-      <section class="section section--full">
-        <ProjectSecondaryImages :images="projectData.attributes?.secondary_images?.data" />
+      <section v-if="projectData?.data[0].attributes?.secondary_images" class="section section--full">
+        <ProjectSecondaryImages :images="projectData.data[0].attributes?.secondary_images?.data" />
       </section>
     </div>
   </main>

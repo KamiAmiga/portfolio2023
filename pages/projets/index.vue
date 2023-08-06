@@ -3,14 +3,15 @@ import { Project } from "@/types/project";
 
 const { find } = useStrapi();
 
-const projectsResponse = await find<Project>("projects", {
-  fields: ["name", "slug", "year"],
-  populate: ["cover_image"],
-});
-const projectsData = reactive(projectsResponse.data);
-const projectsDataSorted = computed(() => {
-  return projectsData.sort((a, b) => b.attributes.year - a.attributes.year);
-});
+const { data: projectsData } = await useAsyncData(
+  'projects',
+  () => find<Project>("projects", {
+    fields: ["name", "slug", "year"],
+    populate: ["cover_image"],
+    sort: 'year:desc'
+  })
+)
+
 </script>
 
 <template>
@@ -23,8 +24,8 @@ const projectsDataSorted = computed(() => {
       </div>
     </header>
 
-    <ul class="container projects__content">
-      <li v-for="project in projectsDataSorted" :key="project.id" class="section section--third projects__content__item">
+    <ul v-if="projectsData" class="container projects__content">
+      <li v-for="project in projectsData.data" :key="project.id" class="section section--third projects__content__item">
         <NuxtLink :to="`/projets/${project.attributes?.slug}`" class="projects__content__item__link">
           <div class="projects__content__item__link__image">
             <div class="projects__content__item__link__image__wrapper">

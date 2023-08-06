@@ -2,10 +2,12 @@
 import { ShopsPage } from "@/types/shops-page";
 
 const { findOne } = useStrapi();
-const shopsPageResponse = await findOne<ShopsPage>("shops-page", {
-  populate: ["shops_list", "social_links"],
-});
-const shopsPageData = ref(shopsPageResponse.data);
+const { data: shopsPageData } = await useAsyncData(
+  'shops-page',
+  () => findOne<ShopsPage>("shops-page", {
+    populate: ["shops_list", "social_links"],
+  })
+)
 </script>
 
 <template>
@@ -15,8 +17,10 @@ const shopsPageData = ref(shopsPageResponse.data);
     <div class="container shops__header">
       <div class="section section--full">
         <img src="~/assets/images/logoWithBg.svg" alt="Logo" class="shops__header__logo" />
-        <h1 class="shops__header__title font-sans--md-capitalized">{{ shopsPageData.attributes.title }}</h1>
-        <p class="font-mono--small">{{ shopsPageData.attributes.subtitle }}</p>
+        <h1 v-if="shopsPageData?.data.attributes.title" class="shops__header__title font-sans--md-capitalized">
+          {{ shopsPageData.data.attributes.title }}</h1>
+        <p v-if="shopsPageData?.data.attributes.subtitle" class="font-mono--small">
+          {{ shopsPageData.data.attributes.subtitle }}</p>
       </div>
     </div>
 
@@ -24,8 +28,8 @@ const shopsPageData = ref(shopsPageResponse.data);
       <div class="section section--full">
         <h2 class="shops__content__title-second font-sans--capitalized">Mes boutiques</h2>
 
-        <ul class="shops__content__shops-list">
-          <li v-for="shopItem in shopsPageData.attributes.shops_list" :key="shopItem.id"
+        <ul v-if="shopsPageData?.data.attributes.shops_list" class="shops__content__shops-list">
+          <li v-for="shopItem in shopsPageData.data.attributes.shops_list" :key="shopItem.id"
             class="shops__content__shops-list__item">
             <a :href="shopItem.url" target="_blank" class="shops__content__shops-list__item__link">
               <nuxt-icon :name="shopItem.icon_name" class="icon icon--xl shops__content__shops-list__item__link__icon" />
@@ -39,8 +43,8 @@ const shopsPageData = ref(shopsPageResponse.data);
         <h2 class="shops__content__title-second font-sans--capitalized">Retrouvez
           moi aussi sur : </h2>
 
-        <ul class="shops__content__socials-links">
-          <li v-for="socialLink in shopsPageData.attributes.social_links" :key="socialLink.id">
+        <ul v-if="shopsPageData?.data.attributes.social_links" class="shops__content__socials-links">
+          <li v-for="socialLink in shopsPageData.data.attributes.social_links" :key="socialLink.id">
             <a :href="socialLink.url" target="blank" class="shops__content__socials-links__item">
               <div
                 class="shops__content__socials-links__item__icon-wrapper icon-wrapper icon-wrapper--m icon-wrapper--square">

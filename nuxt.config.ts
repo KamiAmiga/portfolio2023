@@ -30,5 +30,5 @@ export default defineNuxtConfig({
       "~/components",
     ],
   },
-  css: ["@/assets/styles/main.scss"],
+  css: ["@/assets/styles/main.scss"]
 });
