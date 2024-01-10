@@ -4,7 +4,7 @@ export interface Experience {
   id: number;
   name: string;
   date: string;
-  place?: string;
+  place?: string | null;
   category: string;
 }
 
