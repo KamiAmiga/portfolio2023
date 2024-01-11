@@ -1,5 +1,5 @@
-import { StrapiImage, StrapiSVGMedia } from "./strapiResponsiveImage";
-import { Skill } from "./skills";
+import { type StrapiImage, type StrapiSVGMedia } from "./strapiResponsiveImage";
+import { type Skill } from "./skills";
 
 export enum ProjectMainImageTypes {
   UIMobileDesktop = "ui-mobile_desktop",

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Project } from "@/types/project";
+import { type Project } from "@/types/project";
 
 const route = useRoute();
 const { find } = useStrapi();

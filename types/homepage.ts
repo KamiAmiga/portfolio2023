@@ -1,4 +1,4 @@
-import { StrapiImage } from "./strapiResponsiveImage";
+import { type StrapiImage } from "./strapiResponsiveImage";
 
 export interface Homepage {
   title: string;

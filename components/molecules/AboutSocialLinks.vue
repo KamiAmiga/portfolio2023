@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SocialLink } from '@/types/about'
+import { type SocialLink } from '@/types/about'
 
 defineProps<{
   socialLinks: SocialLink[]

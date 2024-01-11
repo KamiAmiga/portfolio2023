@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ProjectColor } from 'types/project';
+import { type ProjectColor } from '@/types/project';
 
 defineProps<{
   colors: ProjectColor[];

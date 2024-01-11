@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Homepage } from "@/types/homepage";
+import { type Homepage } from "@/types/homepage";
 import { StrapiResponsiveFormats } from "@/types/strapiResponsiveImage";
 
 const { findOne } = useStrapi();

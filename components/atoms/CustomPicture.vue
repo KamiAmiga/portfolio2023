@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {
-  StrapiImageResponsiveData,
+  type StrapiImageResponsiveData,
   StrapiResponsiveFormats,
-} from "../../types/strapiResponsiveImage";
+} from "@/types/strapiResponsiveImage";
 
 defineProps<{
   pictureData: StrapiImageResponsiveData;

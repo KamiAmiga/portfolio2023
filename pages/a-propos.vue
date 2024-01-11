@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { About } from "@/types/about";
+import { type About } from "@/types/about";
 
 const { findOne } = useStrapi();
 const { data: aboutData } = await useAsyncData(

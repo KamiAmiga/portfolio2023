@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {
-  StrapiImage,
+  type StrapiImage,
   StrapiResponsiveFormats,
-} from "../../types/strapiResponsiveImage";
+} from "@/types/strapiResponsiveImage";
 
 defineProps<{
   coverImage: StrapiImage;

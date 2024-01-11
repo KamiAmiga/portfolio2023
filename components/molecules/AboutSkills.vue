@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Skill } from "@/types/skills";
+import { type Skill } from "@/types/skills";
 
 const props = defineProps<{
   skills: Skill[]

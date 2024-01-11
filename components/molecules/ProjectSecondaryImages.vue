@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {
-  StrapiImage,
+  type StrapiImage,
   StrapiResponsiveFormats,
-} from "../../types/strapiResponsiveImage";
+} from "@/types/strapiResponsiveImage";
 
 defineProps<{
   images: StrapiImage[];
@@ -11,16 +11,9 @@ defineProps<{
 
 <template>
   <div class="project-secondary-images">
-    <figure
-      v-for="secondaryImage in images"
-      :key="secondaryImage.id"
-      class="project-secondary-images__item"
-    >
-      <CustomPicture
-        :picture-data="secondaryImage.attributes"
-        :format="StrapiResponsiveFormats.HalfWidth"
-        class="project-secondary-images__item__image"
-      />
+    <figure v-for="secondaryImage in images" :key="secondaryImage.id" class="project-secondary-images__item">
+      <CustomPicture :picture-data="secondaryImage.attributes" :format="StrapiResponsiveFormats.HalfWidth"
+        class="project-secondary-images__item__image" />
     </figure>
   </div>
 </template>

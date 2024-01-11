@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Interest } from '@/types/about'
+import { type Interest } from '@/types/about'
 
 defineProps<{
   interests: Interest[]

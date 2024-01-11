@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ProjectTypography } from 'types/project';
+import { type ProjectTypography } from '@/types/project';
 
 defineProps<{
   fonts: ProjectTypography[];
