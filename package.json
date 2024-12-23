@@ -10,7 +10,7 @@
     "setup": "npm run setup:frontend && npm run setup:backend",
     "seed": "cd backend && npm run strapi import -f ../seed-data.tar.gz",
     "export": "cd backend && npm run strapi export --no-encrypt -f ../seed-data",
-    "generate:contents": "npm run dev:backend && node ./index.mjs",
+    "generate:contents": "node ./index.mjs",
     "generate:media": "rsync -av --exclude='.gitkeep' --exclude='thumbnail_*' backend/public/uploads/ frontend/public/uploads",
     "generate": "npm run generate:contents && npm run generate:media"
   }

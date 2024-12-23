@@ -1,25 +1,11 @@
 <script setup lang="ts">
-import { type Project } from "@/types/project";
-// import projectsData from "@/content/projets.json"
-
-const { find } = useStrapi();
-
-const { data: projectsData } = await useAsyncData(
-  'projects',
-  () => find<Project>("projects", {
-    fields: ["name", "slug", "year"],
-    populate: ["cover_image"],
-    sort: 'year:desc'
-  })
-)
-
 </script>
 
 <template>
   <main class="projects">
     <MainMenu />
 
-    <header class="container projects__header">
+    <!-- <header class="container projects__header">
       <div class="section section--full">
         <h1 class="heading--main">Projets</h1>
       </div>
@@ -37,7 +23,7 @@ const { data: projectsData } = await useAsyncData(
           <h2 class="heading--second projects__content__item__link__name">{{ project.attributes?.name }}</h2>
         </NuxtLink>
       </li>
-    </ul>
+    </ul> -->
   </main>
 </template>
 

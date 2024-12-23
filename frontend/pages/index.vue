@@ -1,23 +1,17 @@
 <script setup lang="ts">
-import { type Homepage } from "@/types/homepage";
-import { StrapiResponsiveFormats } from "@/types/strapiResponsiveImage";
-// import homepageData from "@/content/homepage.json"
-
-
-const { findOne } = useStrapi();
-const { data: homepageData } = await useAsyncData(
-  'homepage',
-  () => findOne<Homepage>("homepage", {
-    populate: ["highlight_medias"],
-  })
-)
 </script>
 
 <template>
   <main class="homepage">
     <MainMenu />
 
-    <div class="homepage__bg-triangle homepage__bg-triangle--1"></div>
+    <ContentQuery v-slot="{ data }" path="/homepage" find="one">
+      <ContentRenderer :value="data">
+        <h1>{{ data.title }}</h1>
+      </ContentRenderer>
+    </ContentQuery>
+
+    <!-- <div class="homepage__bg-triangle homepage__bg-triangle--1"></div>
     <div class="homepage__bg-triangle homepage__bg-triangle--2"></div>
     <div class="homepage__bg-triangle homepage__bg-triangle--3"></div>
     <div class="homepage__bg-triangle homepage__bg-triangle--4"></div>
@@ -116,7 +110,7 @@ const { data: homepageData } = await useAsyncData(
         <div class="homepage__illustration__ground__reflexion homepage__illustration__ground__reflexion--right"></div>
         <div class="homepage__illustration__ground__light"></div>
       </div>
-    </div>
+    </div> -->
   </main>
 </template>
 

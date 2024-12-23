@@ -1,19 +1,8 @@
 <script setup lang="ts">
-import { type ShopsPage } from "@/types/shops-page";
-// import shopsPageData from "@/content/boutiques.json"
-
-const { findOne } = useStrapi();
-const { data: shopsPageData } = await useAsyncData(
-  'shops-page',
-  () => findOne<ShopsPage>("shops-page", {
-    populate: ["shops_list", "social_links"],
-  })
-)
-// const { data: shopsPageData } = await queryContent('/hello').findOne()
 </script>
 
 <template>
-  <main class="shops">
+  <!-- <main class="shops">
     <MainMenu />
 
     <div class="container shops__header">
@@ -59,133 +48,133 @@ const { data: shopsPageData } = await useAsyncData(
         </ul>
       </div>
     </div>
-  </main>
+  </main> -->
 </template>
 
 <style lang="scss">
-@use "../assets/styles/abstracts" as *;
+// @use "../assets/styles/abstracts" as *;
 
-.shops {
-  &__header {
-    padding-top: map-get($spacers, 11);
-    text-align: center;
+// .shops {
+//   &__header {
+//     padding-top: map-get($spacers, 11);
+//     text-align: center;
 
-    &__logo {
-      width: 8rem;
-      margin: 0 auto map-get($spacers, 6);
-      border-radius: 50%;
-      box-shadow: 0 map-get($spacers, 1) map-get($spacers, 2) fade-out(map-get($theme-color-accent, base), map-get($fading-out, 4));
-    }
+//     &__logo {
+//       width: 8rem;
+//       margin: 0 auto map-get($spacers, 6);
+//       border-radius: 50%;
+//       box-shadow: 0 map-get($spacers, 1) map-get($spacers, 2) fade-out(map-get($theme-color-accent, base), map-get($fading-out, 4));
+//     }
 
-    &__title {
-      margin-bottom: map-get($spacers, 2);
-    }
-  }
+//     &__title {
+//       margin-bottom: map-get($spacers, 2);
+//     }
+//   }
 
-  &__content {
-    padding-top: map-get($spacers, 8);
-    padding-bottom: map-get($spacers, 8);
-    row-gap: map-get($spacers, 10);
+//   &__content {
+//     padding-top: map-get($spacers, 8);
+//     padding-bottom: map-get($spacers, 8);
+//     row-gap: map-get($spacers, 10);
 
-    &__title-second {
-      text-align: center;
-    }
+//     &__title-second {
+//       text-align: center;
+//     }
 
-    &__shops-list {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: map-get($spacers, 3);
-      padding: 0;
-      margin: map-get($spacers, 6) 0 0 0;
-      list-style: none;
+//     &__shops-list {
+//       display: flex;
+//       flex-direction: column;
+//       align-items: center;
+//       gap: map-get($spacers, 3);
+//       padding: 0;
+//       margin: map-get($spacers, 6) 0 0 0;
+//       list-style: none;
 
-      &__item {
-        width: 100%;
-        max-width: 60rem;
-        flex-grow: 0;
-        flex-shrink: 0;
+//       &__item {
+//         width: 100%;
+//         max-width: 60rem;
+//         flex-grow: 0;
+//         flex-shrink: 0;
 
-        &__link {
-          @include font-sans(bold);
-          display: flex;
-          padding: map-get($spacers, 4);
-          border: 1px solid map-get($theme-color-accent, darker);
-          margin-bottom: map-get($spacers, 3);
-          justify-content: flex-start;
-          align-items: center;
-          background: linear-gradient(to right,
-              fade-out(map-get($theme-color-accent, darker),
-                map-get($fading-out, 5)),
-              8%,
-              fade-out(map-get($theme-color-accent, darker),
-                map-get($fading-out, 0)) 25%,
-            );
-          background-size: 200% 100%;
-          background-position: 0 0;
-          text-decoration: none;
-          transition: background-position .4s cubic-bezier(0.83, 0, 0.17, 1);
+//         &__link {
+//           @include font-sans(bold);
+//           display: flex;
+//           padding: map-get($spacers, 4);
+//           border: 1px solid map-get($theme-color-accent, darker);
+//           margin-bottom: map-get($spacers, 3);
+//           justify-content: flex-start;
+//           align-items: center;
+//           background: linear-gradient(to right,
+//               fade-out(map-get($theme-color-accent, darker),
+//                 map-get($fading-out, 5)),
+//               8%,
+//               fade-out(map-get($theme-color-accent, darker),
+//                 map-get($fading-out, 0)) 25%,
+//             );
+//           background-size: 200% 100%;
+//           background-position: 0 0;
+//           text-decoration: none;
+//           transition: background-position .4s cubic-bezier(0.83, 0, 0.17, 1);
 
-          &__icon {
-            flex-shrink: 0;
-            flex-grow: 0;
-            margin-right: $spacer;
+//           &__icon {
+//             flex-shrink: 0;
+//             flex-grow: 0;
+//             margin-right: $spacer;
 
-            svg {
-              vertical-align: baseline;
-            }
-          }
+//             svg {
+//               vertical-align: baseline;
+//             }
+//           }
 
-          &:hover,
-          &:focus {
-            background-position: 100% 100%;
-          }
-        }
-      }
-    }
+//           &:hover,
+//           &:focus {
+//             background-position: 100% 100%;
+//           }
+//         }
+//       }
+//     }
 
-    &__socials-links {
-      display: flex;
-      gap: map-get($spacers, 8);
-      justify-content: center;
-      padding: 0;
-      margin: map-get($spacers, 6) 0 0 0;
-      list-style: none;
+//     &__socials-links {
+//       display: flex;
+//       gap: map-get($spacers, 8);
+//       justify-content: center;
+//       padding: 0;
+//       margin: map-get($spacers, 6) 0 0 0;
+//       list-style: none;
 
-      &__item {
-        @include font-sans(small);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: map-get($spacers, 2);
-        text-decoration: none;
+//       &__item {
+//         @include font-sans(small);
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//         gap: map-get($spacers, 2);
+//         text-decoration: none;
 
-        &__icon-wrapper {
-          position: relative;
-          color: map-get($theme-color-primary, base);
+//         &__icon-wrapper {
+//           position: relative;
+//           color: map-get($theme-color-primary, base);
 
-          svg {
-            vertical-align: baseline;
-          }
+//           svg {
+//             vertical-align: baseline;
+//           }
 
-          &::before {
-            width: 1.75rem;
-            height: 1.75rem;
-            border-width: map-get($spacers, 1);
-            border-color: map-get($theme-color-accent, darker);
-            background-color: map-get($theme-color-primary, reverse);
-            box-shadow: 0 0 map-get($spacers, 2) fade-out(map-get($theme-color-accent, lighter),
-                map-get($fading-out, 7));
-            transition: transform .32s cubic-bezier(0, -0.8, .4, 1.25);
+//           &::before {
+//             width: 1.75rem;
+//             height: 1.75rem;
+//             border-width: map-get($spacers, 1);
+//             border-color: map-get($theme-color-accent, darker);
+//             background-color: map-get($theme-color-primary, reverse);
+//             box-shadow: 0 0 map-get($spacers, 2) fade-out(map-get($theme-color-accent, lighter),
+//                 map-get($fading-out, 7));
+//             transition: transform .32s cubic-bezier(0, -0.8, .4, 1.25);
 
-            .shops__content__socials-links__item:hover &,
-            .shops__content__socials-links__item:focus & {
-              transform: translate(-50%, -50%) rotate(180deg);
-            }
-          }
-        }
-      }
-    }
-  }
-}
+//             .shops__content__socials-links__item:hover &,
+//             .shops__content__socials-links__item:focus & {
+//               transform: translate(-50%, -50%) rotate(180deg);
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 </style>

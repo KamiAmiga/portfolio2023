@@ -1,12 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/strapi", "nuxt-icons"],
-  strapi: {
-    url: 'http://localhost:1337'
-  },
-  typescript: {
-    strict: false
-  },
   app: {
     head: {
       charset: 'utf-8',
@@ -14,8 +7,17 @@ export default defineNuxtConfig({
       title: 'Camille Gicquel - Portfolio',
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-      ]
+      ],
+      htmlAttrs: {
+        lang: 'fr-FR'
+      }
     }
+  },
+  compatibilityDate: '2024-11-01',
+  devtools: { enabled: true },
+  modules: ['@nuxt/eslint', '@nuxt/content', "nuxt-icons"],
+  typescript: {
+    typeCheck: true
   },
   components: {
     dirs: [
@@ -31,4 +33,4 @@ export default defineNuxtConfig({
     ],
   },
   css: ["@/assets/styles/main.scss"]
-});
+})

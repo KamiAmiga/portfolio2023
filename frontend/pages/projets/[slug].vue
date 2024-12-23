@@ -1,33 +1,11 @@
 <script setup lang="ts">
-import { type Project } from "@/types/project";
-
-const route = useRoute();
-const { find } = useStrapi();
-
-const { data: projectData } = await useAsyncData(
-  'projects',
-  () => find<Project>("projects", {
-    filters: { slug: route.params.slug },
-    populate: [
-      "cover_image",
-      "skills",
-      "main_images",
-      "main_images.images",
-      "main_images.zoom_images",
-      "typography",
-      "typography.typo_visual",
-      "colors",
-      "secondary_images",
-    ],
-  })
-)
 </script>
 
 <template>
   <main class="project">
     <MainMenu />
 
-    <ProjectHeader v-if="projectData?.data[0].attributes?.name" :title="projectData.data[0].attributes?.name"
+    <!-- <ProjectHeader v-if="projectData?.data[0].attributes?.name" :title="projectData.data[0].attributes?.name"
       :cover-image="projectData.data[0].attributes?.cover_image?.data" />
     <div class="container project__content">
       <section class="section section--third">
@@ -69,7 +47,7 @@ const { data: projectData } = await useAsyncData(
       <section v-if="projectData?.data[0].attributes?.secondary_images?.data" class="section section--full">
         <ProjectSecondaryImages :images="projectData.data[0].attributes?.secondary_images?.data" />
       </section>
-    </div>
+    </div> -->
   </main>
 </template>
 

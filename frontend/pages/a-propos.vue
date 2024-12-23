@@ -1,21 +1,11 @@
 <script setup lang="ts">
-import { type About } from "@/types/about";
-// import aboutData from "@/content/a-propos.json"
-
-const { findOne } = useStrapi();
-const { data: aboutData } = await useAsyncData(
-  'about',
-  () => findOne<About>("about", {
-    populate: ["experience", "skills", "interests", "social_links"],
-  })
-)
 </script>
 
 <template>
   <main class="about">
     <MainMenu />
 
-    <header class="container about__header">
+    <!-- <header class="container about__header">
       <div class="section section--full">
         <h1 class="heading--main">A propos</h1>
       </div>
@@ -54,7 +44,7 @@ const { data: aboutData } = await useAsyncData(
         <about-social-links v-if="aboutData?.data.attributes.social_links"
           :social-links="aboutData.data.attributes.social_links" />
       </div>
-    </div>
+    </div> -->
   </main>
 </template>
 
