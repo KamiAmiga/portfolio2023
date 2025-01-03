@@ -108,6 +108,69 @@ $font-sans-letter-spacings: (
   xxxl: $letter-spacing-small-1
 );
 
+$font-sans-settings: (
+  size: (
+    small: $font-size-small,
+    base: $font-size-base,
+    bold: $font-size-base,
+    capitalized: $font-size-base,
+    md: $font-size-base * $font-size-scale-ratio,
+    md-capitalized: $font-size-base * $font-size-scale-ratio,
+    lg: $font-size-base * $font-size-scale-ratio * $font-size-scale-ratio,
+    xl: $font-size-base * $font-size-scale-ratio * $font-size-scale-ratio * $font-size-scale-ratio,
+    xxl: $font-size-base * $font-size-scale-ratio * $font-size-scale-ratio * $font-size-scale-ratio * $font-size-scale-ratio,
+    xxxl: $font-size-base * $font-size-scale-ratio * $font-size-scale-ratio * $font-size-scale-ratio * $font-size-scale-ratio * $font-size-scale-ratio
+  ),
+  color: (
+    small: map-get($theme-color-primary, lighter-4),
+    base: map-get($theme-color-primary, reverse),
+    bold: map-get($theme-color-primary, reverse),
+    capitalized: map-get($theme-color-accent, lighter),
+    md: map-get($theme-color-primary, reverse),
+    md-capitalized: map-get($theme-color-primary, reverse),
+    lg: map-get($theme-color-primary, reverse),
+    xl: map-get($theme-color-primary, reverse),
+    xxl: map-get($theme-color-primary, reverse),
+    xxxl: map-get($theme-color-primary, reverse)
+  ),
+  weight: (
+    small: $font-weight-base,
+    base: $font-weight-base,
+    bold: $font-weight-bold,
+    capitalized: $font-weight-light,
+    md: $font-weight-semibold,
+    md-capitalized: $font-weight-light,
+    lg: $font-weight-semibold,
+    xl: $font-weight-semibold,
+    xxl: $font-weight-semibold,
+    xxxl: $font-weight-semibold
+  ),
+  line-height: (
+    small: $line-height-base,
+    base: $line-height-base,
+    bold: $line-height-base,
+    capitalized: $line-height-base,
+    md: $line-height-small,
+    md-capitalized: $line-height-small,
+    lg: $line-height-small,
+    xl: $line-height-small,
+    xxl: $line-height-small,
+    xxxl: $line-height-small
+  ),
+  letter-spacing: (
+    small: $letter-spacing-base,
+    base: $letter-spacing-large-1,
+    bold: $letter-spacing-base,
+    capitalized: $letter-spacing-large-3,
+    md: $letter-spacing-small-1,
+    md-capitalized: $letter-spacing-large-2,
+    lg: $letter-spacing-small-2,
+    xl: $letter-spacing-small-2,
+    xxl: $letter-spacing-small-1,
+    xxxl: $letter-spacing-small-1
+  )
+);
+
 
 //
 // Font-mono maps
@@ -139,6 +202,29 @@ $font-mono-line-heights: (
 $font-mono-letter-spacings: (
   small: $letter-spacing-large-1,
   base: $letter-spacing-large-1
+);
+
+$font-mono-settings: (
+  size: (
+    small: $font-size-small,
+    base: $font-size-base
+  ),
+  color: (
+    small: map-get($theme-color-primary, lighter-4),
+    base: map-get($theme-color-primary, reverse)
+  ),
+  weight: (
+    small: $font-weight-bold,
+    base: $font-weight-bold
+  ),
+  line-height: (
+    small: $line-height-base,
+    base: $line-height-base
+  ),
+  letter-spacing: (
+    small: $letter-spacing-large-1,
+    base: $letter-spacing-large-1
+  )
 );
 
 //

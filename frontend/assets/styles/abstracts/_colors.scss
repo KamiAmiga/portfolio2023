@@ -31,6 +31,37 @@ $theme-color-fourth: (
   lighter: #43ffc2,
 );
 
+$theme-colors: (
+  primary: (
+    base: #14161f,
+    lighter-1: #1c1e2b,
+    lighter-2: #414453,
+    lighter-3: #666b7b,
+    lighter-4: #8b91a3,
+    reverse: #ffffff,
+  ),
+  accent: (
+    base: #22e0ff,
+    darker: #1692b5,
+    lighter: #5be9ff,
+  ),
+  secondary: (
+    base: #dd1045,
+    darker: #ad0d39,
+    lighter: #e6517e,
+  ),
+  tertiary: (
+    base: #f97d3e,
+    darker: #c36333,
+    lighter: #faa079,
+  ),
+  fourth: (
+    base: #01ffa7,
+    darker: #01ca8a,
+    lighter: #43ffc2,
+  )
+);
+
 $opacities: (
   1: .04,
   2: .08,
