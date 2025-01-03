@@ -2,7 +2,7 @@
 const { data } = await useAsyncData('projects-data', () => queryContent('/projets').find())
 
 const projectsList = computed(() => {
-  return data.value?.map(item => item.data[0].attributes)
+  return data.value?.map(item => item.data[0].attributes).sort((a, b) => b.year - a.year)
 })
 </script>
 
