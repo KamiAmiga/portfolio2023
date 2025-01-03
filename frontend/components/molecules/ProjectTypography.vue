@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type ProjectTypography } from '@/types/project';
+import type { ProjectTypography } from '@/types/project';
 
 defineProps<{
   fonts: ProjectTypography[];
@@ -9,14 +9,12 @@ defineProps<{
 <template>
   <ul class="project-typography">
     <li v-for="font in fonts" :key="font.id" class="project-typography__item">
-      <img :src="`${font.typo_visual?.data?.attributes.url}`" :alt="font.typo_name" />
+      <img :src="`${font.typo_visual?.data?.attributes.url}`" :alt="font.typo_name" >
     </li>
   </ul>
 </template>
 
 <style lang="scss">
-@use "../../assets/styles/abstracts" as *;
-
 .project-typography {
   padding: 0;
   margin: 0;

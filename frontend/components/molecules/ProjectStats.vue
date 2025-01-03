@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Skill } from "@/types/skills";
+import type { Skill } from "@/types/skills";
 
 defineProps<{
   year: number;
@@ -17,18 +17,18 @@ defineProps<{
     <dd v-if="skills" class="project-stats__value font-mono font-mono--small">
       <ul v-if="skills.length > 1" class="project-stats__skills-list">
         <li v-for="skill in skills" :key="skill.id" class="project-stats__skill project-stats__skill--list-item">
-          <div class="project-stats__skill__icon-wrapper icon icon-wrapper icon-wrapper--square icon-wrapper--m" :class="'project-stats__skill__icon-wrapper--' +
-            skill.attributes?.category
-            ">
+          <div
+            class="project-stats__skill__icon-wrapper icon icon-wrapper icon-wrapper--square icon-wrapper--m"
+            :class="'project-stats__skill__icon-wrapper--' + skill.attributes?.category">
             <nuxt-icon :name="skill.attributes?.icon_name" class="project-stats__skill__icon icon icon--m" />
           </div>
           {{ skill.attributes?.name }}
         </li>
       </ul>
       <div v-else class="project-stats__skill">
-        <div class="project-stats__skill__icon-wrapper icon icon-wrapper icon-wrapper--square icon-wrapper--m" :class="'project-stats__skill__icon-wrapper--' +
-          skills[0].attributes?.category
-          ">
+        <div
+          class="project-stats__skill__icon-wrapper icon icon-wrapper icon-wrapper--square icon-wrapper--m"
+          :class="'project-stats__skill__icon-wrapper--' + skills[0].attributes?.category">
           <nuxt-icon :name="skills[0].attributes?.icon_name" class="project-stats__skill__icon icon icon--m" />
         </div>
         {{ skills[0].attributes?.name }}
@@ -38,8 +38,6 @@ defineProps<{
 </template>
 
 <style lang="scss">
-@use "../../assets/styles/abstracts" as *;
-
 //
 // Variables
 //

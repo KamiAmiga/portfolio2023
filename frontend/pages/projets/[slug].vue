@@ -66,8 +66,6 @@
 </template>
 
 <style lang="scss">
-@use "../../assets/styles/abstracts" as *;
-
 .project {
   &__content {
     padding-top: map-get($spacers, 8);

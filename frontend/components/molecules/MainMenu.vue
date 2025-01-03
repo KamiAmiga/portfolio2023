@@ -5,7 +5,7 @@
     <nav class="container">
       <div class="section section--full main-menu__content">
         <NuxtLink to="/">
-          <img src="~/assets/images/logo.svg" alt="Logo" class="main-menu__content__logo" />
+          <img src="~/assets/images/logo.svg" alt="Logo" class="main-menu__content__logo" >
         </NuxtLink>
 
         <div class="main-menu__content__link-list">
@@ -18,8 +18,6 @@
 </template>
 
 <style lang="scss">
-@use "../assets/styles/abstracts" as *;
-
 .main-menu {
   width: 100%;
   position: fixed;

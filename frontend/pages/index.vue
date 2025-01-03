@@ -112,9 +112,6 @@
 </template>
 
 <style lang="scss">
-@use "../assets/styles/abstracts" as *;
-@use "../assets/styles/base/typography" as *;
-
 //
 // Variables
 //

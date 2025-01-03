@@ -32,5 +32,13 @@ export default defineNuxtConfig({
       "~/components",
     ],
   },
-  css: ["@/assets/styles/main.scss"]
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "~/assets/styles/abstracts/index" as *;'
+        }
+      }
+    }
+  }
 })

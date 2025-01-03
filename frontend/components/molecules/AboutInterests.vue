@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Interest } from '@/types/about'
+import type { Interest } from '@/types/about'
 
 defineProps<{
   interests: Interest[]
@@ -26,7 +26,6 @@ defineProps<{
 
 <style lang="scss">
 @use "sass:math";
-@use "../../assets/styles/abstracts" as *;
 
 .about-interests {
   display: flex;

@@ -62,8 +62,6 @@
 </template>
 
 <style lang="scss">
-@use "../assets/styles/abstracts" as *;
-
 .shops {
   &__header {
     padding-top: map-get($spacers, 11);

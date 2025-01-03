@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type ProjectColor } from '@/types/project';
+import type { ProjectColor } from '@/types/project';
 
 defineProps<{
   colors: ProjectColor[];
@@ -9,15 +9,13 @@ defineProps<{
 <template>
   <ul class="project-colors">
     <li v-for="color in colors" :key="color.id" class="project-colors__item">
-      <span class="project-colors__item__swatch" :style="{ '--swatch-color': `#${color.color_code}` }"></span>
+      <span class="project-colors__item__swatch" :style="{ '--swatch-color': `#${color.color_code}` }"/>
       <span class="project-colors__item__name">{{ color.color_name }}</span>
     </li>
   </ul>
 </template>
 
 <style lang="scss">
-@use "../../assets/styles/abstracts" as *;
-
 .project-colors {
   padding: 0;
   margin: 0;

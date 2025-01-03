@@ -30,8 +30,6 @@ defineProps<{
 </template>
 
 <style lang="scss">
-@use "../../assets/styles/abstracts" as *;
-
 .project-header {
   display: flex;
   flex-direction: column;

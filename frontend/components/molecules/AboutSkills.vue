@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Skill } from "@/types/skills";
+import type { Skill } from "@/types/skills";
 
 const props = defineProps<{
   skills: Skill[]
@@ -17,7 +17,10 @@ const sortedSkills = computed(() => {
 
 <template>
   <ul class="about-skills">
-    <li v-for="skill in sortedSkills" :key="skill.id" class="about-skills__item"
+    <li 
+      v-for="skill in sortedSkills"
+      :key="skill.id"
+      class="about-skills__item"
       :class="'about-skills__item--' + skill.attributes.category">
       <div class="about-skills__item__icon-wrapper">
         <nuxt-icon :name="skill.attributes.icon_name" class="icon icon--xl" />
@@ -37,15 +40,14 @@ const sortedSkills = computed(() => {
         </template>
       </template>
     </li>
-    <li class="about-skills__filler about-skills__filler--lang"></li>
-    <li class="about-skills__filler about-skills__filler--dev"></li>
-    <li class="about-skills__filler about-skills__filler--art"></li>
+    <li class="about-skills__filler about-skills__filler--lang"/>
+    <li class="about-skills__filler about-skills__filler--dev"/>
+    <li class="about-skills__filler about-skills__filler--art"/>
   </ul>
 </template>
 
 <style lang="scss">
 @use "sass:math";
-@use "../../assets/styles/abstracts" as *;
 
 //
 // Variables

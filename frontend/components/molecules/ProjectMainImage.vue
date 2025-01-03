@@ -61,8 +61,6 @@ const mainImageCategory = computed(() => {
 </template>
 
 <style lang="scss">
-@use "../../assets/styles/abstracts" as *;
-
 .project-main-image {
   $self: &;
 

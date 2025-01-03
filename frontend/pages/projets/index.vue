@@ -33,8 +33,6 @@ const projectsList = computed(() => {
 </template>
 
 <style lang="scss">
-@use "../assets/styles/abstracts" as *;
-
 .projects {
   &__header {
     padding-top: map-get($spacers, 11);

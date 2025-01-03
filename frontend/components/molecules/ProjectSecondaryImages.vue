@@ -19,8 +19,6 @@ defineProps<{
 </template>
 
 <style lang="scss">
-@use "../../assets/styles/abstracts" as *;
-
 .project-secondary-images {
   &__item {
     line-height: 0;

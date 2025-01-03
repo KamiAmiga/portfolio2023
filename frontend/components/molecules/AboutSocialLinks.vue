@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type SocialLink } from '@/types/about'
+import type { SocialLink } from '@/types/about'
 
 defineProps<{
   socialLinks: SocialLink[]
@@ -22,7 +22,6 @@ defineProps<{
 
 <style lang="scss">
 @use "sass:math";
-@use "../../assets/styles/abstracts" as *;
 
 .about-social-links {
   margin: 0;

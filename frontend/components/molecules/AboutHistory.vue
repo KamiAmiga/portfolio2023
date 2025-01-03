@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Experience } from '@/types/about'
+import type { Experience } from '@/types/about'
 
 defineProps<{
   history: Experience[]
@@ -8,7 +8,8 @@ defineProps<{
 
 <template>
   <ul class="about-history">
-    <li v-for="(historyItem, index) in history" :key="historyItem.id" class="about-history__item" :class="[
+    <li
+v-for="(historyItem, index) in history" :key="historyItem.id" class="about-history__item" :class="[
       'about-history__item--' + historyItem.category,
       { 'about-history__item--junction': historyItem.category !== history[index + 1]?.category && index < history.length - 1 && index !== 0 }
     ]">
@@ -33,7 +34,6 @@ defineProps<{
 
 <style lang="scss">
 @use "sass:math";
-@use "../../assets/styles/abstracts" as *;
 
 //
 // Variables

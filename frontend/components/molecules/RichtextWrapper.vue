@@ -5,12 +5,10 @@ defineProps<{
 </script>
 
 <template>
-  <div v-html="$mdRenderer.render(text)" class="richtext-wrapper"></div>
+  <div class="richtext-wrapper" v-html="$mdRenderer.render(text)"/>
 </template>
 
 <style lang="scss">
-@use "../../assets/styles/abstracts" as *;
-
 .richtext-wrapper {
   max-width: 45rem;
 
