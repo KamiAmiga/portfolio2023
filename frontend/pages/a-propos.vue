@@ -5,46 +5,55 @@
   <main class="about">
     <MainMenu />
 
-    <!-- <header class="container about__header">
-      <div class="section section--full">
-        <h1 class="heading--main">A propos</h1>
-      </div>
-    </header>
+    <ContentQuery v-slot="{ data }" path="/about" find="one">
+      <template v-if="data">
+        <ContentRenderer :value="data">
+          <header class="container about__header">
+            <div class="section section--full">
+              <h1 class="heading--main">A propos</h1>
+            </div>
+          </header>
 
-    <div class="container about__content">
-      <div v-if="aboutData?.data.attributes.intro" class="section section--full">
-        <div class="about__content__intro-wrapper">
-          <div class="about__content__intro">
-            <richtext-wrapper :text="aboutData.data.attributes.intro" />
+          <div class="container about__content">
+            <div v-if="data?.data.attributes.intro" class="section section--full">
+              <div class="about__content__intro-wrapper">
+                <div class="about__content__intro">
+                  <richtext-wrapper :text="data.data.attributes.intro" />
+                </div>
+              </div>
+            </div>
+
+            <div class="section section--full">
+              <h2 class="heading--second">Parcours</h2>
+
+              <about-history v-if="data?.data.attributes.experience" :history="data.data.attributes.experience" />
+            </div>
+
+            <div class="section section--full">
+              <h2 class="heading--second">Compétences</h2>
+
+              <about-skills v-if="data?.data.attributes.skills?.data" :skills="data.data.attributes.skills.data" />
+            </div>
+
+            <div class="section section--half">
+              <h2 class="heading--second">Intérêts</h2>
+
+              <about-interests v-if="data?.data.attributes.interests" :interests="data.data.attributes.interests" />
+            </div>
+
+            <div class="section section--half">
+              <h2 class="heading--second">Contacts</h2>
+
+              <about-social-links v-if="data?.data.attributes.social_links" :social-links="data.data.attributes.social_links" />
+            </div>
           </div>
-        </div>
-      </div>
+        </ContentRenderer>
+      </template>
 
-      <div class="section section--full">
-        <h2 class="heading--second">Parcours</h2>
-
-        <about-history v-if="aboutData?.data.attributes.experience" :history="aboutData.data.attributes.experience" />
-      </div>
-
-      <div class="section section--full">
-        <h2 class="heading--second">Compétences</h2>
-
-        <about-skills v-if="aboutData?.data.attributes.skills?.data" :skills="aboutData.data.attributes.skills.data" />
-      </div>
-
-      <div class="section section--half">
-        <h2 class="heading--second">Intérêts</h2>
-
-        <about-interests v-if="aboutData?.data.attributes.interests" :interests="aboutData.data.attributes.interests" />
-      </div>
-
-      <div class="section section--half">
-        <h2 class="heading--second">Contacts</h2>
-
-        <about-social-links v-if="aboutData?.data.attributes.social_links"
-          :social-links="aboutData.data.attributes.social_links" />
-      </div>
-    </div> -->
+      <template v-else>
+        <p>No content found.</p>
+      </template>
+    </ContentQuery>
   </main>
 </template>
 
