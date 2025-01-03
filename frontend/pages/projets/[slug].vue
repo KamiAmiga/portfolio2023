@@ -5,49 +5,63 @@
   <main class="project">
     <MainMenu />
 
-    <!-- <ProjectHeader v-if="projectData?.data[0].attributes?.name" :title="projectData.data[0].attributes?.name"
-      :cover-image="projectData.data[0].attributes?.cover_image?.data" />
-    <div class="container project__content">
-      <section class="section section--third">
-        <ProjectStats v-if="projectData?.data[0].attributes?.year" :year="projectData.data[0].attributes?.year"
-          :skills="projectData.data[0].attributes?.skills?.data">
-        </ProjectStats>
-      </section>
-
-      <section class="section section--half">
-        <RichtextWrapper v-if="projectData?.data[0].attributes?.description"
-          :text="projectData.data[0].attributes?.description" />
-      </section>
-
-      <section class="section section--full">
-        <div v-if="projectData?.data[0].attributes?.main_images" class="project__main-images">
-          <template v-for="mainImage in projectData.data[0].attributes?.main_images" :key="mainImage.id">
-            <div class="project__main-images__item">
-              <ProjectMainImage :type="mainImage.type" :images="mainImage.images?.data" />
+    <ContentQuery v-slot="{ data }" :path="$route.path" find="one">
+      <template v-if="data">
+        <ProjectHeader
+          v-if="data?.data[0].attributes?.name"
+          :title="data.data[0].attributes?.name"
+          :cover-image="data.data[0].attributes?.cover_image?.data" />
+        <div class="container project__content">
+          <section class="section section--third">
+            <ProjectStats
+              v-if="data?.data[0].attributes?.year"
+              :year="data.data[0].attributes?.year"
+              :skills="data.data[0].attributes?.skills?.data"/>
+          </section>
+    
+          <section class="section section--half">
+            <RichtextWrapper 
+              v-if="data?.data[0].attributes?.description"
+              :text="data.data[0].attributes?.description" />
+          </section>
+    
+          <section class="section section--full">
+            <div v-if="data?.data[0].attributes?.main_images" class="project__main-images">
+              <template v-for="mainImage in data.data[0].attributes?.main_images" :key="mainImage.id">
+                <div class="project__main-images__item">
+                  <ProjectMainImage :type="mainImage.type" :images="mainImage.images?.data" />
+                </div>
+              </template>
             </div>
-          </template>
+          </section>
+    
+          <section
+            v-if="data?.data[0].attributes?.typography && data?.data[0].attributes?.typography?.length > 0"
+            class="section section--half">
+            <h2 class="heading--second">Typographie</h2>
+    
+            <ProjectTypography :fonts="data.data[0].attributes.typography" />
+          </section>
+    
+          <section 
+            v-if="data?.data[0].attributes?.colors
+              && data?.data[0].attributes?.colors?.length > 0"
+            class="section section--half">
+            <h2 class="heading--second">Couleurs</h2>
+    
+            <ProjectColors :colors="data.data[0].attributes?.colors" />
+          </section>
+    
+          <section v-if="data?.data[0].attributes?.secondary_images?.data" class="section section--full">
+            <ProjectSecondaryImages :images="data.data[0].attributes?.secondary_images?.data" />
+          </section>
         </div>
-      </section>
+      </template>
 
-      <section
-        v-if="projectData?.data[0].attributes?.typography && projectData?.data[0].attributes?.typography?.length > 0"
-        class="section section--half">
-        <h2 class="heading--second">Typographie</h2>
-
-        <ProjectTypography :fonts="projectData.data[0].attributes.typography" />
-      </section>
-
-      <section v-if="projectData?.data[0].attributes?.colors && projectData?.data[0].attributes?.colors?.length > 0"
-        class="section section--half">
-        <h2 class="heading--second">Couleurs</h2>
-
-        <ProjectColors :colors="projectData.data[0].attributes?.colors" />
-      </section>
-
-      <section v-if="projectData?.data[0].attributes?.secondary_images?.data" class="section section--full">
-        <ProjectSecondaryImages :images="projectData.data[0].attributes?.secondary_images?.data" />
-      </section>
-    </div> -->
+      <template v-else>
+        <p>No content found.</p>
+      </template>
+    </ContentQuery>
   </main>
 </template>
 
