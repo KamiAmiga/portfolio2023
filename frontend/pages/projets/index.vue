@@ -1,29 +1,34 @@
 <script setup lang="ts">
+const { data } = await useAsyncData('projects-data', () => queryContent('/projets').find())
+
+const projectsList = computed(() => {
+  return data.value?.map(item => item.data[0].attributes)
+})
 </script>
 
 <template>
   <main class="projects">
     <MainMenu />
 
-    <!-- <header class="container projects__header">
+    <header class="container projects__header">
       <div class="section section--full">
         <h1 class="heading--main">Projets</h1>
       </div>
     </header>
 
-    <ul v-if="projectsData" class="container projects__content">
-      <li v-for="project in projectsData.data" :key="project.id" class="section section--third projects__content__item">
-        <NuxtLink :to="`/projets/${project.attributes?.slug}`" class="projects__content__item__link">
+    <ul v-if="projectsList" class="container projects__content">
+      <li v-for="project in projectsList" :key="project.id" class="section section--third projects__content__item">
+        <NuxtLink :to="`/projets/${project.slug}`" class="projects__content__item__link">
           <div class="projects__content__item__link__image">
             <div class="projects__content__item__link__image__wrapper">
-              <custom-picture :picture-data="project.attributes?.cover_image.data?.attributes" format="half_width" />
+              <custom-picture :picture-data="project.cover_image.data?.attributes" format="half_width" />
             </div>
           </div>
 
-          <h2 class="heading--second projects__content__item__link__name">{{ project.attributes?.name }}</h2>
+          <h2 class="heading--second projects__content__item__link__name">{{ project.name }}</h2>
         </NuxtLink>
       </li>
-    </ul> -->
+    </ul>
   </main>
 </template>
 
