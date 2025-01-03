@@ -5,8 +5,8 @@
   <main class="shops">
     <MainMenu />
 
-    <ContentQuery v-slot="{ data }" path="/shops-page" find="one">
-      <template v-if="data">
+    <ContentQuery path="/shops-page" find="one">
+      <template #default="{ data }">
         <div class="container shops__header">
         <div class="section section--full">
           <img src="~/assets/images/logoWithBg.svg" alt="Logo" class="shops__header__logo" >
@@ -54,7 +54,7 @@
       </div>
       </template>
 
-      <template v-else>
+      <template #not-found>
         <p>No content found.</p>
       </template>
     </ContentQuery>

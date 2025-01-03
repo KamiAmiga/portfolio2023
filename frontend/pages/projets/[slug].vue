@@ -5,8 +5,8 @@
   <main class="project">
     <MainMenu />
 
-    <ContentQuery v-slot="{ data }" :path="$route.path" find="one">
-      <template v-if="data">
+    <ContentQuery :path="$route.path" find="one">
+      <template #default="{ data }">
         <ProjectHeader
           v-if="data?.data[0].attributes?.name"
           :title="data.data[0].attributes?.name"
@@ -58,7 +58,7 @@
         </div>
       </template>
 
-      <template v-else>
+      <template #not-found>
         <p>No content found.</p>
       </template>
     </ContentQuery>

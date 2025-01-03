@@ -5,8 +5,8 @@
   <main class="homepage">
     <MainMenu />
 
-    <ContentQuery v-slot="{ data }" path="/homepage" find="one">
-      <template v-if="data">
+    <ContentQuery path="/homepage" find="one">
+      <template #default="{ data }">
         <ContentRenderer :value="data">
           <div class="homepage__bg-triangle homepage__bg-triangle--1"/>
           <div class="homepage__bg-triangle homepage__bg-triangle--2"/>
@@ -104,7 +104,7 @@
         </ContentRenderer>
       </template>
 
-      <template v-else>
+      <template #not-found>
         <p>No content found.</p>
       </template>
     </ContentQuery>
