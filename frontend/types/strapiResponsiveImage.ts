@@ -4,11 +4,7 @@ interface StrapiImageData {
   height: number;
 }
 
-export enum StrapiResponsiveFormats {
-  FullWidth = "full_width",
-  HalfWidth = "half_width",
-  FourthWidth = "fourth_width",
-}
+export type StrapiResponsiveFormats = "full_width" | "half_width" | "fourth_width"
 
 export interface StrapiImageResponsiveData extends StrapiImageData {
   url: string;
@@ -30,7 +26,7 @@ export interface StrapiSVGMedia {
     caption?: string | null;
     width: number;
     height: number;
-    formats?: null | {};
+    formats?: null | object;
     hash: string;
     ext: string;
     mime: string;

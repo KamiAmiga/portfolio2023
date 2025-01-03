@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import {
-  type StrapiImage,
-  StrapiResponsiveFormats,
+import type {
+  StrapiImage,
 } from "@/types/strapiResponsiveImage";
 
 defineProps<{
@@ -14,7 +13,7 @@ defineProps<{
   <header class="project-header">
     <div class="project-header__visual">
       <div class="project-header__visual__image">
-        <CustomPicture :picture-data="coverImage.attributes" :format="StrapiResponsiveFormats.FullWidth" />
+        <CustomPicture :picture-data="coverImage.attributes" format="full_width" />
       </div>
     </div>
 

@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ProjectMainImageTypes } from "@/types/project";
-import {
-  type StrapiImage,
-  StrapiResponsiveFormats,
+import type {
+   StrapiImage
 } from "@/types/strapiResponsiveImage";
 
 const props = defineProps<{
@@ -19,40 +18,43 @@ const mainImageCategory = computed(() => {
   <figure :class="`project-main-image project-main-image--${mainImageCategory} project-main-image--${type}`">
     <template v-if="type === ProjectMainImageTypes.Drawing">
       <div class="project-main-image__picture-wrapper">
-        <CustomPicture :picture-data="images[0].attributes" :format="StrapiResponsiveFormats.FullWidth" />
+        <CustomPicture :picture-data="images[0].attributes" format="full_width" />
       </div>
     </template>
 
     <template v-else-if="type === ProjectMainImageTypes.UIMobileDesktop">
       <div class="project-main-image__picture-wrapper">
-        <CustomPicture :key="images[0].id" :picture-data="images[0].attributes"
-          :format="StrapiResponsiveFormats.FullWidth" />
+        <CustomPicture
+          :key="images[0].id" :picture-data="images[0].attributes"
+          format="full_width" />
       </div>
 
       <div class="project-main-image__picture-wrapper">
-        <CustomPicture :key="images[1].id" :picture-data="images[1].attributes"
-          :format="StrapiResponsiveFormats.FourthWidth" />
+        <CustomPicture
+          :key="images[1].id" :picture-data="images[1].attributes"
+          format="fourth_width" />
       </div>
     </template>
 
-    <template v-else-if="type === ProjectMainImageTypes.UIDesktop ||
-      type === ProjectMainImageTypes.DesignVisualID
-      ">
+    <template
+      v-else-if="type === ProjectMainImageTypes.UIDesktop
+        || type === ProjectMainImageTypes.DesignVisualID">
       <div class="project-main-image__picture-wrapper">
-        <CustomPicture :key="images[0].id" :picture-data="images[0].attributes"
-          :format="StrapiResponsiveFormats.FullWidth" />
+        <CustomPicture
+          :key="images[0].id" :picture-data="images[0].attributes"
+          format="full_width" />
       </div>
     </template>
 
     <template v-else-if="type === ProjectMainImageTypes.DesignPrint">
       <div v-for="image in images" :key="image.id" class="project-main-image__picture-wrapper">
-        <CustomPicture :picture-data="image.attributes" :format="StrapiResponsiveFormats.HalfWidth" />
+        <CustomPicture :picture-data="image.attributes" format="half_width" />
       </div>
     </template>
 
     <template v-else>
       <div v-for="image in images" :key="image.id" class="project-main-image__picture-wrapper">
-        <CustomPicture :picture-data="image.attributes" :format="StrapiResponsiveFormats.FourthWidth" />
+        <CustomPicture :picture-data="image.attributes" format="fourth_width" />
       </div>
     </template>
   </figure>
