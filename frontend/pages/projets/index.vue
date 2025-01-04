@@ -35,19 +35,19 @@ const projectsList = computed(() => {
 <style lang="scss">
 .projects {
   &__header {
-    padding-top: map-get($spacers, 11);
+    padding-top: var(--spacer-11);
   }
 
   &__content {
-    padding-top: map-get($spacers, 8);
-    padding-bottom: map-get($spacers, 8);
+    padding-top: var(--spacer-8);
+    padding-bottom: var(--spacer-8);
     margin: 0;
     list-style: none;
-    row-gap: map-get($spacers, 8);
+    row-gap: var(--spacer-8);
 
     @media screen and (min-width: $breakpoint-xs) {
       grid-template-columns: repeat(6, 1fr);
-      column-gap: map-get($spacers, 6);
+      column-gap: var(--spacer-6);
     }
 
     &__item {
@@ -57,15 +57,15 @@ const projectsList = computed(() => {
 
         &__image {
           position: relative;
-          margin-bottom: map-get($spacers, 6);
+          margin-bottom: var(--spacer-6);
 
           &::before,
           &::after {
             content: '';
-            width: map-get($spacers, 6);
-            height: map-get($spacers, 6);
-            border-top: 1px solid map-get($theme-color-secondary, darker);
-            border-left: 1px solid map-get($theme-color-secondary, darker);
+            width: var(--spacer-6);
+            height: var(--spacer-6);
+            border-top: 1px solid var(--color-secondary-darker);
+            border-left: 1px solid var(--color-secondary-darker);
             position: absolute;
             z-index: 1;
             transition: width .3s cubic-bezier(0.16, 1, 0.3, 1),
@@ -77,31 +77,31 @@ const projectsList = computed(() => {
 
             .projects__content__item__link:hover &,
             .projects__content__item__link:focus & {
-              width: map-get($spacers, 5);
-              height: map-get($spacers, 5);
+              width: var(--spacer-5);
+              height: var(--spacer-5);
             }
           }
 
           &::before {
-            top: map-get($spacers, 3) * -1;
-            left: map-get($spacers, 3) * -1;
+            top: calc(var(--spacer-3) * -1);
+            left: calc(var(--spacer-3) * -1);
 
             .projects__content__item__link:hover &,
             .projects__content__item__link:focus & {
-              top: map-get($spacers, 3) * 1;
-              left: map-get($spacers, 3) * 1;
+              top: calc(var(--spacer-3) * 1);
+              left: calc(var(--spacer-3) * 1);
             }
           }
 
           &::after {
-            right: map-get($spacers, 3) * -1;
-            bottom: map-get($spacers, 3) * -1;
+            right: calc(var(--spacer-3) * -1);
+            bottom: calc(var(--spacer-3) * -1);
             transform: rotate(180deg);
 
             .projects__content__item__link:hover &,
             .projects__content__item__link:focus & {
-              right: map-get($spacers, 3) * 1;
-              bottom: map-get($spacers, 3) * 1;
+              right: var(--spacer-3);
+              bottom: var(--spacer-3);
             }
           }
 
@@ -116,17 +116,20 @@ const projectsList = computed(() => {
               width: 100%;
               height: 100%;
               clip-path: polygon(0 0, 0 102%, 0 102%, 0 0, 102% 0, 102% 102%, 0 102%, 0 102%, 102% 102%, 102% 0);
-              opacity: map-get($opacities, 9);
-              background: linear-gradient(to bottom right,
-                  mix(map-get($theme-color-secondary, darker),
-                    map-get($theme-color-primary, base),
-                    32%),
-                  25%,
-                  map-get($theme-color-primary, base),
-                  75%,
-                  mix(map-get($theme-color-secondary, darker),
-                    map-get($theme-color-primary, base),
-                    32%));
+              opacity: var(--opacity-9);
+              background: linear-gradient(
+                to bottom right,
+                color-mix(
+                  in srgb,
+                  var(--color-secondary-darker) var(--opacity-percentage-5),
+                  var(--color-primary-base)
+                ) 25%,
+                map-get($theme-color-primary, base),
+                color-mix(
+                  in srgb,
+                  var(--color-secondary-darker) var(--opacity-percentage-5),
+                  var(--color-primary-base)
+                ) 75%);
               transition: clip-path .3s cubic-bezier(0.33, 1, 0.68, 1);
 
               .projects__content__item__link:hover &,

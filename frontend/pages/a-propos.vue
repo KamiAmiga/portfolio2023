@@ -60,18 +60,18 @@
 <style lang="scss">
 .about {
   &__header {
-    padding-top: map-get($spacers, 11);
+    padding-top: var(--spacer-11);
   }
 
   &__content {
-    padding-top: map-get($spacers, 8);
-    padding-bottom: map-get($spacers, 8);
-    row-gap: map-get($spacers, 9);
+    padding-top: var(--spacer-8);
+    padding-bottom: var(--spacer-8);
+    row-gap: var(--spacer-9);
 
     &__intro {
       @media screen and (min-width: $breakpoint-m) {
-        padding-top: map-get($spacers, 6);
-        padding-left: map-get($spacers, 6);
+        padding-top: var(--spacer-6);
+        padding-left: var(--spacer-6);
         position: relative;
 
         &::before {
@@ -83,28 +83,29 @@
           top: 0;
           left: 0;
           z-index: -1;
-          ;
-          background: linear-gradient(to bottom right,
-              fade-out(map-get($theme-color-accent, darker), .68),
-              16.5%,
-              fade-out(map-get($theme-color-accent, base), 1) 50%);
+          background: linear-gradient(
+            to bottom right,
+            color-mix(in srgb, transparent var(--opacity-percentage-6), var(--color-accent-darker)),
+            16.5%,
+            transparent 50%
+          );
         }
       }
 
       &-wrapper {
         @media screen and (min-width: $breakpoint-m) {
           display: inline-block;
-          padding: map-get($spacers, 3);
+          padding: var(--spacer-3);
           position: relative;
 
           &::before,
           &::after {
             content: "";
             display: block;
-            width: map-get($spacers, 7);
-            height: map-get($spacers, 7);
-            border-top: 1px solid map-get($theme-color-accent, base);
-            border-left: 1px solid map-get($theme-color-accent, base);
+            width: var(--spacer-7);
+            height: var(--spacer-7);
+            border-top: 1px solid var(--color-accent-base);
+            border-left: 1px solid var(--color-accent-base);
             position: absolute;
           }
 
@@ -123,9 +124,9 @@
     }
 
     @media screen and (min-width: $breakpoint-m) {
-      padding-top: map-get($spacers, 10);
-      padding-bottom: map-get($spacers, 10);
-      row-gap: map-get($spacers, 10);
+      padding-top: var(--spacer-10);
+      padding-bottom: var(--spacer-10);
+      row-gap: var(--spacer-10);
     }
   }
 }

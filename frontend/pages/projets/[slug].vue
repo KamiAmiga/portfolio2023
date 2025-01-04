@@ -68,21 +68,21 @@
 <style lang="scss">
 .project {
   &__content {
-    padding-top: map-get($spacers, 8);
-    padding-bottom: map-get($spacers, 8);
-    row-gap: map-get($spacers, 9);
+    padding-top: var(--spacer-8);
+    padding-bottom: var(--spacer-8);
+    row-gap: var(--spacer-9);
 
     @media screen and (min-width: $breakpoint-m) {
-      padding-top: map-get($spacers, 10);
-      padding-bottom: map-get($spacers, 10);
-      row-gap: map-get($spacers, 10);
+      padding-top: var(--spacer-10);
+      padding-bottom: var(--spacer-10);
+      row-gap: var(--spacer-10);
     }
   }
 
   &__main-images {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
-    row-gap: map-get($spacers, 6);
+    row-gap: var(--spacer-6);
 
     &__item {
       display: flex;
@@ -99,7 +99,7 @@
     }
 
     @media screen and (min-width: $breakpoint-m) {
-      row-gap: map-get($spacers, 8);
+      row-gap: var(--spacer-8);
     }
   }
 }
