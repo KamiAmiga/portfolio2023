@@ -19,7 +19,7 @@ body {
   @include font-sans(base);
   min-height: 100vh;
   padding: 0;
-  background: map-get($theme-color-primary, base);
+  background: var(--color-primary-base);
   text-rendering: optimizeSpeed;
 }
 
@@ -37,7 +37,7 @@ dd {
 
 p {
   margin-top: 0;
-  margin-bottom: map-get($spacers, 4);
+  margin-bottom: var(--spacers,-4);
 
   &:last-child {
     margin-bottom: 0;

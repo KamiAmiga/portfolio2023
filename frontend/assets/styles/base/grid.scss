@@ -8,14 +8,14 @@
   grid-template-columns: 1fr;
 
   @media screen and (min-width: $breakpoint-m) {
-    padding: 0 map-get($spacers, 10);
+    padding: 0 var(--spacer-10);
     grid-template-columns: repeat(6, 1fr);
     column-gap: $spacer;
   }
 
   @media screen and (min-width: $breakpoint-l) {
-    padding: 0 map-get($spacers, 10);
-    column-gap: map-get($spacers, 6);
+    padding: 0 var(--spacer-10);
+    column-gap: var(--spacer-6);
   }
 }
 
