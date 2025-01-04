@@ -1,20 +1,5 @@
+@use "sass:map";
 @use '../../abstracts' as *;
-
-$icon-sizes: (
-  s: 1rem,
-  m: 1.25rem,
-  l: 1.5rem,
-  xl: 2rem
-);
-
-$icon-wrapper-sizes: (
-  s: 2.5rem,
-  m: 3rem,
-  l: 4rem
-);
-
-$icon-sizes-suffix: s, m, l, xl;
-$icon-wrapper-sizes-suffix: s, m, l;
 
 .icon {
   @each $size in $icon-sizes-suffix {
@@ -44,7 +29,7 @@ $icon-wrapper-sizes-suffix: s, m, l;
 
     &--square {
       position: relative;
-      z-index: map-get($z-index, base-increase);
+      z-index: var(--z-index-base-increase);
 
       &::before {
         content: "";
@@ -54,7 +39,7 @@ $icon-wrapper-sizes-suffix: s, m, l;
         border-style: solid;
         top: 50%;
         left: 50%;
-        z-index: map-get($z-index, base-decrease);
+        z-index: var(--z-index-base-decrease);
         transform-origin: center;
         transform: translate(-50%, -50%) rotate(45deg);
       }
