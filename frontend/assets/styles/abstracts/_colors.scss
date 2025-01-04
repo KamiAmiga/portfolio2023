@@ -90,13 +90,13 @@ $opacities-percentages: (
 
 $fading-out: (
   0: 1,
-  1: 1 - map-get($opacities, 1),
-  2: 1 - map-get($opacities, 2),
-  3: 1 - map-get($opacities, 3),
-  4: 1 - map-get($opacities, 4),
-  5: 1 - map-get($opacities, 5),
-  6: 1 - map-get($opacities, 6),
-  7: 1 - map-get($opacities, 7),
-  8: 1 - map-get($opacities, 8),
-  9: 1 - map-get($opacities, 9),
+  1: 1 - map.get($opacities, 1),
+  2: 1 - map.get($opacities, 2),
+  3: 1 - map.get($opacities, 3),
+  4: 1 - map.get($opacities, 4),
+  5: 1 - map.get($opacities, 5),
+  6: 1 - map.get($opacities, 6),
+  7: 1 - map.get($opacities, 7),
+  8: 1 - map.get($opacities, 8),
+  9: 1 - map.get($opacities, 9),
 );

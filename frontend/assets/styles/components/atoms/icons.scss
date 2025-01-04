@@ -4,9 +4,9 @@
 .icon {
   @each $size in $icon-sizes-suffix {
     &--#{$size} {
-      width: map-get($icon-sizes, $size);
-      height: map-get($icon-sizes, $size);
-      font-size: map-get($icon-sizes, $size);
+      width: map.get($icon-sizes, $size);
+      height: map.get($icon-sizes, $size);
+      font-size: map.get($icon-sizes, $size);
     }
   }
 
@@ -18,8 +18,8 @@
 
     @each $size in $icon-wrapper-sizes-suffix {
       &--#{$size} {
-        width: map-get($icon-wrapper-sizes, $size);
-        height: map-get($icon-wrapper-sizes, $size);
+        width: map.get($icon-wrapper-sizes, $size);
+        height: map.get($icon-wrapper-sizes, $size);
       }
     }
 

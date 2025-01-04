@@ -1,5 +1,6 @@
 @use 'sass:math';
 @use "sass:map";
+@use 'sass:list';
 @use './colors' as *;
 
 //
@@ -58,16 +59,16 @@ $font-sans-sizes: (
 );
 
 $font-sans-colors: (
-  small: map-get($theme-color-primary, lighter-4),
-  base: map-get($theme-color-primary, reverse),
-  bold: map-get($theme-color-primary, reverse),
-  capitalized: map-get($theme-color-accent, lighter),
-  md: map-get($theme-color-primary, reverse),
-  md-capitalized: map-get($theme-color-primary, reverse),
-  lg: map-get($theme-color-primary, reverse),
-  xl: map-get($theme-color-primary, reverse),
-  xxl: map-get($theme-color-primary, reverse),
-  xxxl: map-get($theme-color-primary, reverse)
+  small: map.get($theme-color-primary, lighter-4),
+  base: map.get($theme-color-primary, reverse),
+  bold: map.get($theme-color-primary, reverse),
+  capitalized: map.get($theme-color-accent, lighter),
+  md: map.get($theme-color-primary, reverse),
+  md-capitalized: map.get($theme-color-primary, reverse),
+  lg: map.get($theme-color-primary, reverse),
+  xl: map.get($theme-color-primary, reverse),
+  xxl: map.get($theme-color-primary, reverse),
+  xxxl: map.get($theme-color-primary, reverse)
 );
 
 $font-sans-weights: (
@@ -123,16 +124,16 @@ $font-sans-settings: (
     xxxl: $font-size-base * $font-size-scale-ratio * $font-size-scale-ratio * $font-size-scale-ratio * $font-size-scale-ratio * $font-size-scale-ratio
   ),
   color: (
-    small: map-get($theme-color-primary, lighter-4),
-    base: map-get($theme-color-primary, reverse),
-    bold: map-get($theme-color-primary, reverse),
-    capitalized: map-get($theme-color-accent, lighter),
-    md: map-get($theme-color-primary, reverse),
-    md-capitalized: map-get($theme-color-primary, reverse),
-    lg: map-get($theme-color-primary, reverse),
-    xl: map-get($theme-color-primary, reverse),
-    xxl: map-get($theme-color-primary, reverse),
-    xxxl: map-get($theme-color-primary, reverse)
+    small: map.get($theme-color-primary, lighter-4),
+    base: map.get($theme-color-primary, reverse),
+    bold: map.get($theme-color-primary, reverse),
+    capitalized: map.get($theme-color-accent, lighter),
+    md: map.get($theme-color-primary, reverse),
+    md-capitalized: map.get($theme-color-primary, reverse),
+    lg: map.get($theme-color-primary, reverse),
+    xl: map.get($theme-color-primary, reverse),
+    xxl: map.get($theme-color-primary, reverse),
+    xxxl: map.get($theme-color-primary, reverse)
   ),
   weight: (
     small: $font-weight-base,
@@ -186,8 +187,8 @@ $font-mono-sizes: (
 );
 
 $font-mono-colors: (
-  small: map-get($theme-color-primary, lighter-4),
-  base: map-get($theme-color-primary, reverse)
+  small: map.get($theme-color-primary, lighter-4),
+  base: map.get($theme-color-primary, reverse)
 );
 
 $font-mono-weights: (
@@ -211,8 +212,8 @@ $font-mono-settings: (
     base: $font-size-base
   ),
   color: (
-    small: map-get($theme-color-primary, lighter-4),
-    base: map-get($theme-color-primary, reverse)
+    small: map.get($theme-color-primary, lighter-4),
+    base: map.get($theme-color-primary, reverse)
   ),
   weight: (
     small: $font-weight-bold,
@@ -254,13 +255,13 @@ $font-mono-settings: (
 // Font-sans styles
 @mixin font-sans($level) {
   font-family: $font-family-sans;
-  font-size: map-get($font-sans-sizes, $level);
-  color: map-get($font-sans-colors, $level);
-  font-weight: map-get($font-sans-weights, $level);
-  line-height: map-get($font-sans-line-heights, $level);
-  letter-spacing: map-get($font-sans-letter-spacings, $level);
+  font-size: map.get($font-sans-sizes, $level);
+  color: map.get($font-sans-colors, $level);
+  font-weight: map.get($font-sans-weights, $level);
+  line-height: map.get($font-sans-line-heights, $level);
+  letter-spacing: map.get($font-sans-letter-spacings, $level);
 
-  @if index(capitalized md-capitalized, $level) {
+  @if list.index(capitalized md-capitalized, $level) {
     text-transform: uppercase;
   }
 }
@@ -268,9 +269,9 @@ $font-mono-settings: (
 // Font-mono styles
 @mixin font-mono($level) {
   font-family: $font-family-mono;
-  font-size: map-get($font-mono-sizes, $level);
-  color: map-get($font-mono-colors, $level);
-  font-weight: map-get($font-mono-weights, $level);
-  line-height: map-get($font-mono-line-heights, $level);
-  letter-spacing: map-get($font-mono-letter-spacings, $level);
+  font-size: map.get($font-mono-sizes, $level);
+  color: map.get($font-mono-colors, $level);
+  font-weight: map.get($font-mono-weights, $level);
+  line-height: map.get($font-mono-line-heights, $level);
+  letter-spacing: map.get($font-mono-letter-spacings, $level);
 }
