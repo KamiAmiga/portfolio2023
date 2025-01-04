@@ -5,7 +5,7 @@
 </template>
 
 <style lang="scss">
-@use '~/assets/styles/base/index' as base;
+@use '~/assets/styles/base/index';
 
 @forward '~/assets/styles/components/atoms/headings.scss';
 @forward '~/assets/styles/components/atoms/icons.scss';
@@ -20,6 +20,10 @@
 
   @each $level, $value in $opacities {
     --opacity-#{$level}: #{$value};
+  }
+
+  @each $level, $value in $opacities-percentages {
+    --opacity-percentage-#{$level}: #{$value};
   }
 
   @each $level, $value in $fading-out {
@@ -49,7 +53,7 @@
   @each $level, $value in $spacers {
     --spacer-#{$level}: #{$value};
   }
-  --spacer-base: $spacer-4;
+  --spacer-base: var(--spacer-4);
 
   @each $level, $value in $z-index {
     --z-index-#{$level}: #{$value};

@@ -74,6 +74,18 @@ $opacities: (
   9: .92,
 );
 
+$opacities-percentages: (
+  1: 4%,
+  2: 8%,
+  3: 16%,
+  4: 24%,
+  5: 32%,
+  6: 48%,
+  7: 64%,
+  8: 80%,
+  9: 92%,
+);
+
 $fading-out: (
   0: 1,
   1: 1 - map-get($opacities, 1),
