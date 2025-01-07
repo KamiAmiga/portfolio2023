@@ -33,19 +33,21 @@ v-for="(historyItem, index) in history" :key="historyItem.id" class="about-histo
 </template>
 
 <style lang="scss">
+@use "sass:map";
 @use "sass:math";
 
 //
 // Variables
 //
 
-$history-item-school-color: map-get($theme-color-secondary, base);
-$history-item-work-color: map-get($theme-color-tertiary, base);
-$history-item-link-width: map-get($spacers, 1);
+$history-item-school-color: map.get($theme-color-secondary, base);
+$history-item-work-color: map.get($theme-color-tertiary, base);
+$history-item-link-width: map.get($spacers, 1);
 $history-item-link-adjust: math.div($history-item-link-width, 2);
 
-$types: "school"$history-item-school-color,
-  "work"$history-item-work-color;
+$types: 
+  "school" $history-item-school-color,
+  "work" $history-item-work-color;
 
 //
 // Styling
@@ -60,7 +62,7 @@ $types: "school"$history-item-school-color,
 
   &__item {
     box-sizing: border-box;
-    padding: map-get($spacers, 4) 0 map-get($spacers, 4) (2.5rem + map-get($spacers, 4));
+    padding: var(--spacer-4) 0 var(--spacer-4) calc(2.5rem + var(--spacer-4));
     position: relative;
 
     &::before {
@@ -70,12 +72,11 @@ $types: "school"$history-item-school-color,
       height: 100%;
       position: absolute;
       top: 0;
-      left: map-get($spacers, 5);
+      left: var(--spacer-5);
       transform: translateX(-50%);
     }
 
-    @each $name,
-    $color in $types {
+    @each $name, $color in $types {
       &--#{$name} {
         &::before {
           background-color: $color;
@@ -88,10 +89,10 @@ $types: "school"$history-item-school-color,
     }
 
     &__icon-wrapper {
-      color: map-get($theme-color-primary, base);
-      border-width: map-get($spacers, 1);
+      color: var(--color-primary-base);
+      border-width: var(--spacer-1);
       border-style: solid;
-      background-color: map-get($theme-color-primary, reverse);
+      background-color: var(--color-primary-reverse);
       position: absolute;
       top: 50%;
       left: 0;
@@ -118,7 +119,11 @@ $types: "school"$history-item-school-color,
 
       &--school {
         align-self: flex-start;
-        padding: map-get($spacers, 4) (math.div(map-get($icon-wrapper-sizes, s), 2) + map-get($spacers, 4)) map-get($spacers, 4) 0;
+        padding: 
+          var(--spacer-4) 
+          (calc(var(--icon-wrapper-size-s) / 2 + var(--spacer-4)))
+          var(--spacer-4)
+          0;
 
         &::before {
           left: 100%;
@@ -136,14 +141,18 @@ $types: "school"$history-item-school-color,
 
       &--work {
         align-self: flex-end;
-        padding: map-get($spacers, 4) 0 map-get($spacers, 4) (math.div(map-get($icon-wrapper-sizes, s), 2) + map-get($spacers, 4));
+        padding: 
+          var(--spacer-4)
+          0
+          var(--spacer-4)
+          (calc(var(--icon-wrapper-size-s) / 2 + var(--spacer-4)));
 
         &::before {
           left: 0;
         }
 
         .about-history__item__icon-wrapper {
-          left: math.div(map-get($icon-wrapper-sizes, s), -2);
+          left: calc(var(--icon-wrapper-size-s) / -2);
         }
       }
     }
@@ -177,7 +186,7 @@ $types: "school"$history-item-school-color,
         align-self: flex-start;
 
         &::before {
-          border-top: map-get($spacers, 1) solid map-get($theme-color-secondary, base);
+          border-top: var(--spacer-1) solid var(--color-secondary-base);
           top: 100%;
           background-color: transparent;
           transform: translateY(-$history-item-link-adjust);
@@ -186,8 +195,8 @@ $types: "school"$history-item-school-color,
         &.about-history__item--junction {
           &::before {
             width: 200%;
-            height: map-get($spacers, 9);
-            border-right: map-get($spacers, 1) solid map-get($theme-color-secondary, base);
+            height: var(--spacer-9);
+            border-right: var(--spacer-1) solid var(--color-secondary-base);
             border-top-right-radius: .5rem;
             right: 0;
             left: auto;
@@ -201,7 +210,7 @@ $types: "school"$history-item-school-color,
           left: 50%;
           text-align: left;
           transform-origin: left bottom;
-          transform: translate(2.5rem, map-get($spacers, 6) * -1) rotate(330deg);
+          transform: translate(2.5rem, calc(var(--spacer-6) * -1)) rotate(330deg);
         }
 
         .about-history__item__icon-wrapper {
@@ -216,7 +225,7 @@ $types: "school"$history-item-school-color,
         margin-top: 19.125rem;
 
         &::before {
-          border-bottom: map-get($spacers, 1) solid map-get($theme-color-tertiary, base);
+          border-bottom: var(--spacer-1) solid var(--color-tertiary-base);
           background-color: transparent;
           transform: translateY(-$history-item-link-adjust);
         }
@@ -224,8 +233,8 @@ $types: "school"$history-item-school-color,
         &.about-history__item--junction {
           &::before {
             width: 200%;
-            height: map-get($spacers, 9);
-            border-left: map-get($spacers, 1) solid map-get($theme-color-tertiary, base);
+            height: var(--spacer-9);
+            border-left: var(--spacer-1) solid var(--color-tertiary-base);
             border-bottom-left-radius: .5rem;
             top: auto;
             bottom: 100%;
@@ -238,7 +247,7 @@ $types: "school"$history-item-school-color,
           right: 50%;
           text-align: right;
           transform-origin: right top;
-          transform: translate(-2.5rem, map-get($spacers, 6)) rotate(330deg);
+          transform: translate(-2.5rem, var(--spacer-6)) rotate(330deg);
         }
 
         .about-history__item__icon-wrapper {

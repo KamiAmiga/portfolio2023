@@ -47,16 +47,17 @@ const sortedSkills = computed(() => {
 </template>
 
 <style lang="scss">
-@use "sass:math";
+@use "sass:map";
 
 //
 // Variables
 //
 
-$types: "language"$theme-color-fourth,
-  "development"$theme-color-tertiary,
-  "art"$theme-color-secondary,
-  "web"$theme-color-accent;
+$types:
+  "language" $theme-color-fourth,
+  "development" $theme-color-tertiary,
+  "art" $theme-color-secondary,
+  "web" $theme-color-accent;
 
 $skill-item-size: 7.5rem;
 $skill-grid-gap: .0625rem;
@@ -79,10 +80,10 @@ $skill-grid-gap: .0625rem;
     box-sizing: border-box;
     width: $skill-item-size;
     height: $skill-item-size;
-    padding: map-get($spacers, 3);
+    padding: var(--spacer-3);
     position: relative;
     flex-direction: column;
-    fill: map-get($theme-color-primary, reverse);
+    fill: var(--color-primary-reverse);
 
     &__icon-wrapper {
       display: flex;
@@ -91,25 +92,31 @@ $skill-grid-gap: .0625rem;
     }
 
     &__name {
-      padding-top: map-get($spacers, 4);
+      padding-top: var(--spacer-4);
     }
 
     &__level {
       position: absolute;
-      top: map-get($spacers, 3);
-      right: map-get($spacers, 3);
+      top: var(--spacer-3);
+      right: var(--spacer-3);
     }
 
-    @each $name,
-    $theme-color in $types {
+    @each $name, $theme-color in $types {
       &--#{$name} {
-        background: linear-gradient(to top right,
-            fade-out(map-get($theme-color, darker),
-              map-get($fading-out, 5)),
-            33%,
-            fade-out(map-get($theme-color, base),
-              map-get($fading-out, 2)));
-        border: .0625rem solid map-get($theme-color, base);
+        background: linear-gradient(
+          to top right,
+          color-mix(
+            in srgb,
+            transparent var(--opacity-percentage-7),
+            map.get($theme-color, darker)
+          ),
+          33%,
+          color-mix(
+            in srgb,
+            transparent var(--opacity-percentage-9),
+            map.get($theme-color, base)
+          ));
+        border: .0625rem solid map.get($theme-color, base);
       }
     }
   }

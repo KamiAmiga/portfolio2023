@@ -24,28 +24,28 @@ defineProps<{
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
-    margin-bottom: map-get($spacers, 7);
+    margin-bottom: var(--spacer-7);
 
     &__swatch {
       display: block;
-      width: map-get($spacers, 9);
-      height: map-get($spacers, 9);
+      width: var(--spacer-9);
+      height: var(--spacer-9);
       flex-grow: 0;
       flex-shrink: 0;
       position: relative;
-      margin-right: map-get($spacers, 6);
+      margin-right: var(--spacer-6);
       background-color: var(--swatch-color);
 
       &::after {
         content: "";
         display: block;
-        width: map-get($spacers, 7);
-        height: map-get($spacers, 7);
-        border-right: 1px solid map-get($theme-color-primary, lighter-2);
-        border-bottom: 1px solid map-get($theme-color-primary, lighter-2);
+        width: var(--spacer-7);
+        height: var(--spacer-7);
+        border-right: 1px solid var(--color-primary-lighter-2);
+        border-bottom: 1px solid var(--color-primary-lighter-2);
         position: absolute;
-        right: map-get($spacers, 3) * -1;
-        bottom: map-get($spacers, 3) * -1;
+        right: calc(var(--spacer-3) * -1);
+        bottom: calc(var(--spacer-3) * -1);
       }
     }
 
@@ -63,7 +63,7 @@ defineProps<{
       flex: 50% 0 0;
 
       &__name {
-        padding-right: map-get($spacers, 4);
+        padding-right: var(--spacer-4);
       }
     }
   }

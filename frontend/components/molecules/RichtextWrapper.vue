@@ -18,11 +18,11 @@ defineProps<{
 
   a {
     position: relative;
-    font-size: $font-size-base;
-    color: map-get($theme-color-accent, lighter);
-    font-weight: $font-weight-base;
-    line-height: $line-height-base;
-    letter-spacing: $letter-spacing-large-1;
+    font-size: var(--font-sans-size-base);
+    color: var(--color-accent-lighter);
+    font-weight: var(--font-sans-weight-base);
+    line-height: var(--font-sans-line-height-base);
+    letter-spacing: var(--font-sans-letter-spacing-base);
     text-decoration: none;
 
     &::after {
@@ -32,10 +32,14 @@ defineProps<{
       left: 0;
       right: 100%;
       height: 2px;
-      background: linear-gradient(to right,
-          map-get($theme-color-accent, base),
-          fade-out(map-get($theme-color-accent, lighter),
-            map-get($fading-out, 3)));
+      background: linear-gradient(
+        to right,
+        var(--color-accent-base),
+        color-mix(
+          in srgb,
+          transparent var(--opacity-percentage-8),
+          var(--color-accent-lighter)
+        ));
       transition: right .16s ease-out;
     }
 

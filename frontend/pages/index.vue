@@ -112,6 +112,7 @@
 </template>
 
 <style lang="scss">
+@use "sass:color";
 @use "sass:map";
 
 //
@@ -209,8 +210,9 @@ $triangle-base-angle: 30deg;
       padding: map.get($spacers, 4) map.get($spacers, 4) map.get($spacers, 4) (map.get($spacers, 7) - map.get($spacers, 2));
       border-left-width: map.get($spacers, 2);
       border-left-style: solid;
-      border-left-color: fade-out(map.get($theme-color-secondary, darker),
-          map.get($fading-out, 0));
+      border-left-color: color.adjust(
+        map.get($theme-color-secondary, darker),
+        $alpha: map.get($fading-out, 0) * -1);
       position: relative;
       animation-name: homepage-title-main-border-anim;
       animation-duration: 0.32s;
@@ -218,14 +220,10 @@ $triangle-base-angle: 30deg;
       animation-fill-mode: forwards;
 
       @keyframes homepage-title-main-border-anim {
-        from {
-          border-left-color: fade-out(map.get($theme-color-secondary, darker),
-              map.get($fading-out, 0));
-        }
-
         to {
-          border-left-color: fade-out(map.get($theme-color-secondary, darker),
-              map.get($fading-out, 9));
+          border-left-color: color.adjust(
+            map.get($theme-color-secondary, darker),
+            $alpha: map.get($fading-out, 9) * -1);
         }
       }
 
@@ -237,12 +235,14 @@ $triangle-base-angle: 30deg;
         bottom: 0;
         right: 100%;
         z-index: map.get($z-index, base-decrease);
-        background: linear-gradient(to right,
-            fade-out(map.get($theme-color-secondary, darker),
-              map.get($fading-out, 5)),
-            16.5%,
-            fade-out(map.get($theme-color-secondary, darker),
-              map.get($fading-out, 0)) 50%);
+        background: linear-gradient(
+          to right,
+          color.adjust(
+            map.get($theme-color-secondary, darker),
+            $alpha: map.get($fading-out, 5) * -1
+          ),
+          16.5%,
+          transparent 50%);
         animation-name: homepage-title-main-gradient-anim;
         animation-duration: 0.32s;
         animation-delay: 0.64s;
@@ -379,19 +379,25 @@ $triangle-base-angle: 30deg;
               width: 2.778%;
               top: 3.226%;
               left: 27.778%;
-              background: linear-gradient(to bottom,
-                  fade-out(map.get($theme-color-fourth, darker),
-                    map.get($fading-out, 0)),
-                  fade-out(map.get($theme-color-primary, reverse),
-                    map.get($fading-out, 3)));
+              background: linear-gradient(
+                to bottom,
+                color.adjust(
+                  map.get($theme-color-fourth, darker),
+                  $alpha: map.get($fading-out, 0) * -1),
+                color.adjust(
+                  map.get($theme-color-primary, reverse),
+                  $alpha: map.get($fading-out, 3) * -1));
 
               &::before,
               &::after {
-                background: linear-gradient(to bottom,
-                    fade-out(map.get($theme-color-fourth, darker),
-                      map.get($fading-out, 0)),
-                    fade-out(map.get($theme-color-primary, reverse),
-                      map.get($fading-out, 3)));
+                background: linear-gradient(
+                  to bottom,
+                  color.adjust(
+                    map.get($theme-color-fourth, darker),
+                    $alpha: map.get($fading-out, 0) * -1),
+                  color.adjust(
+                    map.get($theme-color-primary, reverse),
+                    $alpha: map.get($fading-out, 3) * -1));
               }
 
               &::before {
@@ -407,19 +413,25 @@ $triangle-base-angle: 30deg;
               width: 2%;
               top: 10%;
               right: 30.769%;
-              background: linear-gradient(to bottom,
-                  fade-out(map.get($theme-color-tertiary, darker),
-                    map.get($fading-out, 2)),
-                  fade-out(map.get($theme-color-tertiary, base),
-                    map.get($fading-out, 6)));
+              background: linear-gradient(
+                to bottom,
+                color.adjust(
+                  map.get($theme-color-tertiary, darker),
+                  $alpha: map.get($fading-out, 2) * -1),
+                color.adjust(
+                  map.get($theme-color-tertiary, base),
+                  $alpha: map.get($fading-out, 6) * -1));
 
               &::before,
               &::after {
-                background: linear-gradient(to bottom,
-                    fade-out(map.get($theme-color-tertiary, darker),
-                      map.get($fading-out, 2)),
-                    fade-out(map.get($theme-color-tertiary, base),
-                      map.get($fading-out, 6)));
+                background: linear-gradient(
+                  to bottom,
+                  color.adjust(
+                    map.get($theme-color-tertiary, darker),
+                    $alpha: map.get($fading-out, 2) * -1),
+                  color.adjust(
+                    map.get($theme-color-tertiary, base),
+                    $alpha: map.get($fading-out, 6) * -1));
               }
 
               &::before {
@@ -440,8 +452,13 @@ $triangle-base-angle: 30deg;
             left: 18.92%;
             z-index: map.get($z-index, base-increase);
             background: white;
-            box-shadow: 0 0 map.get($spacers, 2) fade-out(map.get($theme-color-fourth, lighter),
-                map.get($fading-out, 7));
+            box-shadow:
+              0
+              0
+              map.get($spacers, 2)
+              color.adjust(
+                map.get($theme-color-fourth, lighter),
+                $alpha: map.get($fading-out, 7) * -1);
             transform-origin: top left;
             transform: skewY($triangle-base-angle);
           }
@@ -452,8 +469,13 @@ $triangle-base-angle: 30deg;
             left: 43.243%;
             z-index: map.get($z-index, base-increase);
             background: white;
-            box-shadow: 0 0 map.get($spacers, 2) fade-out(map.get($theme-color-tertiary, lighter),
-                map.get($fading-out, 7));
+            box-shadow:
+              0
+              0
+              map.get($spacers, 2)
+              color.adjust(
+                map.get($theme-color-tertiary, lighter),
+                $alpha: map.get($fading-out, 7) * -1);
             transform-origin: top right;
             transform: skewY($triangle-base-angle * -1);
           }
@@ -480,12 +502,15 @@ $triangle-base-angle: 30deg;
             width: 12.162%;
             height: 96.875%;
             left: 8.784%;
-            background: linear-gradient(to bottom,
-                fade-out(map.get($theme-color-fourth, darker),
-                  map.get($fading-out, 2)),
-                33%,
-                fade-out(map.get($theme-color-fourth, base),
-                  map.get($fading-out, 5)));
+            background: linear-gradient(
+              to bottom,
+              color.adjust(
+                map.get($theme-color-fourth, darker),
+                $alpha: map.get($fading-out, 2) * -1),
+              33%,
+              color.adjust(
+                map.get($theme-color-fourth, base),
+                $alpha: map.get($fading-out, 5) * -1));
             transform-origin: top right;
             transform: skewY($triangle-base-angle * -1);
           }
@@ -495,11 +520,14 @@ $triangle-base-angle: 30deg;
             height: 85.156%;
             left: 18.92%;
             z-index: map.get($z-index, base-decrease);
-            background: linear-gradient(to bottom,
-                fade-out(map.get($theme-color-primary, reverse),
-                  map.get($fading-out, 1)),
-                fade-out(map.get($theme-color-primary, reverse),
-                  map.get($fading-out, 8)));
+            background: linear-gradient(
+              to bottom,
+              color.adjust(
+                map.get($theme-color-primary, reverse),
+                $alpha: map.get($fading-out, 1) * -1),
+              color.adjust(
+                map.get($theme-color-primary, reverse),
+                $alpha: map.get($fading-out, 8) * -1));
           }
 
           &-left-3 {
@@ -510,8 +538,9 @@ $triangle-base-angle: 30deg;
             background: linear-gradient(to bottom,
                 transparent,
                 67%,
-                fade-out(map.get($theme-color-primary, reverse),
-                  map.get($fading-out, 8)));
+                color.adjust(
+                  map.get($theme-color-primary, reverse),
+                  $alpha: map.get($fading-out, 8) * -1));
           }
 
           &-center-1 {
@@ -519,12 +548,15 @@ $triangle-base-angle: 30deg;
             height: 86.719%;
             left: 36.149%;
             z-index: map.get($z-index, base-decrease);
-            background: linear-gradient(to bottom,
-                fade-out(map.get($theme-color-accent, darker),
-                  map.get($fading-out, 2)),
-                33%,
-                fade-out(map.get($theme-color-tertiary, lighter),
-                  map.get($fading-out, 3)));
+            background: linear-gradient(
+              to bottom,
+              color.adjust(
+                map.get($theme-color-accent, darker),
+                $alpha: map.get($fading-out, 2) * -1),
+              33%,
+              color.adjust(
+                map.get($theme-color-tertiary, lighter),
+                $alpha: map.get($fading-out, 3) * -1));
             transform-origin: top right;
             transform: skewY($triangle-base-angle * -1);
           }
@@ -534,24 +566,30 @@ $triangle-base-angle: 30deg;
             height: 26.563%;
             left: 55.405%;
             z-index: map.get($z-index, base-decrease);
-            background: linear-gradient(to bottom,
-                fade-out(map.get($theme-color-primary, reverse),
-                  map.get($fading-out, 1)),
-                67%,
-                fade-out(map.get($theme-color-primary, reverse),
-                  map.get($fading-out, 6)));
+            background: linear-gradient(
+              to bottom,
+              color.adjust(
+                map.get($theme-color-primary, reverse),
+                $alpha: map.get($fading-out, 1) * -1),
+              67%,
+              color.adjust(
+                map.get($theme-color-primary, reverse),
+                $alpha: map.get($fading-out, 6) * -1));
           }
 
           &-right-1 {
             width: 20.312%;
             height: 62.5%;
             left: 70.95%;
-            background: linear-gradient(to bottom,
-                fade-out(map.get($theme-color-primary, base),
-                  map.get($fading-out, 2)),
-                33%,
-                fade-out(map.get($theme-color-secondary, darker),
-                  map.get($fading-out, 8)));
+            background: linear-gradient(
+              to bottom,
+              color.adjust(
+                map.get($theme-color-primary, base),
+                $alpha: map.get($fading-out, 2) * -1),
+              33%,
+              color.adjust(
+                map.get($theme-color-secondary, darker),
+                $alpha: map.get($fading-out, 8) * -1));
             transform-origin: top right;
             transform: skewY($triangle-base-angle * -1);
           }
@@ -561,12 +599,15 @@ $triangle-base-angle: 30deg;
             height: 93.75%;
             left: 75.676%;
             z-index: map.get($z-index, base-decrease);
-            background: linear-gradient(to bottom,
-                fade-out(map.get($theme-color-tertiary, darker),
-                  map.get($fading-out, 0)),
-                67%,
-                fade-out(map.get($theme-color-tertiary, base),
-                  map.get($fading-out, 6)));
+            background: linear-gradient(
+              to bottom,
+              color.adjust(
+                map.get($theme-color-tertiary, darker),
+                $alpha: map.get($fading-out, 0) * -1),
+              67%,
+              color.adjust(
+                map.get($theme-color-tertiary, base),
+                $alpha: map.get($fading-out, 6) * -1));
           }
 
           &-right-3 {
@@ -574,12 +615,15 @@ $triangle-base-angle: 30deg;
             height: 93.75%;
             left: 81.76%;
             z-index: map.get($z-index, base-decrease);
-            background: linear-gradient(to bottom,
-                fade-out(map.get($theme-color-secondary, lighter),
-                  map.get($fading-out, 2)),
-                33%,
-                fade-out(map.get($theme-color-tertiary, base),
-                  map.get($fading-out, 5)));
+            background: linear-gradient(
+              to bottom,
+              color.adjust(
+                map.get($theme-color-secondary, lighter),
+                $alpha: map.get($fading-out, 2) * -1),
+              33%,
+              color.adjust(
+                map.get($theme-color-tertiary, base),
+                $alpha: map.get($fading-out, 5) * -1));
             transform-origin: top left;
             transform: skewY($triangle-base-angle);
           }
@@ -596,23 +640,29 @@ $triangle-base-angle: 30deg;
           width: 44.594%;
           padding-bottom: 44.594%;
           left: 5.405%;
-          background: radial-gradient(circle closest-side,
-              fade-out(map.get($theme-color-fourth, lighter),
-                map.get($fading-out, 6)),
-              67%,
-              fade-out(map.get($theme-color-fourth, darker),
-                map.get($fading-out, 0)));
+          background: radial-gradient(
+            circle closest-side,
+            color.adjust(
+              map.get($theme-color-fourth, lighter),
+              $alpha: map.get($fading-out, 6) * -1),
+            67%,
+            color.adjust(
+              map.get($theme-color-fourth, darker),
+              $alpha: map.get($fading-out, 0) * -1));
         }
 
         &--right {
           width: 66.216%;
           padding-bottom: 66.216%;
           left: 21.622%;
-          background: radial-gradient(circle closest-side,
-              fade-out(map.get($theme-color-tertiary, lighter),
-                map.get($fading-out, 7)),
-              fade-out(map.get($theme-color-tertiary, darker),
-                map.get($fading-out, 0)));
+          background: radial-gradient(
+            circle closest-side,
+            color.adjust(
+              map.get($theme-color-tertiary, lighter),
+              $alpha: map.get($fading-out, 7) * -1),
+            color.adjust(
+              map.get($theme-color-tertiary, darker),
+              $alpha: map.get($fading-out, 0) * -1));
         }
       }
     }
@@ -627,8 +677,13 @@ $triangle-base-angle: 30deg;
         height: map.get($spacers, 1);
         background-color: map.get($theme-color-accent, lighter);
         border-radius: 0.0625rem;
-        box-shadow: 0 0 map.get($spacers, 1) fade-out(map.get($theme-color-accent, lighter),
-            map.get($fading-out, 7));
+        box-shadow: 
+          0 
+          0 
+          map.get($spacers, 1) 
+          color.adjust(
+            map.get($theme-color-accent, lighter),
+            $alpha: map.get($fading-out, 7) * -1);
       }
 
       &__shape {
@@ -638,10 +693,11 @@ $triangle-base-angle: 30deg;
         top: 0;
         left: 29.514%;
         clip-path: polygon(100% 0, 0 50%, 100% 100%);
-        background: linear-gradient(to right,
-            map.get($theme-color-accent, base),
-            67%,
-            map.get($theme-color-accent, darker));
+        background: linear-gradient(
+          to right,
+          map.get($theme-color-accent, base),
+          67%,
+          map.get($theme-color-accent, darker));
         transform: translateY(-50%);
 
         &::before,
@@ -682,12 +738,15 @@ $triangle-base-angle: 30deg;
         height: 100%;
         position: absolute;
         clip-path: polygon(100% 0, 0 0, 50% 100%);
-        background: linear-gradient(to bottom,
-            fade-out(map.get($theme-color-accent, lighter),
-              map.get($fading-out, 3)),
-            33%,
-            fade-out(map.get($theme-color-accent, darker),
-              map.get($fading-out, 0)));
+        background: linear-gradient(
+          to bottom,
+          color.adjust(
+            map.get($theme-color-accent, lighter),
+            $alpha: map.get($fading-out, 3) * -1),
+          33%,
+          color.adjust(
+            map.get($theme-color-accent, darker),
+            $alpha: map.get($fading-out, 0) * -1));
       }
 
       &__reflexion {
@@ -699,11 +758,14 @@ $triangle-base-angle: 30deg;
           width: 21.622%;
           height: 39.844%;
           left: 18.92%;
-          background: linear-gradient(to bottom,
-              fade-out(map.get($theme-color-fourth, darker),
-                map.get($fading-out, 4)),
-              fade-out(map.get($theme-color-primary, base),
-                map.get($fading-out, 0)));
+          background: linear-gradient(
+            to bottom,
+            color.adjust(
+              map.get($theme-color-fourth, darker),
+              $alpha: map.get($fading-out, 4) * -1),
+            color.adjust(
+              map.get($theme-color-primary, base),
+              $alpha: map.get($fading-out, 0) * -1));
           transform-origin: top right;
           transform: skewY($triangle-base-angle);
         }
@@ -712,11 +774,14 @@ $triangle-base-angle: 30deg;
           width: 24.324%;
           height: 53.125%;
           left: 43.243%;
-          background: linear-gradient(to bottom,
-              fade-out(map.get($theme-color-tertiary, darker),
-                map.get($fading-out, 4)),
-              fade-out(map.get($theme-color-primary, base),
-                map.get($fading-out, 0)));
+          background: linear-gradient(
+            to bottom,
+            color.adjust(
+              map.get($theme-color-tertiary, darker),
+              $alpha: map.get($fading-out, 4) * -1),
+            color.adjust(
+              map.get($theme-color-primary, base),
+              $alpha: map.get($fading-out, 0) * -1));
           transform-origin: top left;
           transform: skewY($triangle-base-angle * -1);
         }
@@ -728,10 +793,14 @@ $triangle-base-angle: 30deg;
         position: absolute;
         top: 0;
         left: 50%;
-        background: radial-gradient(circle closest-side,
-            fade-out(map.get($theme-color-accent, darker),
-              map.get($fading-out, 5)),
-            fade-out(map.get($theme-color-primary, base), map.get($fading-out, 0)));
+        background: radial-gradient(
+          circle closest-side,
+          color.adjust(
+            map.get($theme-color-accent, darker),
+            $alpha: map.get($fading-out, 5) * -1),
+          color.adjust(
+            map.get($theme-color-primary, base),
+            $alpha: map.get($fading-out, 0) * -1));
         transform: translate(-50%, -50%);
       }
     }
@@ -740,10 +809,15 @@ $triangle-base-angle: 30deg;
   @media screen and (min-width: $breakpoint-m) {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(to top,
-        fade-out(map.get($theme-color-accent, darker), map.get($fading-out, 5)),
-        16.5%,
-        fade-out(map.get($theme-color-accent, base), map.get($fading-out, 0)) 50%);
+    background: linear-gradient(
+      to top,
+      color.adjust(
+        map.get($theme-color-accent, darker), 
+        $alpha: map.get($fading-out, 5) *-1),
+      16.5%,
+      color.adjust(
+        map.get($theme-color-accent, base), 
+        $alpha: map.get($fading-out, 0) *-1) 50%);
 
     &__bg {
       &-line {
@@ -899,12 +973,15 @@ $triangle-base-angle: 30deg;
 
         &--3 {
           clip-path: polygon(100% 0, 0 0, 50% 100%);
-          background: linear-gradient(to bottom,
-              fade-out(map.get($theme-color-secondary, darker),
-                map.get($fading-out, 5)),
-              33%,
-              fade-out(map.get($theme-color-secondary, darker),
-                map.get($fading-out, 0)));
+          background: linear-gradient(
+            to bottom,
+            color.adjust(
+              map.get($theme-color-secondary, darker),
+              $alpha: map.get($fading-out, 5) * -1),
+            33%,
+            color.adjust(
+              map.get($theme-color-secondary, darker),
+              $alpha: map.get($fading-out, 0) * -1));
         }
       }
     }

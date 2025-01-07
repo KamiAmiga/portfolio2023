@@ -37,11 +37,16 @@ defineProps<{
   height: 50dvh;
   max-height: 60rem;
   position: relative;
-  z-index: map-get($z-index, base-decrease);
-  background: linear-gradient(to bottom,
-      fade-out(map-get($theme-color-accent, base), map-get($fading-out, 0)),
-      66%,
-      fade-out(map-get($theme-color-accent, darker), map-get($fading-out, 5)));
+  z-index: var(--z-index-base-decrease);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    66%,
+    color-mix(
+      in srgb,
+      transparent var(--opacity-percentage-7),
+      var(--color-accent-darker) 
+    ));
 
   @media screen and (min-width: $breakpoint-m) {
     height: 75dvh;
@@ -60,7 +65,7 @@ defineProps<{
       display: flex;
       align-items: center;
       justify-content: center;
-      max-width: calc(100% - map-get($spacers, 8) * 2);
+      max-width: calc(100% - var(--spacer-8) * 2);
       max-height: 60dvh;
       position: relative;
       overflow: hidden;
@@ -70,9 +75,9 @@ defineProps<{
   &__title {
     box-sizing: border-box;
     width: 100%;
-    padding-right: map-get($spacers, 4);
+    padding-right: var(--spacer-4);
     margin: 0 auto;
-    z-index: map-get($z-index, base-increase);
+    z-index: var(--z-index-base-increase);
 
     @media screen and (min-width: $breakpoint-m) {
       padding-left: 20rem;

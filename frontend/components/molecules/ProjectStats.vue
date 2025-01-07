@@ -38,11 +38,15 @@ defineProps<{
 </template>
 
 <style lang="scss">
+@use "sass:map";
+
 //
 // Variables
 //
 
-$skills-types: "development"$theme-color-tertiary, "art"$theme-color-secondary;
+$skills-types: 
+  "development" $theme-color-tertiary,
+  "art" $theme-color-secondary;
 
 //
 // Styling
@@ -51,21 +55,21 @@ $skills-types: "development"$theme-color-tertiary, "art"$theme-color-secondary;
 .project-stats {
   box-sizing: border-box;
   padding: 0;
-  border-bottom: 1px solid map-get($theme-color-primary, lighter-2);
+  border-bottom: 1px solid var(--color-primary-lighter-2);
   margin: 0;
-  z-index: map-get($z-index, base-increase);
+  z-index: var(--z-index-base-increase);
 
   &__property {
-    margin-bottom: map-get($spacers, 3);
-    color: map-get($theme-color-accent, lighter);
+    margin-bottom: var(--spacer-3);
+    color: var(--color-accent-lighter);
   }
 
   &__value {
     margin-left: 0;
-    margin-bottom: map-get($spacers, 8);
+    margin-bottom: var(--spacer-8);
 
     &:last-child {
-      margin-bottom: map-get($spacers, 6);
+      margin-bottom: var(--spacer-6);
     }
   }
 
@@ -82,35 +86,38 @@ $skills-types: "development"$theme-color-tertiary, "art"$theme-color-secondary;
     align-items: center;
 
     &__icon {
-      color: map-get($theme-color-primary, reverse);
+      color: var(--color-primary-reverse);
 
       &-wrapper {
         flex-grow: 0;
         flex-shrink: 0;
-        margin-right: map-get($spacers, 3);
+        margin-right: var(--spacer-3);
 
         &::before {
           width: 2rem;
           height: 2rem;
         }
 
-        @each $type,
-        $theme-color in $skills-types {
+        @each $type, $theme-color in $skills-types {
           &--#{$type} {
             &::before {
-              border: 1px solid map-get($theme-color, base);
-              background: linear-gradient(to bottom right,
-                  fade-out(map-get($theme-color, darker),
-                    map-get($fading-out, 5)),
-                  33%,
-                  fade-out(map-get($theme-color, base), map-get($fading-out, 0)));
+              border: 1px solid map.get($theme-color, base);
+              background: linear-gradient(
+                to bottom right,
+                color-mix(
+                  in srgb,
+                  transparent var(--opacity-percentage-7),
+                  map.get($theme-color, darker)
+                ),
+                33%,
+                transparent);
             }
           }
         }
       }
 
       @media screen and (min-width: $breakpoint-m) {
-        color: map-get($theme-color-primary, base);
+        color: var(--color-primary-base);
       }
     }
 
@@ -121,11 +128,11 @@ $skills-types: "development"$theme-color-tertiary, "art"$theme-color-secondary;
       flex-grow: 0;
       flex-shrink: 0;
       max-width: 10rem;
-      padding: map-get($spacers, 3) map-get($spacers, 2);
+      padding: var(--spacer-3) var(--spacer-2);
       flex-direction: column;
 
       .project-stats__skill__icon-wrapper {
-        margin-top: map-get($spacers, 2);
+        margin-top: var(--spacer-2);
         margin-right: 0;
       }
     }
@@ -135,17 +142,17 @@ $skills-types: "development"$theme-color-tertiary, "art"$theme-color-secondary;
     width: 20rem;
     flex-grow: 0;
     flex-shrink: 0;
-    padding: map-get($spacers, 8) map-get($spacers, 7) map-get($spacers, 6) map-get($spacers, 7);
+    padding: var(--spacer-8) var(--spacer-7) var(--spacer-6) var(--spacer-7);
     border: none;
     margin: -12rem 0 0 0;
-    background-color: map-get($theme-color-primary, reverse);
+    background-color: var(--color-primary-reverse);
 
     &__property {
-      color: map-get($theme-color-accent, darker);
+      color: var(--color-accent-darker);
     }
 
     &__value {
-      color: map-get($theme-color-primary, lighter-2);
+      color: var(--color-primary-lighter-2);
     }
   }
 }

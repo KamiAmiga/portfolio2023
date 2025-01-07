@@ -68,21 +68,32 @@ const mainImageCategory = computed(() => {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: map-get($spacers, 9) $spacer;
-    background: linear-gradient(to bottom,
-        map-get($theme-color-primary, base) 50%,
-        mix(map-get($theme-color-accent, darker),
-          map-get($theme-color-primary, base),
-          32%));
-
-    box-shadow: map-get($spacers, 2) * -1 map-get($spacers, 1) map-get($spacers, 2) fade-out(map-get($theme-color-accent, base), map-get($fading-out, 4));
+    padding: var(--spacer-9) var(--spacer-base);
+    background: linear-gradient(
+      to bottom,
+      var(--color-primary-base) 50%,
+      color-mix(
+        in srgb,
+        var(--color-accent-darker) var(--opacity-percentage-5),
+        var(--color-primary-base)
+      ));
+    
+    box-shadow:
+      calc(var(--spacer-2) * -1)
+      var(--spacer-1)
+      var(--spacer-2)
+      color-mix(
+        in srgb,
+        transparent var(--opacity-percentage-8),
+        var(--color-accent-base)
+      );
 
     &-mobile_desktop {
       flex-direction: column;
 
       @media screen and (min-width: $breakpoint-m) {
-        padding-left: map-get($spacers, 8);
-        padding-right: map-get($spacers, 8);
+        padding-left: var(--spacer-8);
+        padding-right: var(--spacer-8);
       }
     }
 
@@ -90,41 +101,53 @@ const mainImageCategory = computed(() => {
       flex-grow: 1;
       flex-direction: row;
       justify-content: space-between;
-      column-gap: $spacer;
+      column-gap: var(--spacer-base);
 
       @media screen and (min-width: $breakpoint-m) {
         justify-content: center;
-        column-gap: map-get($spacers, 8);
+        column-gap: var(--spacer-8);
       }
     }
 
     &-desktop {
       @media screen and (min-width: $breakpoint-m) {
-        padding-left: map-get($spacers, 8);
-        padding-right: map-get($spacers, 8);
+        padding-left: var(--spacer-8);
+        padding-right: var(--spacer-8);
       }
     }
   }
 
   &--design {
-    padding: map-get($spacers, 9) $spacer;
+    padding: var(--spacer-9) var(--spacer-base);
 
     &-visual_id {
-      background: linear-gradient(to bottom right,
-          mix(map-get($theme-color-secondary, darker),
-            map-get($theme-color-primary, base),
-            32%),
-          25%,
-          map-get($theme-color-primary, base),
-          75%,
-          mix(map-get($theme-color-secondary, darker),
-            map-get($theme-color-primary, base),
-            32%));
-      box-shadow: map-get($spacers, 2) * -1 map-get($spacers, 1) map-get($spacers, 2) fade-out(map-get($theme-color-secondary, lighter),
-          map-get($fading-out, 5));
+      background: linear-gradient(
+        to bottom right,
+        color-mix(
+          in srgb,
+          var(--color-secondary-darker) var(--opacity-percentage-5),
+          var(--color-primary-base)
+        ),
+        25%,
+        var(--color-primary-base),
+        75%,
+        color-mix(
+          in srgb,
+          var(--color-secondary-darker) var(--opacity-percentage-5),
+          var(--color-primary-base)
+        ));
+      box-shadow:
+        calc(var(--spacer-2) * -1)
+        var(--spacer-1)
+        var(--spacer-2)
+        color-mix(
+          in srgb,
+          transparent var(--opacity-percentage-7),
+          var(--color-secondary-lighter)
+        );
 
       @media screen and (min-width: $breakpoint-m) {
-        padding: map-get($spacers, 8) map-get($spacers, 9);
+        padding: var(--spacer-8) var(--spacer-9);
       }
     }
 
@@ -134,36 +157,58 @@ const mainImageCategory = computed(() => {
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      background: linear-gradient(to bottom,
-          map-get($theme-color-primary, base) 50%,
-          mix(map-get($theme-color-tertiary, darker),
-            map-get($theme-color-primary, base),
-            32%));
-      box-shadow: map-get($spacers, 2) * -1 map-get($spacers, 1) map-get($spacers, 2) fade-out(map-get($theme-color-tertiary, lighter),
-          map-get($fading-out, 5));
+      background: linear-gradient(
+        to bottom,
+        var(--color-primary-base) 50%,
+        color-mix(
+          in srgb,
+          var(--color-tertiary-darker) var(--opacity-percentage-5),
+          var(--color-primary-base)
+        ));
+      box-shadow:
+        calc(var(--spacer-2) * -1)
+        var(--spacer-1)
+        var(--spacer-2)
+        color-mix(
+          in srgb,
+          transparent var(--opacity-percentage-7),
+          var(--color-tertiary-lighter)
+        );
 
       @media screen and (min-width: $breakpoint-m) {
-        padding-left: map-get($spacers, 8);
-        padding-right: map-get($spacers, 8);
+        padding-left: var(--spacer-8);
+        padding-right: var(--spacer-8);
       }
     }
   }
 
   &--drawing {
     width: fit-content;
-    box-shadow: map-get($spacers, 2) * -1 map-get($spacers, 1) map-get($spacers, 2) fade-out(map-get($theme-color-secondary, lighter),
-        map-get($fading-out, 5));
+    box-shadow:
+      calc(var(--spacer-2) * -1)
+      var(--spacer-1)
+      var(--spacer-2)
+      color-mix(
+        in srgb,
+        transparent var(--opacity-percentage-7),
+        var(--color-secondary-lighter)
+      );
   }
 
   &__picture-wrapper {
     #{$self}--ui & {
       position: relative;
       overflow: hidden;
-      border-radius: map-get($spacers, 2);
-      box-shadow: 0 0 map-get($spacers, 3) map-get($spacers, 1) * -1 map-get($theme-color-primary, lighter-3);
+      border-radius: var(--spacer-2);
+      box-shadow:
+        0
+        0
+        var(--spacer-3)
+        calc(var(--spacer-1) * -1)
+        var(--color-primary-lighter-3);
 
       @media screen and (min-width: $breakpoint-m) {
-        border-radius: map-get($spacers, 3);
+        border-radius: var(--spacer-3);
       }
     }
 
@@ -173,7 +218,12 @@ const mainImageCategory = computed(() => {
 
     #{$self}--design-print & {
       max-width: 75%;
-      box-shadow: 0 0 map-get($spacers, 3) map-get($spacers, 1) * -1 map-get($theme-color-primary, lighter-3);
+      box-shadow:
+        0
+        0
+        var(--spacer-3)
+        calc(var(--spacer-1) * -1)
+        var(--color-primary-lighter-3);
     }
 
     &:first-child {
@@ -201,8 +251,8 @@ const mainImageCategory = computed(() => {
       #{$self}--ui-mobile_desktop & {
         max-width: 40%;
         align-self: flex-end;
-        margin-top: map-get($spacers, 6) * -1;
-        margin-right: $spacer;
+        margin-top: calc(var(--spacer-6) * -1);
+        margin-right: var(--spacer-base);
 
         @media screen and (min-width: $breakpoint-m) {
           max-width: 30%;
@@ -211,7 +261,7 @@ const mainImageCategory = computed(() => {
       }
 
       #{$self}--design-print & {
-        margin-top: map-get($spacers, 3) * -1;
+        margin-top: calc(var(--spacer-3) * -1);
         margin-left: 25%;
       }
     }

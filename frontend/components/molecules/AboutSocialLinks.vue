@@ -21,17 +21,15 @@ defineProps<{
 </template>
 
 <style lang="scss">
-@use "sass:math";
-
 .about-social-links {
   margin: 0;
   padding: 0;
   list-style-type: none;
 
   &__item {
-    padding-left: map-get($spacers, 4);
-    margin-top: map-get($spacers, 3);
-    margin-bottom: map-get($spacers, 3);
+    padding-left: var(--spacer-4);
+    margin-top: var(--spacer-3);
+    margin-bottom: var(--spacer-3);
     position: relative;
 
     &__link {
@@ -39,66 +37,78 @@ defineProps<{
       align-items: center;
       justify-content: flex-start;
       position: relative;
-      color: map-get($theme-color-primary, reverse);
+      color: var(--color-primary-reverse);
       text-decoration: none;
 
       &::before {
         content: "";
         display: block;
         width: 3.5rem;
-        height: map-get($spacers, 3);
+        height: var(--spacer-3);
         position: absolute;
         right: 100%;
         bottom: 50%;
         z-index: -1;
-        background-color: map-get($theme-color-accent, base);
-        transform: translateX(map-get($spacers, 4));
+        background-color: var(--color-accent-base);
+        transform: translateX(var(--spacer-4));
       }
 
       &::after {
         content: "";
         display: block;
         width: auto;
-        height: map-get($spacers, 3);
+        height: var(--spacer-3);
         position: absolute;
         top: 50%;
         right: calc(100% - 5.25rem);
-        left: map-get($spacers, 5);
+        left: var(--spacer-5);
         z-index: -2;
-        background: linear-gradient(to right,
-            fade-out(map-get($theme-color-accent, lighter),
-              map-get($fading-out, 4)),
-            transparent);
+        background: linear-gradient(
+          to right,
+          color-mix(
+            in srgb,
+            transparent var(--opacity-percentage-8),
+            var(--color-accent-lighter)
+          ),
+          transparent);
         transform: translateY(0);
-        transition: right .2s .1s ease-out,
+        transition:
+          right .2s .1s ease-out,
           transform .12s ease-out;
       }
 
       &__icon {
-        font-size: map-get($icon-sizes, s);
-        color: map-get($theme-color-primary, base);
+        font-size: var(--icon-size-s);
+        color: var(--color-primary-base);
 
         &-wrapper {
-          width: map-get($icon-wrapper-sizes, s);
-          height: map-get($icon-wrapper-sizes, s);
+          width: var(--icon-wrapper-size-s);
+          height: var(--icon-wrapper-size-s);
           flex-grow: 0;
           flex-shrink: 0;
 
           &::before {
             width: 1.75rem;
             height: 1.75rem;
-            border-width: map-get($spacers, 1);
-            border-color: map-get($theme-color-accent, darker);
-            background-color: map-get($theme-color-primary, reverse);
-            box-shadow: 0 0 map-get($spacers, 2) fade-out(map-get($theme-color-accent, lighter),
-                map-get($fading-out, 7));
+            border-width: var(--spacer-1);
+            border-color: var(--color-accent-darker);
+            background-color: var(--color-primary-reverse);
+            box-shadow:
+              0
+              0
+              var(--spacer-2)
+              color-mix(
+                in srgb,
+                transparent var(--opacity-percentage-5),
+                var(--color-accent-lighter)
+              );
             transition: transform .32s cubic-bezier(0, -0.8, .4, 1.25);
           }
         }
       }
 
       &__name {
-        margin-left: map-get($spacers, 3);
+        margin-left: var(--spacer-3);
       }
 
       &:hover,
@@ -106,10 +116,14 @@ defineProps<{
       &:active {
         &::after {
           right: 0;
-          background: linear-gradient(to right,
-              fade-out(map-get($theme-color-accent, lighter),
-                map-get($fading-out, 6)),
-              transparent);
+          background: linear-gradient(
+            to right,
+            color-mix(
+              in srgb,
+              transparent var(--opacity-percentage-6),
+              var(--color-accent-lighter)
+            ),
+            transparent);
           transform: translateY(.375rem);
         }
 
@@ -122,30 +136,31 @@ defineProps<{
 
   @media screen and (min-width: $breakpoint-m) {
     &__item {
-      padding-left: map-get($spacers, 10);
-      margin-top: map-get($spacers, 4);
-      margin-bottom: map-get($spacers, 4);
+      padding-left: var(--spacer-10);
+      margin-top: var(--spacer-4);
+      margin-bottom: var(--spacer-4);
 
       &__link {
         &::before {
-          width: map-get($spacers, 7);
-          height: map-get($spacers, 1);
-          left: map-get($spacers, 8) * -1;
+          width: var(--spacer-7);
+          height: var(--spacer-1);
+          left: calc(var(--spacer-8) * -1);
           transform: translateY(50%);
-          transition: width .12s ease-out,
+          transition:
+            width .12s ease-out,
             left .12s ease-out;
         }
 
         &::after {
-          left: map-get($spacers, 6);
+          left: var(--spacer-6);
         }
 
         &__icon {
-          font-size: map-get($icon-sizes, m);
+          font-size: var(--icon-size-m);
 
           &-wrapper {
-            width: map-get($icon-wrapper-sizes, m);
-            height: map-get($icon-wrapper-sizes, m);
+            width: var(--icon-wrapper-size-m);
+            height: var(--icon-wrapper-size-m);
 
             &::before {
               width: 2.125rem;
@@ -158,8 +173,8 @@ defineProps<{
         &:focus,
         &:active {
           &::before {
-            width: map-get($spacers, 5);
-            left: map-get($spacers, 5) * -1;
+            width: var(--spacer-5);
+            left: calc(var(--spacer-5) * -1);
           }
         }
       }

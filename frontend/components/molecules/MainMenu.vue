@@ -23,14 +23,19 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: map-get($z-index, nav);
-  background-color: fade-out(map-get($theme-color-primary, base), map-get($opacities, 3));
+  z-index: var(--z-index-nav);
+  background-color: 
+    color-mix(
+      in srgb,
+      transparent var(--opacity-percentage-3),
+      var(--color-primary-base)
+    );
 
   &__content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $spacer 0;
+    padding: var(--spacer-base) 0;
 
     &__logo {
       height: 2rem;
@@ -44,28 +49,36 @@
       @include font-sans(bold);
       position: relative;
       display: block;
-      padding: map-get($spacers, 3) 0;
+      padding: var(--spacer-3) 0;
       text-decoration: none;
 
       &-list {
         display: flex;
-        gap: $spacer;
+        gap: var(--spacer-base);
 
         @media screen and (min-width: $breakpoint-m) {
-          gap: map-get($spacers, 6);
+          gap: var(--spacer-6);
         }
       }
 
       &::after {
         content: "";
         display: block;
-        width: map-get($spacers, 7);
-        height: map-get($spacers, 1);
+        width: var(--spacer-7);
+        height: var(--spacer-1);
         position: absolute;
-        bottom: map-get($spacers, 2);
+        bottom: var(--spacer-2);
         left: 0;
-        background-color: map-get($theme-color-accent, base);
-        box-shadow: 0 0 map-get($spacers, 2) fade-out(map-get($theme-color-accent, lighter), map-get($fading-out, 7));
+        background-color: var(--color-accent-base);
+        box-shadow:
+          0
+          0
+          var(--spacer-2)
+          color-mix(
+            in srgb,
+            transparent var(--opacity-percentage-5),
+            var(--color-accent-lighter)
+          );
         transition: all .16s .04s ease-out;
       }
 
@@ -74,7 +87,7 @@
         &::after {
           width: 100%;
           height: 1px;
-          background-color: map-get($theme-color-accent, darker);
+          background-color: var(--color-accent-darker);
           box-shadow: 0 0 0 transparent;
         }
       }

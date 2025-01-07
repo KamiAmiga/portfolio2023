@@ -25,25 +25,30 @@ defineProps<{
 </template>
 
 <style lang="scss">
-@use "sass:math";
-
 .about-interests {
   display: flex;
   position: relative;
-  margin-top: map-get($spacers, 10);
-  margin-bottom: map-get($spacers, 8);
+  margin-top: var(--spacer-10);
+  margin-bottom: var(--spacer-8);
   align-items: center;
   justify-content: center;
 
   &__icon-wrapper {
-    border: map-get($spacers, 1) solid map-get($theme-color-secondary, base);
+    border: var(--spacer-1) solid var(--color-secondary-base);
     position: absolute;
     top: 50%;
     left: 50%;
-    background-color: map-get($theme-color-primary, base);
-    color: map-get($theme-color-primary, reverse);
-    box-shadow: 0 0 map-get($spacers, 2) fade-out(map-get($theme-color-secondary, base),
-        map-get($fading-out, 6));
+    background-color: var(--color-primary-base);
+    color: var(--color-primary-reverse);
+    box-shadow: 
+      0
+      0
+      var(--spacer-2)
+      color-mix(
+        in srgb,
+        transparent var(--opacity-percentage-6),
+        var(--color-secondary-base)
+      );
     transform: translate(-50%, -50%);
   }
 
@@ -52,7 +57,7 @@ defineProps<{
     width: 7.5rem;
     height: 7.5rem;
     padding: 0;
-    border: 1px solid map-get($theme-color-primary, lighter-3);
+    border: 1px solid var(--color-primary-lighter-3);
     margin: 0;
     position: relative;
     list-style-type: none;
@@ -62,18 +67,18 @@ defineProps<{
       position: absolute;
 
       &__icon {
-        font-size: map-get($icon-sizes, l);
-        color: map-get($theme-color-primary, lighter-3);
+        font-size: var(--icon-size-l);
+        color: var(--color-primary-lighter-3);
 
         &-wrapper {
-          width: map-get($icon-wrapper-sizes, m);
-          height: map-get($icon-wrapper-sizes, m);
-          background-color: map-get($theme-color-primary, base);
+          width: var(--icon-wrapper-size-m);
+          height: var(--icon-wrapper-size-m);
+          background-color: var(--color-primary-base);
         }
       }
 
       &__name {
-        max-width: map-get($spacers, 9);
+        max-width: var(--spacer-9);
         position: absolute;
       }
 
@@ -85,8 +90,9 @@ defineProps<{
         .about-interests__list__item__name {
           bottom: 100%;
           left: 50%;
-          transform: translate(math.div(map-get($spacers, 6), -2),
-              map-get($spacers, 2));
+          transform: translate(
+            calc(var(--spacer-6) / -2),
+            var(--spacer-2));
         }
       }
 
@@ -98,8 +104,9 @@ defineProps<{
         .about-interests__list__item__name {
           top: 50%;
           left: 100%;
-          transform: translate(map-get($spacers, 2) * -1,
-              -50%);
+          transform: translate(
+            calc(var(--spacer-2) * -1),
+            -50%);
         }
       }
 
@@ -111,9 +118,9 @@ defineProps<{
         .about-interests__list__item__name {
           top: 100%;
           right: 50%;
-          transform: translate(math.div(map-get($spacers, 6), 2),
-              map-get($spacers, 2) * -1,
-            );
+          transform: translate(
+            calc(var(--spacer-6) / 2),
+            calc(var(--spacer-2) * -1));
         }
       }
 
@@ -125,8 +132,7 @@ defineProps<{
         .about-interests__list__item__name {
           top: 50%;
           right: 100%;
-          transform: translate(map-get($spacers, 2),
-              -50%);
+          transform: translate(var(--spacer-2), -50%);
         }
       }
     }
@@ -135,11 +141,11 @@ defineProps<{
   @media screen and (min-width: $breakpoint-xs) {
     &__icon {
       font-size: 2.5rem;
-      color: map-get($theme-color-primary, reverse);
+      color: var(--color-primary-reverse);
 
       &-wrapper {
-        width: map-get($spacers, 10);
-        height: map-get($spacers, 10);
+        width: var(--spacer-10);
+        height: var(--spacer-10);
       }
     }
 
@@ -149,11 +155,11 @@ defineProps<{
 
       &__item {
         &__icon {
-          font-size: map-get($icon-sizes, xl);
+          font-size: var(--icon-size-xl);
 
           &-wrapper {
-            width: map-get($icon-wrapper-sizes, l);
-            height: map-get($icon-wrapper-sizes, l);
+            width: var(--icon-wrapper-size-l);
+            height: var(--icon-wrapper-size-l);
           }
         }
       }

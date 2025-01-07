@@ -124,7 +124,7 @@ const projectsList = computed(() => {
                   var(--color-secondary-darker) var(--opacity-percentage-5),
                   var(--color-primary-base)
                 ) 25%,
-                map-get($theme-color-primary, base),
+                var(--color-primary-base),
                 color-mix(
                   in srgb,
                   var(--color-secondary-darker) var(--opacity-percentage-5),

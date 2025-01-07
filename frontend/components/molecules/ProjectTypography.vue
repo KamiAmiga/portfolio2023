@@ -22,19 +22,27 @@ defineProps<{
 
   &__item {
     max-width: 20rem;
-    padding-bottom: map-get($spacers, 3);
-    border-bottom: 2px solid fade-out(map-get($theme-color-fourth, base), map-get($fading-out, 5));
+    padding-bottom: var(--spacer-3);
+    border-bottom: 2px solid color-mix(
+      in srgb,
+      transparent var(--opacity-percentage-7),
+      var(--color-fourth-base)
+    );
     position: relative;
-    margin-bottom: map-get($spacers, 7);
+    margin-bottom: var(--spacer-7);
     line-height: 0;
 
     &::after {
       content: "";
       display: block;
       width: 100%;
-      border-bottom: 2px dashed fade-out(map-get($theme-color-fourth, lighter), map-get($fading-out, 2));
+      border-bottom: 2px dashed color-mix(
+        in srgb,
+        transparent var(--opacity-percentage-9),
+        var(--color-fourth-lighter)
+      );
       position: absolute;
-      bottom: map-get($spacers, 2);
+      bottom: var(--spacer-2);
     }
 
     &:last-child {
