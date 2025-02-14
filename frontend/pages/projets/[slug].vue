@@ -10,7 +10,8 @@
         <ProjectHeader
           v-if="data?.data[0].attributes?.name"
           :title="data.data[0].attributes?.name"
-          :cover-image="data.data[0].attributes?.cover_image?.data" />
+          :cover-image-landscape="data.data[0].attributes?.cover_image_landscape?.data"
+          :cover-image-portrait="data.data[0].attributes?.cover_image_portrait?.data" />
         <div class="container project__content">
           <section class="section section--third">
             <ProjectStats

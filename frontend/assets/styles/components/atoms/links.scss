@@ -29,8 +29,7 @@
   }
 
   &:hover,
-  &:focus,
-  &:active {
+  &:focus-visible {
     &::after {
       right: 0;
     }

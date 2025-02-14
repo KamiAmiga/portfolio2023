@@ -11,9 +11,12 @@ defineProps<{
 <template>
   <div class="project-secondary-images">
     <figure v-for="secondaryImage in images" :key="secondaryImage.id" class="project-secondary-images__item">
-      <CustomPicture
-        :picture-data="secondaryImage.attributes" format="half_width"
-        class="project-secondary-images__item__image" />
+      <NuxtImg 
+        v-if="secondaryImage.attributes.url"
+        format="webp"
+        :src="secondaryImage.attributes.url"
+        :alt="secondaryImage.attributes.alternativeText ?? ''"
+        sizes="md:50vw lg:45vw xl:45vw"/>
     </figure>
   </div>
 </template>

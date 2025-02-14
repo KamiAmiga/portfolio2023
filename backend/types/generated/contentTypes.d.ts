@@ -853,7 +853,6 @@ export interface ApiProjectProject extends Schema.CollectionType {
   attributes: {
     name: Attribute.String & Attribute.Required & Attribute.Unique;
     description: Attribute.RichText;
-    cover_image: Attribute.Media & Attribute.Required;
     skills: Attribute.Relation<
       'api::project.project',
       'oneToMany',
@@ -871,6 +870,8 @@ export interface ApiProjectProject extends Schema.CollectionType {
     secondary_images: Attribute.Media;
     slug: Attribute.UID<'api::project.project', 'name'>;
     type: Attribute.Enumeration<['design', 'illustration']>;
+    cover_image_portrait: Attribute.Media;
+    cover_image_landscape: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

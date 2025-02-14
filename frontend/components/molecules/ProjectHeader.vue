@@ -4,7 +4,8 @@ import type {
 } from "@/types/strapiResponsiveImage";
 
 defineProps<{
-  coverImage: StrapiImage;
+  coverImageLandscape: StrapiImage;
+  coverImagePortrait: StrapiImage;
   title: string;
 }>();
 </script>
@@ -12,8 +13,11 @@ defineProps<{
 <template>
   <header class="project-header">
     <div class="project-header__visual">
-      <div class="project-header__visual__image">
-        <CustomPicture :picture-data="coverImage.attributes" format="full_width" />
+      <div v-if="coverImageLandscape?.attributes && coverImagePortrait?.attributes" class="project-header__visual__image">
+        <CustomPicture 
+          :picture-data-landscape="coverImageLandscape?.attributes"
+          :picture-data-portrait="coverImagePortrait?.attributes"
+          format='full_screen' />
       </div>
     </div>
 

@@ -30,6 +30,7 @@
       transparent var(--opacity-percentage-3),
       var(--color-primary-base)
     );
+  backdrop-filter: blur(var(--spacer-3));
 
   &__content {
     display: flex;

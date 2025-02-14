@@ -20,14 +20,6 @@
     "description": {
       "type": "richtext"
     },
-    "cover_image": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "skills": {
       "type": "relation",
       "relation": "oneToMany",
@@ -81,6 +73,22 @@
       "enum": [
         "design",
         "illustration"
+      ]
+    },
+    "cover_image_portrait": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "cover_image_landscape": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
       ]
     }
   }

@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxt/content', "nuxt-icons"],
+  modules: ['@nuxt/eslint', '@nuxt/content', "nuxt-icons", '@nuxt/image'],
   typescript: {
     typeCheck: true
   },
@@ -31,6 +31,14 @@ export default defineNuxtConfig({
       },
       "~/components",
     ],
+  },
+  image: {
+    format: ['webp'],
+    screens: {
+      'md': 640,
+      'lg': 1280,
+      'xl': 1920
+    },
   },
   vite: {
     css: {

@@ -27,11 +27,11 @@ const routesSettings = [
     findBy: 'slug',
     subfolder: 'projets',
     populate: [
-      "cover_image",
+      "cover_image_portrait",
+      "cover_image_landscape",
       "skills",
       "main_images",
       "main_images.images",
-      "main_images.zoom_images",
       "typography",
       "typography.typo_visual",
       "colors",

@@ -1,8 +1,31 @@
 <script setup lang="ts">
+import { inView } from "motion"
 import { ProjectMainImageTypes } from "@/types/project";
 import type {
    StrapiImage
 } from "@/types/strapiResponsiveImage";
+  
+const isInView = ref(false)
+const container = useTemplateRef("container")
+let stopViewTracking: () => void
+
+onMounted(() => {
+  if (!container.value) return
+
+  stopViewTracking = inView(container.value, () => {
+    isInView.value = true
+
+    stopViewTracking()
+
+    return () => {
+      isInView.value = false
+    }
+  }, {
+    amount: .25
+  })
+})
+  
+onUnmounted(() => stopViewTracking())
 
 const props = defineProps<{
   type: `${ProjectMainImageTypes}`;
@@ -12,49 +35,92 @@ const props = defineProps<{
 const mainImageCategory = computed(() => {
   return props.type.split("-")[0];
 });
+
+const reorderedUIMobileDesktopImages = computed(() => {
+  const firstImg = props.images.find(image => image.attributes.width > image.attributes.height)
+  const secondImg = props.images.find(image => image.attributes.height > image.attributes.width)
+
+  return [firstImg, secondImg]
+})
 </script>
 
 <template>
-  <figure :class="`project-main-image project-main-image--${mainImageCategory} project-main-image--${type}`">
+  <figure
+    ref="container"
+    :class="`project-main-image project-main-image--${mainImageCategory} project-main-image--${type} ${isInView ? 'in-view': ''}`">
     <template v-if="type === ProjectMainImageTypes.Drawing">
       <div class="project-main-image__picture-wrapper">
-        <CustomPicture :picture-data="images[0].attributes" format="full_width" />
+        <NuxtImg 
+          v-if="images[0].attributes.url"
+          format="webp"
+          :src="images[0].attributes.url"
+          :alt="images[0].attributes.alternativeText ?? ''"
+          sizes="md:80vw lg:80vw xl:80vw"/>
       </div>
     </template>
 
-    <template v-else-if="type === ProjectMainImageTypes.UIMobileDesktop">
+    <template v-else-if="type === ProjectMainImageTypes.UIMobileDesktop && reorderedUIMobileDesktopImages[0] && reorderedUIMobileDesktopImages[1]">
       <div class="project-main-image__picture-wrapper">
-        <CustomPicture
-          :key="images[0].id" :picture-data="images[0].attributes"
-          format="full_width" />
+        <NuxtImg 
+          v-if="reorderedUIMobileDesktopImages[0].attributes.url"
+          format="webp"
+          :src="reorderedUIMobileDesktopImages[0].attributes.url"
+          :alt="reorderedUIMobileDesktopImages[0].attributes.alternativeText ?? ''"
+          sizes="md:75vw lg:75vw xl:75vw"/>
       </div>
 
       <div class="project-main-image__picture-wrapper">
-        <CustomPicture
-          :key="images[1].id" :picture-data="images[1].attributes"
-          format="fourth_width" />
+        <NuxtImg 
+          v-if="reorderedUIMobileDesktopImages[1].attributes.url"
+          format="webp"
+          :src="reorderedUIMobileDesktopImages[1].attributes.url"
+          :alt="reorderedUIMobileDesktopImages[1].attributes.alternativeText ?? ''"
+          sizes="md:25vw lg:20vw xl:20vw"/>
+      </div>
+    </template>
+
+    <template v-else-if="type === ProjectMainImageTypes.UIDesktop">
+      <div class="project-main-image__picture-wrapper">
+        <NuxtImg 
+          v-if="images[0].attributes.url"
+          format="webp"
+          :src="images[0].attributes.url"
+          :alt="images[0].attributes.alternativeText ?? ''"
+          sizes="md:80vw lg:60vw xl:60vw"/>
       </div>
     </template>
 
     <template
-      v-else-if="type === ProjectMainImageTypes.UIDesktop
-        || type === ProjectMainImageTypes.DesignVisualID">
+      v-else-if="type === ProjectMainImageTypes.DesignVisualID">
       <div class="project-main-image__picture-wrapper">
-        <CustomPicture
-          :key="images[0].id" :picture-data="images[0].attributes"
-          format="full_width" />
+        <NuxtImg 
+          v-if="images[0].attributes.url"
+          format="webp"
+          :src="images[0].attributes.url"
+          :alt="images[0].attributes.alternativeText ?? ''"
+          sizes="md:80vw lg:80vw xl:80vw"/>
       </div>
     </template>
 
     <template v-else-if="type === ProjectMainImageTypes.DesignPrint">
       <div v-for="image in images" :key="image.id" class="project-main-image__picture-wrapper">
-        <CustomPicture :picture-data="image.attributes" format="half_width" />
+        <NuxtImg 
+          v-if="image.attributes.url"
+          format="webp"
+          :src="image.attributes.url"
+          :alt="image.attributes.alternativeText ?? ''"
+          sizes="md:66vw lg:50vw xl:40vw"/>
       </div>
     </template>
 
     <template v-else>
       <div v-for="image in images" :key="image.id" class="project-main-image__picture-wrapper">
-        <CustomPicture :picture-data="image.attributes" format="fourth_width" />
+        <NuxtImg 
+          v-if="image.attributes.url"
+          format="webp"
+          :src="image.attributes.url"
+          :alt="image.attributes.alternativeText ?? ''"
+          sizes="md:33vw lg:25vw xl:25vw"/>
       </div>
     </template>
   </figure>
@@ -63,6 +129,12 @@ const mainImageCategory = computed(() => {
 <style lang="scss">
 .project-main-image {
   $self: &;
+  opacity: 0;
+  transition: opacity .5s ease-in;
+
+  &.in-view {
+    opacity: 1
+  }
 
   &--ui {
     display: flex;

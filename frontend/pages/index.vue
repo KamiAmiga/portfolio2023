@@ -67,18 +67,22 @@
               <div
                 class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-right-3"/>
               <div class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--fore-left">
-                <CustomPicture
-                    v-if="data?.data.attributes.highlight_medias?.data?.[0]"
-                    :picture-data="data.data.attributes.highlight_medias.data[0].attributes"
-                    format="half_width"
-                  class="homepage__illustration__cityscape__building__image homepage__illustration__cityscape__building__image--left" />
+                <NuxtImg
+                  v-if="data?.data.attributes.highlight_medias?.data?.[0]"
+                  format="webp"
+                  :src="data?.data.attributes.highlight_medias?.data?.[0].attributes.url"
+                  alt=""
+                  sizes="md:33vw lg:33vw xl:424px"
+                  class="homepage__illustration__cityscape__building__image homepage__illustration__cityscape__building__image--left"/>
               </div>
               <div class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--fore-right">
-                <CustomPicture
+                <NuxtImg
                   v-if="data?.data.attributes.highlight_medias?.data?.[1]"
-                  :picture-data="data.data.attributes.highlight_medias.data[1].attributes"
-                  format="half_width"
-                  class="homepage__illustration__cityscape__building__image homepage__illustration__cityscape__building__image--right" />
+                  format="webp"
+                  :src="data?.data.attributes.highlight_medias?.data?.[1].attributes.url"
+                  alt=""
+                  sizes="md:30vw lg:30vw xl:302px"
+                  class="homepage__illustration__cityscape__building__image homepage__illustration__cityscape__building__image--right"/>
               </div>
               <div class="homepage__illustration__cityscape__light homepage__illustration__cityscape__light--left"/>
               <div class="homepage__illustration__cityscape__light homepage__illustration__cityscape__light--right"/>

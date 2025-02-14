@@ -4,7 +4,7 @@ interface StrapiImageData {
   height: number;
 }
 
-export type StrapiResponsiveFormats = "full_width" | "half_width" | "fourth_width"
+export type CustomResponsiveFormats = "full_screen" | "projects_image"
 
 export interface StrapiImageResponsiveData extends StrapiImageData {
   url: string;
