@@ -23,23 +23,12 @@ defineProps<{
 
 <style lang="scss">
 .project-secondary-images {
+  display: flex;
+  flex-wrap: wrap;
+
   &__item {
-    line-height: 0;
-
-    &__image {
-      width: 100%;
-      line-height: 0;
-    }
-
-    @media screen and (min-width: $breakpoint-s) {
-      width: 50%;
-      flex: 50% 0 0;
-    }
-  }
-
-  @media screen and (min-width: $breakpoint-s) {
-    display: flex;
-    flex-wrap: wrap;
+    width: 50%;
+    flex: 50% 0 0;
   }
 }
 </style>

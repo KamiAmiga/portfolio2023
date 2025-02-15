@@ -128,19 +128,31 @@ const reorderedUIMobileDesktopImages = computed(() => {
 
 <style lang="scss">
 .project-main-image {
+  --shadow-color: var(--color-accent-base);
+
   $self: &;
   opacity: 0;
+  box-shadow:
+    0
+    var(--spacer-1)
+    var(--spacer-7)
+    calc(var(--spacer-2) * -1)
+    color-mix(
+      in srgb,
+      transparent var(--opacity-percentage-7),
+      var(--shadow-color)
+    );
   transition: opacity .5s ease-in;
 
   &.in-view {
     opacity: 1
   }
 
-  &--ui {
+  &--ui {    
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: var(--spacer-9) var(--spacer-base);
+    padding: var(--spacer-6) var(--spacer-base);
     background: linear-gradient(
       to bottom,
       var(--color-primary-base) 50%,
@@ -149,16 +161,6 @@ const reorderedUIMobileDesktopImages = computed(() => {
         var(--color-accent-darker) var(--opacity-percentage-5),
         var(--color-primary-base)
       ));
-    
-    box-shadow:
-      calc(var(--spacer-2) * -1)
-      var(--spacer-1)
-      var(--spacer-2)
-      color-mix(
-        in srgb,
-        transparent var(--opacity-percentage-8),
-        var(--color-accent-base)
-      );
 
     &-mobile_desktop {
       flex-direction: column;
@@ -193,6 +195,8 @@ const reorderedUIMobileDesktopImages = computed(() => {
     padding: var(--spacer-9) var(--spacer-base);
 
     &-visual_id {
+      --shadow-color: var(--color-secondary-lighter);
+
       background: linear-gradient(
         to bottom right,
         color-mix(
@@ -208,15 +212,6 @@ const reorderedUIMobileDesktopImages = computed(() => {
           var(--color-secondary-darker) var(--opacity-percentage-5),
           var(--color-primary-base)
         ));
-      box-shadow:
-        calc(var(--spacer-2) * -1)
-        var(--spacer-1)
-        var(--spacer-2)
-        color-mix(
-          in srgb,
-          transparent var(--opacity-percentage-7),
-          var(--color-secondary-lighter)
-        );
 
       @media screen and (min-width: $breakpoint-m) {
         padding: var(--spacer-8) var(--spacer-9);
@@ -224,6 +219,8 @@ const reorderedUIMobileDesktopImages = computed(() => {
     }
 
     &-print {
+      --shadow-color: var(--color-tertiary-lighter);
+
       display: flex;
       flex-grow: 1;
       flex-direction: column;
@@ -237,15 +234,6 @@ const reorderedUIMobileDesktopImages = computed(() => {
           var(--color-tertiary-darker) var(--opacity-percentage-5),
           var(--color-primary-base)
         ));
-      box-shadow:
-        calc(var(--spacer-2) * -1)
-        var(--spacer-1)
-        var(--spacer-2)
-        color-mix(
-          in srgb,
-          transparent var(--opacity-percentage-7),
-          var(--color-tertiary-lighter)
-        );
 
       @media screen and (min-width: $breakpoint-m) {
         padding-left: var(--spacer-8);
@@ -255,16 +243,14 @@ const reorderedUIMobileDesktopImages = computed(() => {
   }
 
   &--drawing {
+    --shadow-color: var(--color-secondary-lighter);
+
     width: fit-content;
-    box-shadow:
-      calc(var(--spacer-2) * -1)
-      var(--spacer-1)
-      var(--spacer-2)
-      color-mix(
-        in srgb,
-        transparent var(--opacity-percentage-7),
-        var(--color-secondary-lighter)
-      );
+
+    img {
+      max-height: 140vh;
+      object-fit: contain;
+    }
   }
 
   &__picture-wrapper {

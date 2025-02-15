@@ -20,10 +20,6 @@ const projectsList = computed(() => {
 
 <style lang="scss">
 .projects {
-  &__header {
-    padding-top: var(--spacer-11);
-  }
-
   &__content {
     margin: 0;
     

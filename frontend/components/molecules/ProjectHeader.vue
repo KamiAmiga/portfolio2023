@@ -12,13 +12,11 @@ defineProps<{
 
 <template>
   <header class="project-header">
-    <div class="project-header__visual">
-      <div v-if="coverImageLandscape?.attributes && coverImagePortrait?.attributes" class="project-header__visual__image">
-        <CustomPicture 
-          :picture-data-landscape="coverImageLandscape?.attributes"
-          :picture-data-portrait="coverImagePortrait?.attributes"
-          format='full_screen' />
-      </div>
+    <div v-if="coverImageLandscape?.attributes && coverImagePortrait?.attributes" class="project-header__image">
+      <CustomPicture 
+        :picture-data-landscape="coverImageLandscape?.attributes"
+        :picture-data-portrait="coverImagePortrait?.attributes"
+        format='full_screen' />
     </div>
 
     <div class="container">
@@ -38,8 +36,7 @@ defineProps<{
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: 50dvh;
-  max-height: 60rem;
+  height: 90lvh;
   position: relative;
   z-index: var(--z-index-base-decrease);
   background: linear-gradient(
@@ -52,29 +49,23 @@ defineProps<{
       var(--color-accent-darker) 
     ));
 
-  @media screen and (min-width: $breakpoint-m) {
-    height: 75dvh;
-  }
-
-  &__visual {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    overflow: hidden;
-
     &__image {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      max-width: calc(100% - var(--spacer-8) * 2);
-      max-height: 60dvh;
-      position: relative;
+      width: 100%;
+      height: 100%;
+      position: absolute;
       overflow: hidden;
+
+      picture {
+        display: initial;
+        max-width: none;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
-  }
 
   &__title {
     box-sizing: border-box;

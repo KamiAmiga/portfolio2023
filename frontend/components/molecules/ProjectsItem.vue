@@ -56,7 +56,7 @@ onUnmounted(() => stopViewTracking())
 
     <div class="projects-item__header">
       <h2 class="projects-item__name">
-        <!-- TODO : Add aria label sr-only with initial title value -->
+        <span class="sr-only">{{ project.name }}</span>
         <div 
           v-for="(segment, index) in splittedName"
           :key="segment.index"
@@ -230,8 +230,8 @@ onUnmounted(() => stopViewTracking())
   &__image {
     grid-area: image;
     overflow: hidden;
-    padding-left: var(--spacer-base);
-    padding-bottom: var(--spacer-8);
+    margin-left: var(--spacer-base);
+    margin-bottom: var(--spacer-8);
     opacity: 0;
     transition: opacity .5s .5s ease-out;
 
@@ -251,16 +251,16 @@ onUnmounted(() => stopViewTracking())
     }
 
     @media screen and (orientation: landscape) {
-      padding-bottom: var(--spacer-6);
-      padding-right: var(--spacer-base);
+      margin-bottom: var(--spacer-6);
+      margin-right: var(--spacer-base);
     }
 
     @media screen and (min-width: $breakpoint-m) {
-      padding-left: var(--spacer-10);
+      margin-left: var(--spacer-10);
     }
 
     @media screen and (min-width: $breakpoint-m) and (orientation: landscape) {
-      padding-right: var(--spacer-10);
+      margin-right: var(--spacer-10);
     }
   }
 

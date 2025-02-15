@@ -4,12 +4,13 @@
 
 .heading {
   &--main {
-    @include font-sans(xl);
+    @include font-sans(xxl);
     display: inline-block;
-    padding: var(--spacer-3) var(--spacer-7) var(--spacer-3) var(--spacer-4);
+    padding: var(--spacer-4) var(--spacer-8) var(--spacer-4) var(--spacer-6);
     margin: 0;
     position: relative;
     background-color: var(--color-secondary-darker);
+    word-break: break-all;
 
     &::after {
       content: "";
