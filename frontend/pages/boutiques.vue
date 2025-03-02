@@ -1,63 +1,68 @@
 <script setup lang="ts">
+const { data } = await useAsyncData('shops', () => queryContent('/shops-page').findOne())
+
+const seoMeta = data.value?.data?.attributes?.seo
+
+if (seoMeta) {  
+  useSeoMeta({
+    title: seoMeta.metaTitle,
+    description: seoMeta.metaDescription,
+    ogTitle: seoMeta.metaTitle ?? '',
+    ogDescription: seoMeta.metaDescription ?? '',
+    ogImage: seoMeta.metaImage.data.attributes.url ? `https://www.cgicquel.fr${seoMeta.metaImage.data.attributes.url}`:'',
+  })
+}
 </script>
 
 <template>
   <main class="shops">
     <MainMenu />
 
-    <ContentQuery path="/shops-page" find="one">
-      <template #default="{ data }">
-        <div class="container shops__header">
-        <div class="section section--full">
-          <img src="~/assets/images/logoWithBg.svg" alt="Logo" class="shops__header__logo" >
-          <h1 v-if="data?.data.attributes.title" class="shops__header__title font-sans--md-capitalized">
-            {{ data.data.attributes.title }}</h1>
-          <p v-if="data?.data.attributes.subtitle" class="font-mono--small">
-            {{ data.data.attributes.subtitle }}</p>
-        </div>
+    <div class="container shops__header">
+      <div class="section section--full">
+        <img src="~/assets/images/logoWithBg.svg" alt="Logo" class="shops__header__logo" >
+        <h1 v-if="data?.data.attributes.title" class="shops__header__title font-sans--md-capitalized">
+          {{ data.data.attributes.title }}</h1>
+        <p v-if="data?.data.attributes.subtitle" class="font-mono--small">
+          {{ data.data.attributes.subtitle }}</p>
+      </div>
+    </div>
+
+    <div class="container shops__content">
+      <div class="section section--full">
+        <h2 class="shops__content__title-second font-sans--capitalized">Mes boutiques</h2>
+
+        <ul v-if="data?.data.attributes.shops_list" class="shops__content__shops-list">
+          <li
+            v-for="shopItem in data.data.attributes.shops_list"
+            :key="shopItem.id"
+            class="shops__content__shops-list__item">
+            <a :href="shopItem.url" target="_blank" class="shops__content__shops-list__item__link">
+              <nuxt-icon :name="shopItem.icon_name" class="icon icon--xl shops__content__shops-list__item__link__icon" />
+              {{ shopItem.name }}
+            </a>
+          </li>
+        </ul>
       </div>
 
-      <div class="container shops__content">
-        <div class="section section--full">
-          <h2 class="shops__content__title-second font-sans--capitalized">Mes boutiques</h2>
+      <div class="section section--full">
+        <h2 class="shops__content__title-second font-sans--capitalized">Retrouvez
+          moi aussi sur : </h2>
 
-          <ul v-if="data?.data.attributes.shops_list" class="shops__content__shops-list">
-            <li
-              v-for="shopItem in data.data.attributes.shops_list"
-              :key="shopItem.id"
-              class="shops__content__shops-list__item">
-              <a :href="shopItem.url" target="_blank" class="shops__content__shops-list__item__link">
-                <nuxt-icon :name="shopItem.icon_name" class="icon icon--xl shops__content__shops-list__item__link__icon" />
-                {{ shopItem.name }}
-              </a>
-            </li>
-          </ul>
-        </div>
+        <ul v-if="data?.data.attributes.social_links" class="shops__content__socials-links">
+          <li v-for="socialLink in data.data.attributes.social_links" :key="socialLink.id">
+            <a :href="socialLink.url" target="blank" class="shops__content__socials-links__item">
+              <div
+                class="shops__content__socials-links__item__icon-wrapper icon-wrapper icon-wrapper--m icon-wrapper--square">
+                <nuxt-icon :name="socialLink.icon_name" class="shops__content__socials-links__item__icon icon icon--s" />
+              </div>
 
-        <div class="section section--full">
-          <h2 class="shops__content__title-second font-sans--capitalized">Retrouvez
-            moi aussi sur : </h2>
-
-          <ul v-if="data?.data.attributes.social_links" class="shops__content__socials-links">
-            <li v-for="socialLink in data.data.attributes.social_links" :key="socialLink.id">
-              <a :href="socialLink.url" target="blank" class="shops__content__socials-links__item">
-                <div
-                  class="shops__content__socials-links__item__icon-wrapper icon-wrapper icon-wrapper--m icon-wrapper--square">
-                  <nuxt-icon :name="socialLink.icon_name" class="shops__content__socials-links__item__icon icon icon--s" />
-                </div>
-
-                {{ socialLink.name }}
-              </a>
-            </li>
-          </ul>
-        </div>
+              {{ socialLink.name }}
+            </a>
+          </li>
+        </ul>
       </div>
-      </template>
-
-      <template #not-found>
-        <p>No content found.</p>
-      </template>
-    </ContentQuery>
+    </div>
   </main>
 </template>
 

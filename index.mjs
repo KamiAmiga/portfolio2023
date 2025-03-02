@@ -11,15 +11,26 @@ const contentsFolderBasePath = './frontend/content'
 const routesSettings = [
   {
     name: 'homepage',
-    populate: ['highlight_medias']
+    populate: ['highlight_medias', 'seo', 'seo.metaImage']
   },
   {
     name: 'about',
-    populate: ["experience", "skills", "interests", "social_links"]
+    populate: [
+      'experience',
+      'skills',
+      'interests',
+      'social_links',
+      'seo',
+      'seo.metaImage'
+    ]
   },
   {
     name: 'shops-page',
-    populate: ["shops_list", "social_links"]
+    populate: ['shops_list', 'social_links', 'seo', 'seo.metaImage']
+  },
+  {
+    name: 'projects-list-page',
+    populate: ['seo', 'seo.metaImage']
   },
   {
     name: 'projects',
@@ -27,15 +38,17 @@ const routesSettings = [
     findBy: 'slug',
     subfolder: 'projets',
     populate: [
-      "cover_image_portrait",
-      "cover_image_landscape",
-      "skills",
-      "main_images",
-      "main_images.images",
-      "typography",
-      "typography.typo_visual",
-      "colors",
-      "secondary_images",
+      'cover_image_portrait',
+      'cover_image_landscape',
+      'skills',
+      'main_images',
+      'main_images.images',
+      'typography',
+      'typography.typo_visual',
+      'colors',
+      'secondary_images',
+      'seo',
+      'seo.metaImage'
     ]
   }
 ]

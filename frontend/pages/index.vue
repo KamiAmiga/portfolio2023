@@ -1,117 +1,120 @@
 <script setup lang="ts">
+const { data } = await useAsyncData('home', () => queryContent('/homepage').findOne())
+
+const seoMeta = data.value?.data?.attributes?.seo
+
+if (seoMeta) {  
+  useSeoMeta({
+    title: seoMeta.metaTitle,
+    description: seoMeta.metaDescription,
+    ogTitle: seoMeta.metaTitle ?? '',
+    ogDescription: seoMeta.metaDescription ?? '',
+    ogImage: seoMeta.metaImage.data.attributes.url ? `https://www.cgicquel.fr${seoMeta.metaImage.data.attributes.url}`:'',
+  })
+}
 </script>
 
 <template>
   <main class="homepage">
     <MainMenu />
 
-    <ContentQuery path="/homepage" find="one">
-      <template #default="{ data }">
-        <ContentRenderer :value="data">
-          <div class="homepage__bg-triangle homepage__bg-triangle--1"/>
-          <div class="homepage__bg-triangle homepage__bg-triangle--2"/>
-          <div class="homepage__bg-triangle homepage__bg-triangle--3"/>
-          <div class="homepage__bg-triangle homepage__bg-triangle--4"/>
-          <div class="homepage__bg-triangle homepage__bg-triangle--5"/>
-          <div class="homepage__bg-line homepage__bg-line--1"/>
-          <div class="homepage__bg-line homepage__bg-line--2"/>
-          <div class="homepage__bg-line homepage__bg-line--3"/>
+    <div class="homepage__bg-triangle homepage__bg-triangle--1"/>
+    <div class="homepage__bg-triangle homepage__bg-triangle--2"/>
+    <div class="homepage__bg-triangle homepage__bg-triangle--3"/>
+    <div class="homepage__bg-triangle homepage__bg-triangle--4"/>
+    <div class="homepage__bg-triangle homepage__bg-triangle--5"/>
+    <div class="homepage__bg-line homepage__bg-line--1"/>
+    <div class="homepage__bg-line homepage__bg-line--2"/>
+    <div class="homepage__bg-line homepage__bg-line--3"/>
 
-          <div class="container homepage__content-wrapper">
-            <div class="section section--half">
-              <h1 class="homepage__title-container">
-                <div v-if="data?.data.attributes.title" class="homepage__title-sub">
-                  <div class="anim-slide-up">
-                    <div class="font-sans--md-capitalized anim-slide-up__text">
-                      {{ data.data.attributes.title }}
-                    </div>
-                  </div>
-                </div>
-                <div v-if="data?.data.attributes.subtitle" class="homepage__title-main">
-                  <div class="anim-slide-up">
-                    <div class="anim-slide-up__text">
-                      {{ data.data.attributes.subtitle }}
-                    </div>
-                  </div>
-                </div>
-              </h1>
+    <div class="container homepage__content-wrapper">
+      <div class="section section--half">
+        <h1 class="homepage__title-container">
+          <div v-if="data?.data.attributes.title" class="homepage__title-sub">
+            <div class="anim-slide-up">
+              <div class="font-sans--md-capitalized anim-slide-up__text">
+                {{ data.data.attributes.title }}
+              </div>
             </div>
           </div>
-
-          <div class="homepage__illustration">
-            <div class="homepage__illustration__cityscape">
-              <div class="homepage__illustration__skyline homepage__illustration__skyline--left-1"/>
-              <div
-                class="homepage__illustration__skyline homepage__illustration__skyline--right-1 homepage__illustration__skyline--dashes"/>
-              <div class="homepage__illustration__skyline homepage__illustration__skyline--right-2"/>
-              <div
-                class="homepage__illustration__skyline homepage__illustration__skyline--right-3 homepage__illustration__skyline--dashes"/>
-
-              <div class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-left-1">
-                <div
-                  class="homepage__illustration__cityscape__building__lights homepage__illustration__cityscape__building__lights--back-left-1"/>
+          <div v-if="data?.data.attributes.subtitle" class="homepage__title-main">
+            <div class="anim-slide-up">
+              <div class="anim-slide-up__text">
+                {{ data.data.attributes.subtitle }}
               </div>
-              <div class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-left-2"/>
-              <div class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-left-3"/>
-              <div
-                class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-center-1"/>
-              <div
-                class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-center-2"/>
-              <div
-                class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-right-1">
-                <div
-                  class="homepage__illustration__cityscape__building__lights homepage__illustration__cityscape__building__lights--back-right-1"/>
-              </div>
-              <div
-                class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-right-2"/>
-              <div
-                class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-right-3"/>
-              <div class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--fore-left">
-                <NuxtImg
-                  v-if="data?.data.attributes.highlight_medias?.data?.[0]"
-                  format="webp"
-                  :src="data?.data.attributes.highlight_medias?.data?.[0].attributes.url"
-                  alt=""
-                  sizes="md:33vw lg:33vw xl:424px"
-                  class="homepage__illustration__cityscape__building__image homepage__illustration__cityscape__building__image--left"/>
-              </div>
-              <div class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--fore-right">
-                <NuxtImg
-                  v-if="data?.data.attributes.highlight_medias?.data?.[1]"
-                  format="webp"
-                  :src="data?.data.attributes.highlight_medias?.data?.[1].attributes.url"
-                  alt=""
-                  sizes="md:30vw lg:30vw xl:302px"
-                  class="homepage__illustration__cityscape__building__image homepage__illustration__cityscape__building__image--right"/>
-              </div>
-              <div class="homepage__illustration__cityscape__light homepage__illustration__cityscape__light--left"/>
-              <div class="homepage__illustration__cityscape__light homepage__illustration__cityscape__light--right"/>
-            </div>
-
-            <div class="homepage__illustration__horizon">
-              <div class="homepage__illustration__horizon__line"/>
-              <div class="homepage__illustration__horizon__shape"/>
-            </div>
-
-            <div class="homepage__illustration__ground">
-              <div class="homepage__illustration__skyline homepage__illustration__skyline--left-2"/>
-              <div class="homepage__illustration__skyline homepage__illustration__skyline--right-4"/>
-              <div
-                class="homepage__illustration__skyline homepage__illustration__skyline--right-5 homepage__illustration__skyline--dashes"/>
-
-              <div class="homepage__illustration__ground__shape"/>
-              <div class="homepage__illustration__ground__reflexion homepage__illustration__ground__reflexion--left"/>
-              <div class="homepage__illustration__ground__reflexion homepage__illustration__ground__reflexion--right"/>
-              <div class="homepage__illustration__ground__light"/>
             </div>
           </div>
-        </ContentRenderer>
-      </template>
+        </h1>
+      </div>
+    </div>
 
-      <template #not-found>
-        <p>No content found.</p>
-      </template>
-    </ContentQuery>
+    <div class="homepage__illustration">
+      <div class="homepage__illustration__cityscape">
+        <div class="homepage__illustration__skyline homepage__illustration__skyline--left-1"/>
+        <div
+          class="homepage__illustration__skyline homepage__illustration__skyline--right-1 homepage__illustration__skyline--dashes"/>
+        <div class="homepage__illustration__skyline homepage__illustration__skyline--right-2"/>
+        <div
+          class="homepage__illustration__skyline homepage__illustration__skyline--right-3 homepage__illustration__skyline--dashes"/>
+
+        <div class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-left-1">
+          <div
+            class="homepage__illustration__cityscape__building__lights homepage__illustration__cityscape__building__lights--back-left-1"/>
+        </div>
+        <div class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-left-2"/>
+        <div class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-left-3"/>
+        <div
+          class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-center-1"/>
+        <div
+          class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-center-2"/>
+        <div
+          class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-right-1">
+          <div
+            class="homepage__illustration__cityscape__building__lights homepage__illustration__cityscape__building__lights--back-right-1"/>
+        </div>
+        <div
+          class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-right-2"/>
+        <div
+          class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-right-3"/>
+        <div class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--fore-left">
+          <NuxtImg
+            v-if="data?.data.attributes.highlight_medias?.data?.[0]"
+            format="webp"
+            :src="data?.data.attributes.highlight_medias?.data?.[0].attributes.url"
+            alt=""
+            sizes="md:33vw lg:33vw xl:424px"
+            class="homepage__illustration__cityscape__building__image homepage__illustration__cityscape__building__image--left"/>
+        </div>
+        <div class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--fore-right">
+          <NuxtImg
+            v-if="data?.data.attributes.highlight_medias?.data?.[1]"
+            format="webp"
+            :src="data?.data.attributes.highlight_medias?.data?.[1].attributes.url"
+            alt=""
+            sizes="md:30vw lg:30vw xl:302px"
+            class="homepage__illustration__cityscape__building__image homepage__illustration__cityscape__building__image--right"/>
+        </div>
+        <div class="homepage__illustration__cityscape__light homepage__illustration__cityscape__light--left"/>
+        <div class="homepage__illustration__cityscape__light homepage__illustration__cityscape__light--right"/>
+      </div>
+
+      <div class="homepage__illustration__horizon">
+        <div class="homepage__illustration__horizon__line"/>
+        <div class="homepage__illustration__horizon__shape"/>
+      </div>
+
+      <div class="homepage__illustration__ground">
+        <div class="homepage__illustration__skyline homepage__illustration__skyline--left-2"/>
+        <div class="homepage__illustration__skyline homepage__illustration__skyline--right-4"/>
+        <div
+          class="homepage__illustration__skyline homepage__illustration__skyline--right-5 homepage__illustration__skyline--dashes"/>
+
+        <div class="homepage__illustration__ground__shape"/>
+        <div class="homepage__illustration__ground__reflexion homepage__illustration__ground__reflexion--left"/>
+        <div class="homepage__illustration__ground__reflexion homepage__illustration__ground__reflexion--right"/>
+        <div class="homepage__illustration__ground__light"/>
+      </div>
+    </div>
   </main>
 </template>
 

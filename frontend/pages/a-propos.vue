@@ -1,59 +1,62 @@
 <script setup lang="ts">
+const { data } = await useAsyncData('about', () => queryContent('/about').findOne())
+
+const seoMeta = data.value?.data?.attributes?.seo
+
+if (seoMeta) {  
+  useSeoMeta({
+    title: seoMeta.metaTitle,
+    description: seoMeta.metaDescription,
+    ogTitle: seoMeta.metaTitle ?? '',
+    ogDescription: seoMeta.metaDescription ?? '',
+    ogImage: seoMeta.metaImage.data.attributes.url ? `https://www.cgicquel.fr${seoMeta.metaImage.data.attributes.url}`:'',
+  })
+}
 </script>
 
 <template>
   <main class="about">
     <MainMenu />
 
-    <ContentQuery path="/about" find="one">
-      <template #default="{ data }">
-        <ContentRenderer :value="data">
-          <header class="container about__header">
-            <div class="section section--full">
-              <h1 class="heading--main">A propos</h1>
-            </div>
-          </header>
+    <header class="container about__header">
+      <div class="section section--full">
+        <h1 class="heading--main">A propos</h1>
+      </div>
+    </header>
 
-          <div class="container about__content">
-            <div v-if="data?.data.attributes.intro" class="section section--full">
-              <div class="about__content__intro-wrapper">
-                <div class="about__content__intro">
-                  <richtext-wrapper :text="data.data.attributes.intro" />
-                </div>
-              </div>
-            </div>
-
-            <div class="section section--full">
-              <h2 class="heading--second">Parcours</h2>
-
-              <about-history v-if="data?.data.attributes.experience" :history="data.data.attributes.experience" />
-            </div>
-
-            <div class="section section--full">
-              <h2 class="heading--second">Compétences</h2>
-
-              <about-skills v-if="data?.data.attributes.skills?.data" :skills="data.data.attributes.skills.data" />
-            </div>
-
-            <div class="section section--half">
-              <h2 class="heading--second">Intérêts</h2>
-
-              <about-interests v-if="data?.data.attributes.interests" :interests="data.data.attributes.interests" />
-            </div>
-
-            <div class="section section--half">
-              <h2 class="heading--second">Contacts</h2>
-
-              <about-social-links v-if="data?.data.attributes.social_links" :social-links="data.data.attributes.social_links" />
-            </div>
+    <div class="container about__content">
+      <div v-if="data?.data.attributes.intro" class="section section--full">
+        <div class="about__content__intro-wrapper">
+          <div class="about__content__intro">
+            <richtext-wrapper :text="data.data.attributes.intro" />
           </div>
-        </ContentRenderer>
-      </template>
+        </div>
+      </div>
 
-      <template #not-found>
-        <p>No content found.</p>
-      </template>
-    </ContentQuery>
+      <div class="section section--full">
+        <h2 class="heading--second">Parcours</h2>
+
+        <about-history v-if="data?.data.attributes.experience" :history="data.data.attributes.experience" />
+      </div>
+
+      <div class="section section--full">
+        <h2 class="heading--second">Compétences</h2>
+
+        <about-skills v-if="data?.data.attributes.skills?.data" :skills="data.data.attributes.skills.data" />
+      </div>
+
+      <div class="section section--half">
+        <h2 class="heading--second">Intérêts</h2>
+
+        <about-interests v-if="data?.data.attributes.interests" :interests="data.data.attributes.interests" />
+      </div>
+
+      <div class="section section--half">
+        <h2 class="heading--second">Contacts</h2>
+
+        <about-social-links v-if="data?.data.attributes.social_links" :social-links="data.data.attributes.social_links" />
+      </div>
+    </div>
   </main>
 </template>
 

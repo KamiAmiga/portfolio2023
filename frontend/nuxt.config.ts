@@ -6,7 +6,8 @@ export default defineNuxtConfig({
       viewport: 'width=device-width, initial-scale=1',
       title: 'Camille Gicquel - Portfolio',
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'canonical', href: 'https://www.cgicquel.fr' }
       ],
       htmlAttrs: {
         lang: 'fr-FR'

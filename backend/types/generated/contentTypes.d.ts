@@ -894,6 +894,38 @@ export interface ApiProjectProject extends Schema.CollectionType {
   };
 }
 
+export interface ApiProjectsListPageProjectsListPage extends Schema.SingleType {
+  collectionName: 'projects_list_pages';
+  info: {
+    singularName: 'projects-list-page';
+    pluralName: 'projects-list-pages';
+    displayName: 'Projects list page';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    seo: Attribute.Component<'shared.seo'>;
+    title: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::projects-list-page.projects-list-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::projects-list-page.projects-list-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiShopsPageShopsPage extends Schema.SingleType {
   collectionName: 'shops_pages';
   info: {
@@ -990,6 +1022,7 @@ declare module '@strapi/types' {
       'api::about.about': ApiAboutAbout;
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::project.project': ApiProjectProject;
+      'api::projects-list-page.projects-list-page': ApiProjectsListPageProjectsListPage;
       'api::shops-page.shops-page': ApiShopsPageShopsPage;
       'api::skill.skill': ApiSkillSkill;
     }
