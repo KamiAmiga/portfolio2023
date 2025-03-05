@@ -1,5 +1,6 @@
 import { defineCollection, defineContentConfig, z } from '@nuxt/content'
 
+// https://github.com/freb97/nuxt-strapi-blocks-renderer/blob/main/src/runtime/types/index.d.ts
 const strapiImageSchema = z.object({
   id: z.number(),
   attributes: z.object({
@@ -11,6 +12,29 @@ const strapiImageSchema = z.object({
     width: z.number(),
     height: z.number()
   })
+})
+
+const jsonRichtextTextNode = z.object({
+  type: z.enum(['text']),
+  text: z.string(),
+  bold: z.optional(z.boolean()),
+  italic: z.optional(z.boolean()),
+  underline: z.optional(z.boolean()),
+  strikethrough: z.optional(z.boolean()),
+  code: z.optional(z.boolean()),
+})
+
+const jsonRichtextLinkNode = z.object({
+  type: z.enum(['link']),
+  url: z.string(),
+  children: z.array(jsonRichtextTextNode)
+})
+
+const jsonRichtextInlineNode = z.union([jsonRichtextTextNode, jsonRichtextLinkNode])
+
+const jsonRichTextParagraphNode = z.object({
+  type: z.enum(['paragraph']),
+  children: z.array(jsonRichtextInlineNode)
 })
 
 const seoSchema = z.object({
@@ -48,7 +72,7 @@ const homeSchema = z.object({
 })
 
 const aboutSchema = z.object({
-  intro: z.string(),
+  intro: z.array(jsonRichTextParagraphNode),
   experience: z.array(
     z.object({
       id: z.number(),
@@ -96,7 +120,7 @@ const projectSchema = z.object({
   slug: z.string(),
   name: z.string(),
   year: z.number(),
-  description: z.string(),
+  description: z.array(jsonRichTextParagraphNode),
   main_images: z.array(
     z.object({
       id: z.number(),

@@ -28,6 +28,9 @@ if (seoMeta) {
       <div v-if="aboutData.intro" class="section section--full">
         <div class="about__content__intro-wrapper">
           <div class="about__content__intro">
+            <!-- <div class="richtext-wrapper">
+              <StrapiBlocksText :nodes="aboutData.intro2"  />
+            </div> -->
             <richtext-wrapper :text="aboutData.intro" />
           </div>
         </div>

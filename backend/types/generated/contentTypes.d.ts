@@ -780,7 +780,6 @@ export interface ApiAboutAbout extends Schema.SingleType {
     draftAndPublish: true;
   };
   attributes: {
-    intro: Attribute.RichText;
     experience: Attribute.Component<'about.experience', true>;
     skills: Attribute.Relation<
       'api::about.about',
@@ -790,6 +789,7 @@ export interface ApiAboutAbout extends Schema.SingleType {
     interests: Attribute.Component<'about.interest', true>;
     social_links: Attribute.Component<'about.social-link', true>;
     seo: Attribute.Component<'shared.seo'>;
+    intro: Attribute.Blocks;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -855,7 +855,6 @@ export interface ApiProjectProject extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required & Attribute.Unique;
-    description: Attribute.RichText;
     skills: Attribute.Relation<
       'api::project.project',
       'oneToMany',
@@ -876,6 +875,7 @@ export interface ApiProjectProject extends Schema.CollectionType {
     cover_image_portrait: Attribute.Media;
     cover_image_landscape: Attribute.Media;
     seo: Attribute.Component<'shared.seo'>;
+    description: Attribute.Blocks;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

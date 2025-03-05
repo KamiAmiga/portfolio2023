@@ -17,9 +17,6 @@
       "required": true,
       "unique": true
     },
-    "description": {
-      "type": "richtext"
-    },
     "skills": {
       "type": "relation",
       "relation": "oneToMany",
@@ -95,6 +92,9 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.seo"
+    },
+    "description": {
+      "type": "blocks"
     }
   }
 }

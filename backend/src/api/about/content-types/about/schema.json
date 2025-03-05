@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "intro": {
-      "type": "richtext"
-    },
     "experience": {
       "displayName": "Experience",
       "type": "component",
@@ -42,6 +39,9 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.seo"
+    },
+    "intro": {
+      "type": "blocks"
     }
   }
 }

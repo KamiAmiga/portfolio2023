@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import type { BlockNode } from '#strapi-blocks-renderer/types';
+
 defineProps<{
-  text: string;
+  text: BlockNode[];
 }>();
 </script>
 
 <template>
-  <div class="richtext-wrapper" v-html="$mdRenderer.render(text)"/>
+  <!-- <div class="richtext-wrapper" v-html="$mdRenderer.render(text)"/> -->
+   <div class="richtext-wrapper">
+     <StrapiBlocksText :nodes="text"  />
+   </div>
 </template>
 
 <style lang="scss">
