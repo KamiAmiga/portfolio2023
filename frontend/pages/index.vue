@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const { data } = await useAsyncData('home', () => queryContent('/homepage').findOne())
+const { data: homeData } = await useAsyncData(() => queryCollection('home').first())
 
-const seoMeta = data.value?.data?.attributes?.seo
+const seoMeta = homeData?.value?.seo
 
 if (seoMeta) {  
   useSeoMeta({
@@ -15,7 +15,7 @@ if (seoMeta) {
 </script>
 
 <template>
-  <main class="homepage">
+  <main v-if="homeData" class="homepage">
     <MainMenu />
 
     <div class="homepage__bg-triangle homepage__bg-triangle--1"/>
@@ -30,17 +30,17 @@ if (seoMeta) {
     <div class="container homepage__content-wrapper">
       <div class="section section--half">
         <h1 class="homepage__title-container">
-          <div v-if="data?.data.attributes.title" class="homepage__title-sub">
+          <div v-if="homeData.title" class="homepage__title-sub">
             <div class="anim-slide-up">
               <div class="font-sans--md-capitalized anim-slide-up__text">
-                {{ data.data.attributes.title }}
+                {{ homeData.title }}
               </div>
             </div>
           </div>
-          <div v-if="data?.data.attributes.subtitle" class="homepage__title-main">
+          <div v-if="homeData.subtitle" class="homepage__title-main">
             <div class="anim-slide-up">
               <div class="anim-slide-up__text">
-                {{ data.data.attributes.subtitle }}
+                {{ homeData.subtitle }}
               </div>
             </div>
           </div>
@@ -78,18 +78,18 @@ if (seoMeta) {
           class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--back-right-3"/>
         <div class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--fore-left">
           <NuxtImg
-            v-if="data?.data.attributes.highlight_medias?.data?.[0]"
+            v-if="homeData.highlight_medias?.data?.[0]"
             format="webp"
-            :src="data?.data.attributes.highlight_medias?.data?.[0].attributes.url"
+            :src="homeData.highlight_medias?.data?.[0].attributes.url"
             alt=""
             sizes="md:33vw lg:33vw xl:424px"
             class="homepage__illustration__cityscape__building__image homepage__illustration__cityscape__building__image--left"/>
         </div>
         <div class="homepage__illustration__cityscape__building homepage__illustration__cityscape__building--fore-right">
           <NuxtImg
-            v-if="data?.data.attributes.highlight_medias?.data?.[1]"
+            v-if="homeData.highlight_medias?.data?.[1]"
             format="webp"
-            :src="data?.data.attributes.highlight_medias?.data?.[1].attributes.url"
+            :src="homeData.highlight_medias?.data?.[1].attributes.url"
             alt=""
             sizes="md:30vw lg:30vw xl:302px"
             class="homepage__illustration__cityscape__building__image homepage__illustration__cityscape__building__image--right"/>
@@ -115,6 +115,10 @@ if (seoMeta) {
         <div class="homepage__illustration__ground__light"/>
       </div>
     </div>
+  </main>
+
+  <main v-else>
+    <NotFoundContent />
   </main>
 </template>
 

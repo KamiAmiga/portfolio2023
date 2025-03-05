@@ -1,9 +1,4 @@
-import {createWriteStream} from 'node:fs'
-import {pipeline} from 'node:stream'
-import {promisify} from 'node:util'
 import fs from 'fs'
-
-const streamPipeline = promisify(pipeline);
 
 const APIBaseURL='http://localhost:1337/api/'
 const contentsFolderBasePath = './frontend/content'
@@ -71,10 +66,27 @@ const fetchSlug = async (route, slug) => {
   }
 
   await fetch(endpoint)
-    .then(async response => {
+    .then(response => {
       if (response.status !== 200) return
-      await streamPipeline(response.body, createWriteStream(destinationFilePath(slug, route.subfolder)))
+      return response.json()
     })
+    .then(async (response) => {
+      const pageData = Array.isArray(response?.data) 
+        ? response?.data?.[0].attributes
+        : response?.data?.attributes
+      if (!pageData) return
+
+      const destinationFile = destinationFilePath(slug, route.subfolder)
+
+      fs.writeFile(destinationFilePath(slug, route.subfolder), JSON.stringify(pageData), 'utf8', (error) => {
+        if (error) {
+          console.error(`Error writing to file ${destinationFile}`, error);
+        } else {
+          console.log(`Data written to file ${destinationFile}`);
+        }
+      });
+    }
+  )
 }
 
 routesSettings.forEach(async route => {

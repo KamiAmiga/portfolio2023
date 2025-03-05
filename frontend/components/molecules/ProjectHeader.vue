@@ -12,10 +12,10 @@ defineProps<{
 
 <template>
   <header class="project-header">
-    <div v-if="coverImageLandscape?.attributes && coverImagePortrait?.attributes" class="project-header__image">
+    <div v-if="coverImageLandscape && coverImagePortrait" class="project-header__image">
       <CustomPicture 
-        :picture-data-landscape="coverImageLandscape?.attributes"
-        :picture-data-portrait="coverImagePortrait?.attributes"
+        :picture-data-landscape="coverImageLandscape"
+        :picture-data-portrait="coverImagePortrait"
         format='full_screen' />
     </div>
 

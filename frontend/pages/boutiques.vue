@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const { data } = await useAsyncData('shops', () => queryContent('/shops-page').findOne())
+const { data: shopsData } = await useAsyncData('shops', () => queryCollection('shops').first())
 
-const seoMeta = data.value?.data?.attributes?.seo
+const seoMeta = shopsData?.value?.seo
 
 if (seoMeta) {  
   useSeoMeta({
@@ -15,16 +15,16 @@ if (seoMeta) {
 </script>
 
 <template>
-  <main class="shops">
+  <main v-if="shopsData" class="shops">
     <MainMenu />
 
     <div class="container shops__header">
       <div class="section section--full">
         <img src="~/assets/images/logoWithBg.svg" alt="Logo" class="shops__header__logo" >
-        <h1 v-if="data?.data.attributes.title" class="shops__header__title font-sans--md-capitalized">
-          {{ data.data.attributes.title }}</h1>
-        <p v-if="data?.data.attributes.subtitle" class="font-mono--small">
-          {{ data.data.attributes.subtitle }}</p>
+        <h1 v-if="shopsData.title" class="shops__header__title font-sans--md-capitalized">
+          {{ shopsData.title }}</h1>
+        <p v-if="shopsData.subtitle" class="font-mono--small">
+          {{ shopsData.subtitle }}</p>
       </div>
     </div>
 
@@ -32,9 +32,9 @@ if (seoMeta) {
       <div class="section section--full">
         <h2 class="shops__content__title-second font-sans--capitalized">Mes boutiques</h2>
 
-        <ul v-if="data?.data.attributes.shops_list" class="shops__content__shops-list">
+        <ul v-if="shopsData.shops_list" class="shops__content__shops-list">
           <li
-            v-for="shopItem in data.data.attributes.shops_list"
+            v-for="shopItem in shopsData.shops_list"
             :key="shopItem.id"
             class="shops__content__shops-list__item">
             <a :href="shopItem.url" target="_blank" class="shops__content__shops-list__item__link">
@@ -49,8 +49,8 @@ if (seoMeta) {
         <h2 class="shops__content__title-second font-sans--capitalized">Retrouvez
           moi aussi sur : </h2>
 
-        <ul v-if="data?.data.attributes.social_links" class="shops__content__socials-links">
-          <li v-for="socialLink in data.data.attributes.social_links" :key="socialLink.id">
+        <ul v-if="shopsData.social_links" class="shops__content__socials-links">
+          <li v-for="socialLink in shopsData.social_links" :key="socialLink.id">
             <a :href="socialLink.url" target="blank" class="shops__content__socials-links__item">
               <div
                 class="shops__content__socials-links__item__icon-wrapper icon-wrapper icon-wrapper--m icon-wrapper--square">
@@ -63,6 +63,10 @@ if (seoMeta) {
         </ul>
       </div>
     </div>
+  </main>
+
+  <main v-else>
+    <NotFoundContent />
   </main>
 </template>
 

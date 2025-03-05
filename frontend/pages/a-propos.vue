@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const { data } = await useAsyncData('about', () => queryContent('/about').findOne())
+const { data: aboutData } = await useAsyncData('about', () => queryCollection('about').first())
 
-const seoMeta = data.value?.data?.attributes?.seo
+const seoMeta = aboutData?.value?.seo
 
 if (seoMeta) {  
   useSeoMeta({
@@ -15,7 +15,7 @@ if (seoMeta) {
 </script>
 
 <template>
-  <main class="about">
+  <main v-if="aboutData" class="about">
     <MainMenu />
 
     <header class="container about__header">
@@ -25,10 +25,10 @@ if (seoMeta) {
     </header>
 
     <div class="container about__content">
-      <div v-if="data?.data.attributes.intro" class="section section--full">
+      <div v-if="aboutData.intro" class="section section--full">
         <div class="about__content__intro-wrapper">
           <div class="about__content__intro">
-            <richtext-wrapper :text="data.data.attributes.intro" />
+            <richtext-wrapper :text="aboutData.intro" />
           </div>
         </div>
       </div>
@@ -36,27 +36,31 @@ if (seoMeta) {
       <div class="section section--full">
         <h2 class="heading--second">Parcours</h2>
 
-        <about-history v-if="data?.data.attributes.experience" :history="data.data.attributes.experience" />
+        <about-history v-if="aboutData.experience" :history="aboutData.experience" />
       </div>
 
       <div class="section section--full">
         <h2 class="heading--second">Compétences</h2>
 
-        <about-skills v-if="data?.data.attributes.skills?.data" :skills="data.data.attributes.skills.data" />
+        <about-skills v-if="aboutData.skills?.data" :skills="aboutData.skills.data" />
       </div>
 
       <div class="section section--half">
         <h2 class="heading--second">Intérêts</h2>
 
-        <about-interests v-if="data?.data.attributes.interests" :interests="data.data.attributes.interests" />
+        <about-interests v-if="aboutData.interests" :interests="aboutData.interests" />
       </div>
 
       <div class="section section--half">
         <h2 class="heading--second">Contacts</h2>
 
-        <about-social-links v-if="data?.data.attributes.social_links" :social-links="data.data.attributes.social_links" />
+        <about-social-links v-if="aboutData.social_links" :social-links="aboutData.social_links" />
       </div>
     </div>
+  </main>
+
+  <main v-else>
+    <NotFoundContent />
   </main>
 </template>
 

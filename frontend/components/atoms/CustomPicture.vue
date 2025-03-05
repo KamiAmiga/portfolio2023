@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type {
-  StrapiImageResponsiveData,
+  StrapiImage,
   CustomResponsiveFormats,
 } from "@/types/strapiResponsiveImage";
 
 const props = defineProps<{
-  pictureDataLandscape: StrapiImageResponsiveData;
-  pictureDataPortrait: StrapiImageResponsiveData;
+  pictureDataLandscape: StrapiImage;
+  pictureDataPortrait: StrapiImage;
   format: CustomResponsiveFormats;
 }>();
 
@@ -22,8 +22,8 @@ const imgSizesParams = {
 const _srcset = computed(() => {
   if (!props.pictureDataLandscape && !props.pictureDataPortrait) return null
 
-  const resizerLandscape = img.getSizes(props.pictureDataLandscape?.url, imgSizesParams)
-  const resizerPortrait = img.getSizes(props.pictureDataPortrait?.url, imgSizesParams)
+  const resizerLandscape = img.getSizes(props.pictureDataLandscape?.attributes?.url, imgSizesParams)
+  const resizerPortrait = img.getSizes(props.pictureDataPortrait?.attributes?.url, imgSizesParams)
 
   return {resizerLandscape, resizerPortrait}
 })
@@ -43,7 +43,7 @@ const _srcset = computed(() => {
       :sizes="_srcset.resizerLandscape.sizes"
       type="image/webp">
     <img 
-      :src="_srcset?.resizerLandscape?.src ?? pictureDataLandscape?.url"
-      :alt="pictureDataLandscape?.alternativeText ?? ''" >
+      :src="_srcset?.resizerLandscape?.src ?? pictureDataLandscape?.attributes?.url"
+      :alt="pictureDataLandscape?.attributes?.alternativeText ?? ''" >
   </picture>
 </template>

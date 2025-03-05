@@ -1,12 +1,14 @@
 <script setup lang="ts">
-const { data: pageData } = await useAsyncData('projects-list-page', () => queryContent('/projects-list-page').findOne())
-const { data: projectsData } = await useAsyncData('projects-data', () => queryContent('/projets').find())
+const { data: projectsListData } = await useAsyncData('projects-list-page', () => queryCollection('projectsList').first())
+const { data: projectsData } = await useAsyncData(
+  'projects-data',
+  () => queryCollection('projects')
+    .order('year', 'DESC')
+    .select('name', 'year', 'slug', 'cover_image_landscape', 'cover_image_portrait')
+    .all()
+)
 
-const projectsList = computed(() => {
-  return projectsData.value?.map(item => item.data[0].attributes).sort((a, b) => b.year - a.year)
-})
-
-const seoMeta = pageData?.value?.data?.attributes?.seo
+const seoMeta = projectsListData?.value?.seo
 
 if (seoMeta) {  
   useSeoMeta({
@@ -20,13 +22,13 @@ if (seoMeta) {
 </script>
 
 <template>
-  <main class="projects">
+  <main v-if="projectsData" class="projects">
     <MainMenu />
 
-    <h1 class="sr-only">{{ pageData?.data?.attributes?.title }}</h1>
+    <h1 class="sr-only">{{ projectsListData?.title }}</h1>
 
-    <ul v-if="projectsList" class="container projects__content">
-      <ProjectsItem v-for="project in projectsList" :key="project.id" :project="project" />
+    <ul class="container projects__content">
+      <ProjectsItem v-for="project in projectsData" :key="project.slug" :project="project" />
     </ul>
   </main>
 </template>

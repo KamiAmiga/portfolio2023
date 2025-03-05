@@ -1,4 +1,4 @@
-import type { StrapiImage, StrapiSVGMedia } from "./strapiResponsiveImage";
+import type { StrapiImage } from "./strapiResponsiveImage";
 import type { Skill } from "./skills";
 
 export enum ProjectMainImageTypes {
@@ -13,7 +13,7 @@ export enum ProjectMainImageTypes {
 export interface ProjectTypography {
   id: number;
   typo_name: string;
-  typo_visual: { data: StrapiSVGMedia }
+  typo_visual: { data: StrapiImage }
 }
 
 export interface ProjectColor {

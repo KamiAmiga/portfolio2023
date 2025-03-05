@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const route = useRoute()
-const { data } = await useAsyncData('project', () => queryContent(route.path).findOne())
+const { data: projectData } = await useAsyncData(route.path, () => queryCollection('projects').path(route.path).first())
 
-const seoMeta = data.value?.data[0]?.attributes?.seo
+const seoMeta = projectData?.value?.seo
 
 if (seoMeta) {  
   useSeoMeta({
@@ -16,31 +16,31 @@ if (seoMeta) {
 </script>
 
 <template>
-  <main class="project">
+  <main v-if="projectData" class="project">
     <MainMenu />
 
     <ProjectHeader
-      v-if="data?.data[0].attributes?.name"
-      :title="data.data[0].attributes?.name"
-      :cover-image-landscape="data.data[0].attributes?.cover_image_landscape?.data"
-      :cover-image-portrait="data.data[0].attributes?.cover_image_portrait?.data" />
+      v-if="projectData.name"
+      :title="projectData.name"
+      :cover-image-landscape="projectData.cover_image_landscape?.data"
+      :cover-image-portrait="projectData.cover_image_portrait?.data" />
     <div class="container project__content">
       <section class="section section--third">
         <ProjectStats
-          v-if="data?.data[0].attributes?.year"
-          :year="data.data[0].attributes?.year"
-          :skills="data.data[0].attributes?.skills?.data"/>
+          v-if="projectData.year"
+          :year="projectData.year"
+          :skills="projectData.skills?.data"/>
       </section>
 
       <section class="section section--half">
         <RichtextWrapper 
-          v-if="data?.data[0].attributes?.description"
-          :text="data.data[0].attributes?.description" />
+          v-if="projectData.description"
+          :text="projectData.description" />
       </section>
 
       <section class="section section--full">
-        <div v-if="data?.data[0].attributes?.main_images" class="project__main-images">
-          <template v-for="mainImage in data.data[0].attributes?.main_images" :key="mainImage.id">
+        <div v-if="projectData.main_images" class="project__main-images">
+          <template v-for="mainImage in projectData.main_images" :key="mainImage.id">
             <div class="project__main-images__item">
               <ProjectMainImage :type="mainImage.type" :images="mainImage.images?.data" />
             </div>
@@ -49,26 +49,30 @@ if (seoMeta) {
       </section>
 
       <section
-        v-if="data?.data[0].attributes?.typography && data?.data[0].attributes?.typography?.length > 0"
+        v-if="projectData.typography && projectData.typography?.length > 0"
         class="section section--half">
         <h2 class="heading--second">Typographie</h2>
 
-        <ProjectTypography :fonts="data.data[0].attributes.typography" />
+        <ProjectTypography :fonts="projectData.typography" />
       </section>
 
       <section 
-        v-if="data?.data[0].attributes?.colors
-          && data?.data[0].attributes?.colors?.length > 0"
+        v-if="projectData.colors
+          && projectData.colors?.length > 0"
         class="section section--half">
         <h2 class="heading--second">Couleurs</h2>
 
-        <ProjectColors :colors="data.data[0].attributes?.colors" />
+        <ProjectColors :colors="projectData.colors" />
       </section>
 
-      <section v-if="data?.data[0].attributes?.secondary_images?.data" class="section section--full">
-        <ProjectSecondaryImages :images="data.data[0].attributes?.secondary_images?.data" />
+      <section v-if="projectData.secondary_images?.data" class="section section--full">
+        <ProjectSecondaryImages :images="projectData.secondary_images?.data" />
       </section>
     </div>
+  </main>
+
+  <main v-else>
+    <NotFoundContent />
   </main>
 </template>
 

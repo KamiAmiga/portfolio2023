@@ -1,20 +1,16 @@
 <script setup lang="ts">
 import { inView } from 'motion';
-import type { StrapiImageResponsiveData } from '~/types/strapiResponsiveImage';
+import type { StrapiImage } from '~/types/strapiResponsiveImage';
 
 const props = defineProps<{
   project: {
     name: string,
     slug: string,
     cover_image_landscape: {
-      data: {
-        attributes: StrapiImageResponsiveData
-      }
+      data: StrapiImage
     },
     cover_image_portrait: {
-      data: {
-        attributes: StrapiImageResponsiveData
-      }
+      data: StrapiImage
     }
   }
 }>();
@@ -76,8 +72,8 @@ onUnmounted(() => stopViewTracking())
     
     <div v-if="project.cover_image_landscape.data && project.cover_image_portrait.data" class="projects-item__image">
       <CustomPicture
-        :picture-data-landscape="project.cover_image_landscape.data?.attributes"
-        :picture-data-portrait="project.cover_image_portrait.data?.attributes"
+        :picture-data-landscape="project.cover_image_landscape.data"
+        :picture-data-portrait="project.cover_image_portrait.data"
         format='projects_image' />
     </div>
   </li>
