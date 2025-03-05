@@ -1,5 +1,3 @@
-import { type Skill } from "./skills";
-
 export interface Experience {
   id: number;
   name: string;
@@ -19,14 +17,4 @@ export interface SocialLink {
   name: string;
   url: string;
   icon_name: string;
-}
-
-export interface About {
-  intro: string;
-  experience: Experience[];
-  skills: {
-    data: Skill[];
-  };
-  interests: Interest[];
-  social_links: SocialLink[];
 }

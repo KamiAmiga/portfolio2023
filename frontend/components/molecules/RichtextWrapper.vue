@@ -7,9 +7,8 @@ defineProps<{
 </script>
 
 <template>
-  <!-- <div class="richtext-wrapper" v-html="$mdRenderer.render(text)"/> -->
    <div class="richtext-wrapper">
-     <StrapiBlocksText :nodes="text"  />
+     <StrapiBlocksText :nodes="text" />
    </div>
 </template>
 

@@ -12,7 +12,6 @@
     "@nuxt/content": "^3.2.2",
     "@nuxt/image": "^1.9.0",
     "lenis": "^1.1.19",
-    "markdown-it": "^14.1.0",
     "motion": "^11.18.0",
     "nuxt": "^3.14.1592",
     "nuxt-strapi-blocks-renderer": "^1.0.15",
@@ -22,7 +21,6 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^0.7.2",
-    "@types/markdown-it": "^14.1.2",
     "eslint": "^9.16.0",
     "nuxt-icons": "^3.1.0",
     "sass": "^1.82.0",

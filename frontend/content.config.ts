@@ -1,6 +1,5 @@
 import { defineCollection, defineContentConfig, z } from '@nuxt/content'
 
-// https://github.com/freb97/nuxt-strapi-blocks-renderer/blob/main/src/runtime/types/index.d.ts
 const strapiImageSchema = z.object({
   id: z.number(),
   attributes: z.object({

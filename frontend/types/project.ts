@@ -1,5 +1,4 @@
 import type { StrapiImage } from "./strapiResponsiveImage";
-import type { Skill } from "./skills";
 
 export enum ProjectMainImageTypes {
   UIMobileDesktop = "ui-mobile_desktop",
@@ -29,30 +28,4 @@ export interface ProjectMainImage {
     data: StrapiImage[];
   };
   type: ProjectMainImageTypes;
-}
-
-export interface Project {
-  slug: string;
-  name: string;
-  year: number;
-  description: string;
-  main_images: ProjectMainImage[];
-  typography: ProjectTypography[];
-  colors: ProjectColor[];
-  secondary_images: {
-    data: StrapiImage[];
-  };
-  skills: {
-    data: Skill[];
-  };
-  cover_image_portrait: {
-    data: StrapiImage;
-  };
-  cover_image_landscape: {
-    data: StrapiImage;
-  };
-}
-
-export interface Projects {
-  data: Project[];
 }
