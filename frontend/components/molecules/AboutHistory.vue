@@ -1,18 +1,49 @@
 <script setup lang="ts">
+import { inView } from "motion"
 import type { Experience } from '@/types/about'
 
 defineProps<{
   history: Experience[]
 }>();
+
+const isInView = ref(false)
+const container = useTemplateRef("container")
+let stopViewTracking: () => void
+
+onMounted(() => {
+  if (!container.value) return
+
+  stopViewTracking = inView(container.value, () => {
+    isInView.value = true
+
+    stopViewTracking()
+
+    return () => {
+      isInView.value = false
+    }
+  }, {
+    margin: "0% 0% -33% 0%"
+  })
+})
+  
+onUnmounted(() => stopViewTracking())
 </script>
 
 <template>
-  <ul class="about-history">
+  <ul ref="container" class="about-history" :class="{'about-history--in-view' : isInView}">
     <li
-v-for="(historyItem, index) in history" :key="historyItem.id" class="about-history__item" :class="[
-      'about-history__item--' + historyItem.category,
-      { 'about-history__item--junction': historyItem.category !== history[index + 1]?.category && index < history.length - 1 && index !== 0 }
-    ]">
+      v-for="(historyItem, index) in history"
+      :key="historyItem.id"
+      class="about-history__item"
+      :class="[
+        'about-history__item--' + historyItem.category,
+        { 'about-history__item--junction': 
+          historyItem.category !== history[index + 1]?.category 
+          && index < history.length - 1 
+          && index !== 0 }
+      ]"
+      :style="`--delay: ${index * .05 + .4}s`"
+    >
       <span class="about-history__item__icon-wrapper icon-wrapper icon-wrapper--s icon-wrapper--circle">
         <nuxt-icon v-if="historyItem.category === 'school'" class="icon icon--m" name="scholar" />
         <nuxt-icon v-else class="icon icon--m" name="bag" />
@@ -54,16 +85,26 @@ $types:
 //
 
 .about-history {
+  $self: &;
+
   display: flex;
   padding: 0;
   margin: 0;
   list-style-type: none;
   flex-direction: column;
+  opacity: 0;
+  transition: opacity .5s ease-in-out;
+
+  &--in-view {
+    opacity: 1;
+  }
 
   &__item {
     box-sizing: border-box;
     padding: var(--spacer-4) 0 var(--spacer-4) calc(2.5rem + var(--spacer-4));
     position: relative;
+    opacity: 0;
+    transition: opacity .4s var(--delay) ease-in-out;
 
     &::before {
       content: "";
@@ -73,25 +114,23 @@ $types:
       position: absolute;
       top: 0;
       left: var(--spacer-5);
+      background-color: var(--item-color);
       transform: translateX(-50%);
     }
 
     @each $name, $color in $types {
       &--#{$name} {
-        &::before {
-          background-color: $color;
-        }
-
-        .about-history__item__icon-wrapper {
-          border-color: $color;
-        }
+        --item-color: #{$color};
       }
+    }
+
+    #{$self}--in-view & {
+      opacity: 1;
     }
 
     &__icon-wrapper {
       color: var(--color-primary-base);
-      border-width: var(--spacer-1);
-      border-style: solid;
+      border: var(--spacer-1) solid var(--item-color);
       background-color: var(--color-primary-reverse);
       position: absolute;
       top: 50%;
@@ -105,7 +144,6 @@ $types:
     }
 
     &__description {
-
       &__company,
       &__date {
         display: block;
