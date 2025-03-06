@@ -20,7 +20,7 @@ defineProps<{
           <div
             class="project-stats__skill__icon-wrapper icon icon-wrapper icon-wrapper--square icon-wrapper--m"
             :class="'project-stats__skill__icon-wrapper--' + skill.attributes?.category">
-            <nuxt-icon :name="skill.attributes?.icon_name" class="project-stats__skill__icon icon icon--m" />
+            <nuxt-icon :name="skill.attributes?.icon_name" class="project-stats__skill__icon icon icon--s" />
           </div>
           {{ skill.attributes?.name }}
         </li>
@@ -29,7 +29,7 @@ defineProps<{
         <div
           class="project-stats__skill__icon-wrapper icon icon-wrapper icon-wrapper--square icon-wrapper--m"
           :class="'project-stats__skill__icon-wrapper--' + skills[0].attributes?.category">
-          <nuxt-icon :name="skills[0].attributes?.icon_name" class="project-stats__skill__icon icon icon--m" />
+          <nuxt-icon :name="skills[0].attributes?.icon_name" class="project-stats__skill__icon icon icon--s" />
         </div>
         {{ skills[0].attributes?.name }}
       </div>

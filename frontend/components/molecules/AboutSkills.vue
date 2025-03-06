@@ -148,7 +148,7 @@ $skill-grid-gap: .125rem;
     }
 
     &__name {
-      padding-top: var(--spacer-4);
+      padding-top: var(--spacer-3);
     }
 
     &__level {
