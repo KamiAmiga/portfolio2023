@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { inView } from "motion"
 import type { Skill } from "@/types/skills";
 
 const props = defineProps<{
@@ -13,15 +14,39 @@ const sortedSkills = computed(() => {
 
   return langSkills.concat(devSkills, artSkills, webSkills)
 })
+
+const isInView = ref(false)
+const container = useTemplateRef("container")
+let stopViewTracking: () => void
+
+onMounted(() => {
+  if (!container.value) return
+
+  stopViewTracking = inView(container.value, () => {
+    isInView.value = true
+
+    stopViewTracking()
+
+    return () => {
+      isInView.value = false
+    }
+  }, {
+    margin: "0% 0% -33% 0%"
+  })
+})
+  
+onUnmounted(() => stopViewTracking())
+
 </script>
 
 <template>
-  <ul class="about-skills">
+  <ul ref="container" class="about-skills" :class="{'about-skills--in-view' : isInView}">
     <li 
-      v-for="skill in sortedSkills"
+      v-for="(skill, index) in sortedSkills"
       :key="skill.id"
       class="about-skills__item"
-      :class="'about-skills__item--' + skill.attributes.category">
+      :class="'about-skills__item--' + skill.attributes.category"
+      :style="`--delay: ${index * .02}s`">
       <div class="about-skills__item__icon-wrapper">
         <nuxt-icon :name="skill.attributes.icon_name" class="icon icon--xl" />
       </div>
@@ -60,13 +85,15 @@ $types:
   "web" $theme-color-accent;
 
 $skill-item-size: 7.5rem;
-$skill-grid-gap: .0625rem;
+$skill-grid-gap: .125rem;
 
 //
 // Styling
 //
 
 .about-skills {
+  $self: &;
+
   display: grid;
   width: min-content;
   padding: 0;
@@ -76,6 +103,8 @@ $skill-grid-gap: .0625rem;
   list-style-type: none;
 
   &__item {
+    --responsiveDelay: calc(var(--delay) * 2);
+
     display: flex;
     box-sizing: border-box;
     width: $skill-item-size;
@@ -84,6 +113,33 @@ $skill-grid-gap: .0625rem;
     position: relative;
     flex-direction: column;
     fill: var(--color-primary-reverse);
+    opacity: 0;
+    background: linear-gradient(
+      to top right,
+      color-mix(
+        in srgb,
+        transparent var(--opacity-percentage-7),
+        var(--theme-color-darker)
+      ),
+      33%,
+      color-mix(
+        in srgb,
+        transparent var(--opacity-percentage-9),
+        var(--theme-color-base)
+      ) 75%);
+    border: .0625rem solid var(--theme-color-base);
+    transform: scale(0.25);
+    transition: opacity .25s var(--responsiveDelay) ease-in-out,
+      transform .4s var(--responsiveDelay) cubic-bezier(.5,.75,.75,1.25);
+
+    @media screen and (min-width: $breakpoint-m) {
+      --responsiveDelay: var(--delay);
+    }
+
+    #{$self}--in-view & {
+      opacity: 1;
+      transform: scale(1);
+    }
 
     &__icon-wrapper {
       display: flex;
@@ -97,26 +153,14 @@ $skill-grid-gap: .0625rem;
 
     &__level {
       position: absolute;
-      top: var(--spacer-3);
+      top: var(--spacer-2);
       right: var(--spacer-3);
     }
 
     @each $name, $theme-color in $types {
       &--#{$name} {
-        background: linear-gradient(
-          to top right,
-          color-mix(
-            in srgb,
-            transparent var(--opacity-percentage-7),
-            map.get($theme-color, darker)
-          ),
-          33%,
-          color-mix(
-            in srgb,
-            transparent var(--opacity-percentage-9),
-            map.get($theme-color, base)
-          ));
-        border: .0625rem solid map.get($theme-color, base);
+        --theme-color-base: #{map.get($theme-color, base)};
+        --theme-color-darker: #{map.get($theme-color, darker)};
       }
     }
   }
