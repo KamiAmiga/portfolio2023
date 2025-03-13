@@ -1,0 +1,65 @@
+@use '../../abstracts' as *;
+@use '../../base' as *;
+
+
+.heading {
+  &--main {
+    @include font-sans(xxl);
+    display: inline-block;
+    padding: var(--spacer-4) var(--spacer-8) var(--spacer-4) var(--spacer-6);
+    margin: 0;
+    position: relative;
+    background-color: var(--color-secondary-darker);
+    word-break: break-all;
+
+    &::after {
+      content: "";
+      display: block;
+      height: .375rem;
+      width: 50%;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: var(--color-secondary-lighter);
+    }
+
+    @media screen and (min-width: $breakpoint-m) {
+      padding: var(--spacer-4) var(--spacer-10) var(--spacer-4) var(--spacer-7);
+      font-size: var(--font-sans-size-xxxl);
+      letter-spacing: var(--letter-spacing-xxl);
+
+      &::after {
+        height: var(--spacer-3);
+      }
+    }
+  }
+
+  &--second {
+    @include font-sans(xl);
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: var(--spacer-7);
+    position: relative;
+
+    &::after {
+      content: "";
+      display: block;
+      height: var(--spacer-2);
+      width: var(--spacer-8);
+      background-color: var(--color-secondary-darker);
+      box-shadow: 
+        calc(var(--spacer-2) * -1)
+        var(--spacer-1)
+        var(--spacer-2)
+        color-mix(
+          in srgb,
+          transparent var(--opacity-percentage-7),
+          var(--color-secondary-lighter)
+        );
+    }
+
+    @media screen and (min-width: $breakpoint-m) {
+      @include font-sans(xxl);
+    }
+  }
+}

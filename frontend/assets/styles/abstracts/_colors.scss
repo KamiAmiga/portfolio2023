@@ -1,0 +1,102 @@
+@use "sass:map";
+
+$theme-color-primary: (
+  base: #14161f,
+  lighter-1: #1c1e2b,
+  lighter-2: #414453,
+  lighter-3: #666b7b,
+  lighter-4: #8b91a3,
+  reverse: #ffffff,
+);
+
+$theme-color-accent: (
+  base: #22e0ff,
+  darker: #1692b5,
+  lighter: #5be9ff,
+);
+
+$theme-color-secondary: (
+  base: #dd1045,
+  darker: #ad0d39,
+  lighter: #e6517e,
+);
+
+$theme-color-tertiary: (
+  base: #f97d3e,
+  darker: #c36333,
+  lighter: #faa079,
+);
+
+$theme-color-fourth: (
+  base: #01ffa7,
+  darker: #01ca8a,
+  lighter: #43ffc2,
+);
+
+$theme-colors: (
+  primary: (
+    base: #14161f,
+    lighter-1: #1c1e2b,
+    lighter-2: #414453,
+    lighter-3: #666b7b,
+    lighter-4: #8b91a3,
+    reverse: #ffffff,
+  ),
+  accent: (
+    base: #22e0ff,
+    darker: #1692b5,
+    lighter: #5be9ff,
+  ),
+  secondary: (
+    base: #dd1045,
+    darker: #ad0d39,
+    lighter: #e6517e,
+  ),
+  tertiary: (
+    base: #f97d3e,
+    darker: #c36333,
+    lighter: #faa079,
+  ),
+  fourth: (
+    base: #01ffa7,
+    darker: #01ca8a,
+    lighter: #43ffc2,
+  )
+);
+
+$opacities: (
+  1: .04,
+  2: .08,
+  3: .16,
+  4: .24,
+  5: .32,
+  6: .48,
+  7: .64,
+  8: .8,
+  9: .92,
+);
+
+$opacities-percentages: (
+  1: 4%,
+  2: 8%,
+  3: 16%,
+  4: 24%,
+  5: 32%,
+  6: 48%,
+  7: 64%,
+  8: 80%,
+  9: 92%,
+);
+
+$fading-out: (
+  0: 1,
+  1: 1 - map.get($opacities, 1),
+  2: 1 - map.get($opacities, 2),
+  3: 1 - map.get($opacities, 3),
+  4: 1 - map.get($opacities, 4),
+  5: 1 - map.get($opacities, 5),
+  6: 1 - map.get($opacities, 6),
+  7: 1 - map.get($opacities, 7),
+  8: 1 - map.get($opacities, 8),
+  9: 1 - map.get($opacities, 9),
+);

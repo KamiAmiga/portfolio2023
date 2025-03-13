@@ -1,0 +1,44 @@
+@use '../abstracts/layout' as *;
+
+.container {
+  display: grid;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 $spacer;
+  grid-template-columns: 1fr;
+
+  @media screen and (min-width: $breakpoint-m) {
+    padding: 0 var(--spacer-10);
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: $spacer;
+  }
+
+  @media screen and (min-width: $breakpoint-l) {
+    padding: 0 var(--spacer-10);
+    column-gap: var(--spacer-6);
+  }
+}
+
+.section {
+  &--full {
+    @media screen and (min-width: $breakpoint-m) {
+      grid-column: span 6;
+    }
+  }
+
+  &--half {
+    @media screen and (min-width: $breakpoint-m) {
+      grid-column: span 3;
+    }
+  }
+
+  &--third {
+    @media screen and (min-width: $breakpoint-m) {
+      grid-column: span 2;
+    }
+
+    @media screen and (min-width: $breakpoint-l) {
+      grid-column: span 2;
+    }
+  }
+}

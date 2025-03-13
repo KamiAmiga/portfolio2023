@@ -1,0 +1,57 @@
+@use "sass:map";
+@use '../../abstracts' as *;
+
+.icon {
+  @each $size in $icon-sizes-suffix {
+    &--#{$size} {
+      width: map.get($icon-sizes, $size);
+      height: map.get($icon-sizes, $size);
+      font-size: map.get($icon-sizes, $size);
+    }
+  }
+
+  &-wrapper {
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+
+    @each $size in $icon-wrapper-sizes-suffix {
+      &--#{$size} {
+        width: map.get($icon-wrapper-sizes, $size);
+        height: map.get($icon-wrapper-sizes, $size);
+      }
+    }
+
+    &--circle {
+      border-radius: 50%;
+    }
+
+    &--square {
+      position: relative;
+      z-index: var(--z-index-base-increase);
+
+      &::before {
+        content: "";
+        display: block;
+        box-sizing: border-box;
+        position: absolute;
+        border-style: solid;
+        top: 50%;
+        left: 50%;
+        z-index: var(--z-index-base-decrease);
+        transform-origin: center;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+    }
+  }
+
+  &.nuxt-icon {
+    line-height: 1;
+
+    svg {
+      display: block;
+      margin-bottom: 0;
+    }
+  }
+}
