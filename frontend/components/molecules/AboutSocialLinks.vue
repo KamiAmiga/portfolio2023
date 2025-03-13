@@ -1,23 +1,60 @@
 <script setup lang="ts">
+import { inView } from "motion"
+
 import type { SocialLink } from '@/types/about'
 
 defineProps<{
   socialLinks: SocialLink[]
 }>();
+
+const isInView = ref(false)
+const container = useTemplateRef("container")
+let stopViewTracking: () => void
+
+onMounted(() => {
+  if (!container.value) return
+
+  stopViewTracking = inView(container.value, () => {
+    isInView.value = true
+
+    stopViewTracking()
+
+    return () => {
+      isInView.value = false
+    }
+  }, {
+    margin: "0% 0% -33% 0%"
+  })
+})
+  
+onUnmounted(() => stopViewTracking())
 </script>
 
 <template>
-  <ul class="about-social-links">
-    <li v-for="link in socialLinks" :key="link.id" class="about-social-links__item">
-      <a :href="link.url" target="_blank" class="about-social-links__item__link">
-        <div class="about-social-links__item__link__icon-wrapper icon-wrapper icon-wrapper--square">
-          <nuxt-icon :name="link.icon_name" class="about-social-links__item__link__icon icon" />
-        </div>
+  <section ref="container" class="section section--half">
+    <h2 
+      class="about-social-links__title heading--second"
+      :class="{'about-social-links__title--in-view' : isInView}">
+      Contacts
+    </h2>
 
-        <span class="about-social-links__item__link__name">{{ link.name }}</span>
-      </a>
-    </li>
-  </ul>
+    <ul class="about-social-links">
+      <li
+        v-for="(link, index) in socialLinks"
+        :key="link.id"
+        class="about-social-links__item"
+        :class="{'about-social-links__item--in-view': isInView}"
+        :style="{'--delay': `${index * .1}s`}">
+        <a :href="link.url" target="_blank" class="about-social-links__item__link">
+          <div class="about-social-links__item__link__icon-wrapper icon-wrapper icon-wrapper--square">
+            <nuxt-icon :name="link.icon_name" class="about-social-links__item__link__icon icon" />
+          </div>
+  
+          <span class="about-social-links__item__link__name">{{ link.name }}</span>
+        </a>
+      </li>
+    </ul>
+  </section>
 </template>
 
 <style lang="scss">
@@ -26,11 +63,28 @@ defineProps<{
   padding: 0;
   list-style-type: none;
 
+  &__title {
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+
+    &--in-view {
+      opacity: 1;
+    }
+  }
+
   &__item {
-    padding-left: var(--spacer-4);
+    padding-left: var(--spacer-6);
     margin-top: var(--spacer-3);
     margin-bottom: var(--spacer-3);
     position: relative;
+    opacity: 0;
+    transition: opacity .4s ease-in-out calc(var(--delay) + .4s),
+      padding .45s ease-in-out calc(var(--delay) + .42s);
+
+    &--in-view {
+      padding-left: var(--spacer-4);
+      opacity: 1;
+    }
 
     &__link {
       display: inline-flex;
@@ -136,9 +190,13 @@ defineProps<{
 
   @media screen and (min-width: $breakpoint-m) {
     &__item {
-      padding-left: var(--spacer-10);
+      padding-left: var(--spacer-11);
       margin-top: var(--spacer-4);
       margin-bottom: var(--spacer-4);
+
+      &--in-view {
+        padding-left: var(--spacer-10);
+      }
 
       &__link {
         &::before {

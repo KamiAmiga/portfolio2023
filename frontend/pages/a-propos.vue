@@ -28,37 +28,18 @@ if (seoMeta) {
       <div v-if="aboutData.intro" class="section section--full">
         <div class="about__content__intro-wrapper">
           <div class="about__content__intro">
-            <!-- <div class="richtext-wrapper">
-              <StrapiBlocksText :nodes="aboutData.intro2"  />
-            </div> -->
             <richtext-wrapper :text="aboutData.intro" />
           </div>
         </div>
       </div>
 
-      <div class="section section--full">
-        <h2 class="heading--second">Parcours</h2>
+      <about-history v-if="aboutData.experience" :history="aboutData.experience" />
 
-        <about-history v-if="aboutData.experience" :history="aboutData.experience" />
-      </div>
+      <about-skills v-if="aboutData.skills?.data" :skills="aboutData.skills.data" />
 
-      <div class="section section--full">
-        <h2 class="heading--second">Compétences</h2>
+      <about-interests v-if="aboutData.interests" :interests="aboutData.interests" />
 
-        <about-skills v-if="aboutData.skills?.data" :skills="aboutData.skills.data" />
-      </div>
-
-      <div class="section section--half">
-        <h2 class="heading--second">Intérêts</h2>
-
-        <about-interests v-if="aboutData.interests" :interests="aboutData.interests" />
-      </div>
-
-      <div class="section section--half">
-        <h2 class="heading--second">Contacts</h2>
-
-        <about-social-links v-if="aboutData.social_links" :social-links="aboutData.social_links" />
-      </div>
+      <about-social-links v-if="aboutData.social_links" :social-links="aboutData.social_links" />
     </div>
   </main>
 
@@ -71,6 +52,8 @@ if (seoMeta) {
 .about {
   &__header {
     padding-top: var(--spacer-11);
+    opacity: 0;
+    animation: .6s cubic-bezier(0.65, 0, 0.35, 1) .2s forwards fade-in;
   }
 
   &__content {
@@ -103,6 +86,9 @@ if (seoMeta) {
       }
 
       &-wrapper {
+        opacity: 0;
+        animation: .6s cubic-bezier(0.65, 0, 0.35, 1) .25s forwards fade-in;
+
         @media screen and (min-width: $breakpoint-m) {
           display: inline-block;
           padding: var(--spacer-3);
@@ -138,6 +124,12 @@ if (seoMeta) {
       padding-bottom: var(--spacer-10);
       row-gap: var(--spacer-10);
     }
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
   }
 }
 </style>

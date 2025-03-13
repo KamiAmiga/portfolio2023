@@ -30,37 +30,41 @@ onUnmounted(() => stopViewTracking())
 </script>
 
 <template>
-  <ul ref="container" class="about-history" :class="{'about-history--in-view' : isInView}">
-    <li
-      v-for="(historyItem, index) in history"
-      :key="historyItem.id"
-      class="about-history__item"
-      :class="[
-        'about-history__item--' + historyItem.category,
-        { 'about-history__item--junction': 
-          historyItem.category !== history[index + 1]?.category 
-          && index < history.length - 1 
-          && index !== 0 }
-      ]"
-      :style="`--delay: ${index * .05 + .4}s`"
-    >
-      <span class="about-history__item__icon-wrapper icon-wrapper icon-wrapper--s icon-wrapper--circle">
-        <nuxt-icon v-if="historyItem.category === 'school'" class="icon icon--m" name="scholar" />
-        <nuxt-icon v-else class="icon icon--m" name="bag" />
-      </span>
-      <div class="about-history__item__description">
-        <span class="font-sans--bold">{{ historyItem.name }}</span>
-        <p class="font-mono font-mono--small">
-          <span v-if="historyItem.place" class="about-history__item__description__company">
-            {{ historyItem.place }},
-          </span>
-          <span class="about-history__item__description__date">
-            {{ historyItem.date }}
-          </span>
-        </p>
-      </div>
-    </li>
-  </ul>
+  <section ref="container" class="section section--full">
+    <h2 class="about-history__title heading--second" :class="{'about-history__title--in-view' : isInView}">Parcours</h2>
+  
+    <ul class="about-history" :class="{'about-history--in-view' : isInView}">
+      <li
+        v-for="(historyItem, index) in history"
+        :key="historyItem.id"
+        class="about-history__item"
+        :class="[
+          'about-history__item--' + historyItem.category,
+          { 'about-history__item--junction': 
+            historyItem.category !== history[index + 1]?.category 
+            && index < history.length - 1 
+            && index !== 0 }
+        ]"
+        :style="`--delay: ${index * .05 + .4}s`"
+      >
+        <span class="about-history__item__icon-wrapper icon-wrapper icon-wrapper--s icon-wrapper--circle">
+          <nuxt-icon v-if="historyItem.category === 'school'" class="icon icon--m" name="scholar" />
+          <nuxt-icon v-else class="icon icon--m" name="bag" />
+        </span>
+        <div class="about-history__item__description">
+          <span class="font-sans--bold">{{ historyItem.name }}</span>
+          <p class="font-mono font-mono--small">
+            <span v-if="historyItem.place" class="about-history__item__description__company">
+              {{ historyItem.place }},
+            </span>
+            <span class="about-history__item__description__date">
+              {{ historyItem.date }}
+            </span>
+          </p>
+        </div>
+      </li>
+    </ul>
+  </section>
 </template>
 
 <style lang="scss">
@@ -94,6 +98,15 @@ $types:
   flex-direction: column;
   opacity: 0;
   transition: opacity .5s ease-in-out;
+
+  &__title {
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+
+    &--in-view {
+      opacity: 1;
+    }
+  }
 
   &--in-view {
     opacity: 1;

@@ -1,27 +1,63 @@
 <script setup lang="ts">
+import { inView } from "motion"
 import type { Interest } from '@/types/about'
 
 defineProps<{
   interests: Interest[]
 }>();
+
+const isInView = ref(false)
+const container = useTemplateRef("container")
+let stopViewTracking: () => void
+
+onMounted(() => {
+  if (!container.value) return
+
+  stopViewTracking = inView(container.value, () => {
+    isInView.value = true
+
+    stopViewTracking()
+
+    return () => {
+      isInView.value = false
+    }
+  }, {
+    margin: "0% 0% -33% 0%"
+  })
+})
+  
+onUnmounted(() => stopViewTracking())
 </script>
 
 <template>
-  <div class="about-interests">
-    <div class="about-interests__icon-wrapper icon-wrapper icon-wrapper--l icon-wrapper--circle">
-      <nuxt-icon class="icon icon--xl" name="heart" />
+  <section ref="container" class="section section--half">
+    <h2 class="about-interests__title heading--second" :class="{'about-interests__title--in-view' : isInView}">Intérêts</h2>
+
+    <div class="about-interests">
+      <div 
+        class="about-interests__icon-wrapper icon-wrapper icon-wrapper--l icon-wrapper--circle"
+        :class="{'about-interests__icon-wrapper--in-view': isInView}">
+        <nuxt-icon class="icon icon--xl" name="heart" />
+      </div>
+  
+      <ul
+        class="about-interests__list"
+        :class="{'about-interests__list--in-view': isInView}">
+        <li
+          v-for="(interest, index) in interests"
+          :key="interest.id"
+          class="about-interests__list__item"
+          :class="{'about-interests__list__item--in-view': isInView}"
+          :style="{'--delay': `${index * .05}s`}">
+          <div class="about-interests__list__item__icon-wrapper icon-wrapper icon-wrapper--circle">
+            <nuxt-icon :name="interest.icon_name" class="about-interests__list__item__icon icon" />
+          </div>
+  
+          <h3 class="about-interests__list__item__name font-mono font-mono--small">{{ interest.name }}</h3>
+        </li>
+      </ul>
     </div>
-
-    <ul class="about-interests__list">
-      <li v-for="interest in interests" :key="interest.id" class="about-interests__list__item">
-        <div class="about-interests__list__item__icon-wrapper icon-wrapper icon-wrapper--circle">
-          <nuxt-icon :name="interest.icon_name" class="about-interests__list__item__icon icon" />
-        </div>
-
-        <h3 class="about-interests__list__item__name font-mono font-mono--small">{{ interest.name }}</h3>
-      </li>
-    </ul>
-  </div>
+  </section>
 </template>
 
 <style lang="scss">
@@ -32,6 +68,15 @@ defineProps<{
   margin-bottom: var(--spacer-8);
   align-items: center;
   justify-content: center;
+
+  &__title {
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+
+    &--in-view {
+      opacity: 1;
+    }
+  }
 
   &__icon-wrapper {
     border: var(--spacer-1) solid var(--color-secondary-base);
@@ -50,6 +95,12 @@ defineProps<{
         var(--color-secondary-base)
       );
     transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity .5s ease-in-out .4s;
+
+    &--in-view {
+      opacity: 1;
+    }
   }
 
   &__list {
@@ -62,9 +113,21 @@ defineProps<{
     position: relative;
     list-style-type: none;
     border-radius: 50%;
+    opacity: 0;
+    transition: opacity .5s ease-in-out .2s;
+
+    &--in-view {
+      opacity: 1;
+    }
 
     &__item {
       position: absolute;
+      opacity: 0;
+      transition: opacity .3s ease-in-out calc(var(--delay) + .6s);
+
+      &--in-view {
+        opacity: 1;
+      }
 
       &__icon {
         font-size: var(--icon-size-l);

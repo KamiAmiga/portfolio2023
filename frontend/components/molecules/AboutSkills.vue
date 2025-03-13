@@ -40,35 +40,39 @@ onUnmounted(() => stopViewTracking())
 </script>
 
 <template>
-  <ul ref="container" class="about-skills" :class="{'about-skills--in-view' : isInView}">
-    <li 
-      v-for="(skill, index) in sortedSkills"
-      :key="skill.id"
-      class="about-skills__item"
-      :class="'about-skills__item--' + skill.attributes.category"
-      :style="`--delay: ${index * .02}s`">
-      <div class="about-skills__item__icon-wrapper">
-        <nuxt-icon :name="skill.attributes.icon_name" class="icon icon--xl" />
-      </div>
-
-      <span class="about-skills__item__name">{{ skill.attributes.name }}</span>
-
-      <template v-if="skill.attributes.level && skill.attributes.level > 0">
-        <template v-if="skill.attributes.level == 1">
-          <span class="sr-only">Niveau correct</span>
-          <nuxt-icon class="about-skills__item__level icon icon--s" name="star" />
+  <section ref="container" class="section section--full">
+    <h2 class="about-skills__title heading--second" :class="{'about-skills__title--in-view' : isInView}">Compétences</h2>
+    
+    <ul class="about-skills" :class="{'about-skills--in-view' : isInView}">
+      <li 
+        v-for="(skill, index) in sortedSkills"
+        :key="skill.id"
+        class="about-skills__item"
+        :class="'about-skills__item--' + skill.attributes.category"
+        :style="`--delay: ${index * .02}s`">
+        <div class="about-skills__item__icon-wrapper">
+          <nuxt-icon :name="skill.attributes.icon_name" class="icon icon--xl" />
+        </div>
+  
+        <span class="about-skills__item__name">{{ skill.attributes.name }}</span>
+  
+        <template v-if="skill.attributes.level && skill.attributes.level > 0">
+          <template v-if="skill.attributes.level == 1">
+            <span class="sr-only">Niveau correct</span>
+            <nuxt-icon class="about-skills__item__level icon icon--s" name="star" />
+          </template>
+  
+          <template v-else>
+            <span class="sr-only">Bon niveau</span>
+            <nuxt-icon class="about-skills__item__level icon icon--s" name="stars" />
+          </template>
         </template>
-
-        <template v-else>
-          <span class="sr-only">Bon niveau</span>
-          <nuxt-icon class="about-skills__item__level icon icon--s" name="stars" />
-        </template>
-      </template>
-    </li>
-    <li class="about-skills__filler about-skills__filler--lang"/>
-    <li class="about-skills__filler about-skills__filler--dev"/>
-    <li class="about-skills__filler about-skills__filler--art"/>
-  </ul>
+      </li>
+      <li class="about-skills__filler about-skills__filler--lang"/>
+      <li class="about-skills__filler about-skills__filler--dev"/>
+      <li class="about-skills__filler about-skills__filler--art"/>
+    </ul>
+  </section>
 </template>
 
 <style lang="scss">
@@ -101,6 +105,15 @@ $skill-grid-gap: .125rem;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: $skill-grid-gap;
   list-style-type: none;
+
+  &__title {
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+
+    &--in-view {
+      opacity: 1;
+    }
+  }
 
   &__item {
     --responsiveDelay: calc(var(--delay) * 2);
