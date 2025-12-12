@@ -1,7 +1,8 @@
 @use "sass:map";
 
 $theme-color-primary: (
-  base: #14161f,
+  // base: #14161f,
+  base: #04081C,
   lighter-1: #1c1e2b,
   lighter-2: #414453,
   lighter-3: #666b7b,
@@ -35,7 +36,8 @@ $theme-color-fourth: (
 
 $theme-colors: (
   primary: (
-    base: #14161f,
+    // base: #14161f,
+    base: #04081C,
     lighter-1: #1c1e2b,
     lighter-2: #414453,
     lighter-3: #666b7b,

@@ -11,10 +11,13 @@
   "dependencies": {
     "@nuxt/content": "^3.2.2",
     "@nuxt/image": "^1.9.0",
+    "@tresjs/nuxt": "^5.1.1",
+    "better-sqlite3": "^12.4.6",
     "lenis": "^1.1.19",
     "motion": "^11.18.0",
     "nuxt": "^3.14.1592",
     "nuxt-strapi-blocks-renderer": "^1.0.15",
+    "three": "^0.181.2",
     "vue": "latest",
     "vue-router": "latest",
     "vue-tsc": "^2.1.10"

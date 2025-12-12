@@ -16,7 +16,17 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxt/content', "nuxt-icons", '@nuxt/image', 'nuxt-strapi-blocks-renderer'],
+  modules: [
+    '@nuxt/eslint',
+    '@nuxt/content',
+    "nuxt-icons",
+    '@nuxt/image',
+    'nuxt-strapi-blocks-renderer',
+    '@tresjs/nuxt',
+  ],
+  tres: {
+    devtools: true,
+  },
   typescript: {
     typeCheck: true
   },
@@ -45,7 +55,6 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          api: 'modern-compiler',
           additionalData: '@use "~/assets/styles/abstracts/index" as *;'
         }
       }
@@ -54,7 +63,6 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ["/"],
     }
   },
 })
